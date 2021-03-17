@@ -7,7 +7,7 @@
 
 cd ~/ || exit 1
 
-for i in dolanseesu.github.io dotfiles markdown python studium; do
+for i in sihensel.github.io dotfiles docs python studium; do
     if [ -d "$i" ]; then
         echo "cd into ${i}..."
         cd ~/"$i" || exit 1
