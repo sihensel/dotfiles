@@ -1,6 +1,6 @@
 @echo off
 
-set git_dirs=markdown python studium
+set git_dirs=docs python studium
 
 (for %%i in (%git_dirs%) do (
    echo,
