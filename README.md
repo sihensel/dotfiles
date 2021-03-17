@@ -16,7 +16,8 @@ My Awesome theme is based on Multicolor from [Awesome Copycats](https://github.c
 Clone the repo into your home directory:
 
 ```bash
-git clone https://github.com/dolanseesu/dotfiles.git ~/ && cd dotfiles
+git clone https://github.com/sihensel/dotfiles.git ~/
+git clone git@github.com:sihensel/dotfiles.git ~/
 ```
 
 Run the install-script. You may ignore the question about the laptop setup, that is just for me.
