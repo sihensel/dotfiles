@@ -1,0 +1,15 @@
+# Custom EQ preset
+# Check https://github.com/spiralofhope/misc-configuration/tree/master/live/moc-eqsets for more
+
+EQSET
+0	0.00
+60	1.46	0.00
+170	1.43	0.00
+310	1.42	-1.20
+600	1.42	-2.70
+1000	1.42	-3.20
+3000	1.44	-4.20
+6000	1.50	-3.70
+12000	1.76	-2.20
+14000	1.90	-1.00
+16000	2.08	-0.00
