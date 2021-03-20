@@ -79,6 +79,7 @@ alias vim='nvim'
 alias pac='sudo pacman'
 alias uppac='sudo reflector --country France --country Germany --latest 10 --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 alias p='python3'
+alias mount='sudo mount'
 
 # Edit line in vim with ctrl-e (requires 'export VISUAL=nvim' in .profile)
 autoload edit-command-line; zle -N edit-command-line
