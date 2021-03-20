@@ -25,7 +25,7 @@ cd ~/ || exit 1
 
 # start creating symlinks
 # files in ~/
-for i in .bashrc .zshrc .profile .vimrc; do
+for i in .zshrc .zshenv; do
     if [ -f "$i" ]; then
         rm -f "$i"
     fi
@@ -88,5 +88,7 @@ ln -sf "$dotdir"/nvim/init.vim init.vim
 
 # finish
 cd ~/ || exit 1
+unset $dotdir
+unset $laptop
 echo "All done, no errors."
 exit 0

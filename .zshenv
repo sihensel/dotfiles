@@ -1,12 +1,13 @@
-# set screen layout
-xrandr --output HDMI-0 --mode 1920x1080 --pos 0x180 --rotate normal --output DP-0 --mode 2560x1440 --pos 1920x0 --rotate normal
+# set screen layout on my PC using xrandr
+# check for the name of the connected display ('eDP' means laptop)
+if [[ ! $(xrandr | grep " connected " | awk '{ print$1 }') = 'eDP' ]]; then
+    xrandr --output HDMI-0 --mode 1920x1080 --pos 0x180 --rotate normal --output DP-0 --mode 2560x1440 --pos 1920x0 --rotate normal
+fi
+
 
 # set keyboard layout and disable caps
 setxkbmap -option caps:none
 setxkbmap -model pc105 -layout us -variant altgr-intl
-
-# set brightness at startup
-light -S 30
 
 export EDITOR="nvim"
 export VIISUAL="nvim"
