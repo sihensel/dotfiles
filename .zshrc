@@ -3,6 +3,7 @@
 # colors and prompt
 autoload -U colors && colors
 PS1="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$ "
+#PS1="%n@%M %~ # "
 
 # general settings
 setopt autocd extendedglob nomatch
