@@ -388,7 +388,7 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end,
               {description = "delete tag", group = "tag"}),
 
-    -- Standard program
+    -- Standard programs
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "_custom"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -513,7 +513,7 @@ globalkeys = my_table.join(
         end,
         {description = "mpc on/off", group = "widgets"}),
 
-    -- User programs
+    -- Custom program shortcuts
     awful.key({ modkey }, "b", function () awful.spawn("brave") end,
               {description = "Brave", group = "_custom"}),
 
@@ -522,6 +522,9 @@ globalkeys = my_table.join(
     
     awful.key({ modkey }, "t", function () awful.spawn("marktext") end,
               {description = "Marktext", group = "_custom"}),
+
+    awful.key({ modkey }, "d", function () awful.spawn("darktable") end,
+              {description = "Darktable", group = "_custom"}),
     
     awful.key({ modkey }, "F11", function () awful.spawn("flameshot gui") end,
               {description = "Take Screenshot", group = "_custom"}),
