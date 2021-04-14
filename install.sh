@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # creates symbolic links for my dotfiles so all files can stay in ~/dotfiles
 # WARNING: this script will overwrite existing files that match the filenames from the dotfiles repo!
