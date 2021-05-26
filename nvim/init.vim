@@ -118,6 +118,13 @@ hi Normal guibg=None guifg=None ctermbg=None ctermfg=None
 hi CursorLine cterm=bold ctermbg=None ctermfg=None gui=bold guibg=None guifg=None
 hi Comment cterm=italic gui=italic
 
+" If more than one window and previous buffer was NERDTree, go back to it
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+let g:plug_window = 'noautocmd vertical topleft new'
+
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+
 " Autocomplete HTML/CSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
