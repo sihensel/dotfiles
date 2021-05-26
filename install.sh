@@ -71,7 +71,7 @@ if [ "$laptop" = true ]; then
     rm -f awesome/rc.lua
     mv awesome/rc_laptop.lua awesome/rc.lua
 else
-    for i in alacritty awesome neofetch zathura; do
+    for i in alacritty awesome neofetch picom zathura; do
         if [ -d "$i" ] || [ -f "$i" ]; then
             rm -rf "$i"
         fi
