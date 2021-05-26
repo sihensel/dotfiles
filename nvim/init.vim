@@ -120,10 +120,14 @@ hi Comment cterm=italic gui=italic
 
 " If more than one window and previous buffer was NERDTree, go back to it
 autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+" prevent crashed with vim-plug
 let g:plug_window = 'noautocmd vertical topleft new'
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 
 " Autocomplete HTML/CSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
