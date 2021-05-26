@@ -23,6 +23,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-fugitive'
 
 Plug 'morhetz/gruvbox'
 
@@ -112,7 +113,9 @@ colorscheme gruvbox
 " modify lightline to show the absolute file path
 let g:lightline = { 'colorscheme': 'gruvbox', 
                     \ 'active': {
-                    \ 'left': [['mode', 'paste'], ['readonly', 'absolutepath', 'modified']],}}
+                    \ 'left': [['mode', 'paste'], ['gitbranch', 'readonly', 'absolutepath', 'modified']],},
+                    \ 'component_function': {
+                    \ 'gitbranch': 'FugitiveHead'},}
 
 hi Normal guibg=None guifg=None ctermbg=None ctermfg=None
 hi CursorLine cterm=bold ctermbg=None ctermfg=None gui=bold guibg=None guifg=None
