@@ -124,7 +124,7 @@ StartInMusicDir = yes
 # Sound driver - OSS, ALSA, JACK, SNDIO (on OpenBSD) or null (only for
 # debugging).  You can enter more than one driver as a colon-separated
 # list.  The first working driver will be used.
-SoundDriver = JACK:ALSA:OSS
+SoundDriver = PULSEAUDIO:JACK:ALSA:OSS
 
 # Jack output settings.
 #JackClientName = "moc"
