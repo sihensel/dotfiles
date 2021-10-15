@@ -1,10 +1,11 @@
-# Dotfiles
+# ~/ sweet ~/
 
 ![screenshot.png](screenshot.png)
 
 This repository contains my personal Linux dotfiles.
+They are often (speak: all the time) a work in progress and may or may not work for you.
 
-Programs in the screenshot:
+Programs in the screenshot (outdated, will get updated soon):
 - Neovim
 - Neofetch
 - MOC (with the Gruvbox color scheme, based on [this](https://github.com/hringriin/dotfiles/blob/master/moc/themes/hringriin_theme))
@@ -13,25 +14,15 @@ My Awesome theme is based on Multicolor from [Awesome Copycats](https://github.c
 
 ## Installation
 
-Clone the repo into your home directory:
+Clone the repo into your home directory or download the zip.
 
 ```bash
 git clone https://github.com/sihensel/dotfiles.git ~/
-git clone git@github.com:sihensel/dotfiles.git ~/
 ```
 
-Run the install-script. You may ignore the question about the laptop setup, that is just for me.
-WARNING: This script deletes all preset files and replaces them with symlinks, so use with caution.
+There is an install script that places symlinks to the local repo. 
+You might want to ignore that, this is just for my personal setup.
 
 ```bash
 ~/dotfiles/install.sh
 ```
-
-If nothing happens, make sure to set the script as executable.
-
-```bash
-chmod 744 ~/dotfiles/install.sh
-```
-
-While this repo was created for personal use, feel free to use it (the terms of the GNU General Public License v3.0 apply).
-Please note that these files are often a work in progress, so I won't make any guarantees that these will work for you. Also I'm not responsible if they break your system.
