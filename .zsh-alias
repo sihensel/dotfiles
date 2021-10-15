@@ -1,0 +1,28 @@
+# Aliases for ZSH
+
+# confirm before overwriting something
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Git
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+
+# some aliases
+alias ls='ls -hlN --color=auto --group-directories-first'
+alias la='ls -AhlN --color=auto --group-directories-first'
+alias free='free -m'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias vim='nvim'
+alias pac='sudo pacman'
+alias updatepac='sudo reflector --country France --country Germany --latest 10 --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+alias p='python3'
+alias mount='sudo mount'
+alias ufw='sudo ufw'
+alias ack='ack -i'
+alias light='sudo light'
+alias msfconsole="msfconsole --quiet -x \"db_connect ${USER}@msf\""
+alias diff='diff -y --color'
