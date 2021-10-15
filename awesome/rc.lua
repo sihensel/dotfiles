@@ -14,15 +14,15 @@
         - dmenu
         - slock
         - Flameshot
+        - Chrome
         - Brave
-        - Thunar
-        - Marktext
+        - PCManFM
 
     Based on Awesome Copycats: github.com/lcpz
 
     Maintainer:
         Simon Hensel
-        https://github.com/dolanseesu/dotfiles
+        https://github.com/sihensel/dotfiles
 --]]
 
 -- {{{ Required libraries
@@ -94,9 +94,8 @@ awful.spawn.with_shell(
 -- {{{ Variable definitions
 
 local themes = {
-    "multicolor",      -- 1
-    "powerarrow",      -- 2
-    "powerarrow-dark", -- 3
+    "multicolor",       -- 1
+    "powerarrow-dark",  -- 2
 }
 
 local chosen_theme = themes[1]
@@ -107,35 +106,13 @@ local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awe
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
 local gui_editor   = os.getenv("GUI_EDITOR") or "nvim"
-local browser      = os.getenv("BROWSER") or "brave"
+local browser      = os.getenv("BROWSER") or "google-chrome-stable"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
---awful.util.tagnames = { "1", "2", "3", "4", "5" }
-awful.util.tagnames = { "I", "II", "III", "IV", "V" }
+awful.util.tagnames = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }
 awful.layout.layouts = {
-    --awful.layout.suit.floating,
     awful.layout.suit.tile,
-    --awful.layout.suit.tile.left,
-    --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
-    --lain.layout.cascade,
-    --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
-    --lain.layout.centerwork.horizontal,
-    --lain.layout.termfair,
-    --lain.layout.termfair.center,
 }
 
 awful.util.taglist_buttons = my_table.join(
@@ -437,9 +414,10 @@ globalkeys = my_table.join(
     --          {description = "show weather", group = "widgets"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
@@ -514,17 +492,17 @@ globalkeys = my_table.join(
         {description = "mpc on/off", group = "widgets"}),
 
     -- Custom program shortcuts
-    awful.key({ modkey }, "b", function () awful.spawn("brave") end,
+    awful.key({ modkey }, "b", function () awful.spawn("google-chrome-stable") end,
+              {description = "Google Chrome", group = "_custom"}),
+
+    awful.key({ modkey, "Shift"  }, "b", function () awful.spawn("brave") end,
               {description = "Brave", group = "_custom"}),
 
-    awful.key({ modkey }, "e", function () awful.spawn("thunar") end,
-              {description = "Thunar File Manager", group = "_custom"}),
-    
-    awful.key({ modkey }, "t", function () awful.spawn("marktext") end,
-              {description = "Marktext", group = "_custom"}),
+    awful.key({ modkey }, "t", function () awful.spawn("typora") end,
+              {description = "Typora", group = "_custom"}),
 
-    awful.key({ modkey }, "d", function () awful.spawn("darktable") end,
-              {description = "Darktable", group = "_custom"}),
+    awful.key({ modkey }, "e", function () awful.spawn("pcmanfm") end,
+              {description = "PCManFM", group = "_custom"}),
     
     awful.key({ modkey }, "F11", function () awful.spawn("flameshot gui") end,
               {description = "Take Screenshot", group = "_custom"}),
@@ -540,7 +518,7 @@ globalkeys = my_table.join(
     --]]
 
     --dmenu
-    awful.key({ modkey }, "r", function ()
+    awful.key({ modkey }, "space", function ()
             os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
            -- bg_normal, fg_normal, bg_focus, fg_focus
             "#000000", "#aaaaaa", "#000000", "#ff8c00"))
@@ -787,3 +765,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Custom autostart programs
 awful.spawn.with_shell("picom")
+awful.spawn.with_shell("nm-applet")

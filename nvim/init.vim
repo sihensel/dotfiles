@@ -21,10 +21,11 @@
 " more info: https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'itchyny/lightline.vim'
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
+Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
@@ -54,7 +55,7 @@ set shiftwidth=4
 set expandtab
 set smarttab
 set smartindent
-set scrolloff=8
+set scrolloff=6
 
 " line numbers and wrapping
 set number relativenumber
