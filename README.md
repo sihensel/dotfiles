@@ -14,6 +14,15 @@ Programs in the screenshot (outdated, will get updated soon):
 
 My Awesome theme is based on Multicolor from [Awesome Copycats](https://github.com/lcpz/awesome-copycats).
 
+## Dependencies (WIP)
+- Jetbrains Mono Nerd Font
+- Moc
+- taskwarrior
+- pulseaudio
+- dmenu (to be rofi)
+- alacritty
+- etc.
+
 ## Installation
 
 Clone the repo into your home directory or download the zip.
