@@ -28,12 +28,12 @@ local function factory(args)
 
     local bat         = { widget = wibox.widget.textbox() }
     local args        = args or {}
-    local timeout     = args.timeout or 30
+    local timeout     = args.timeout or 3
     local notify      = args.notify or "on"
     local full_notify = args.full_notify or notify
     local n_perc      = args.n_perc or { 5, 15 }
     local batteries   = args.batteries or (args.battery and {args.battery}) or {}
-    local ac          = args.ac or "AC0"
+    local ac          = args.ac or "AC"
     local settings    = args.settings or function() end
 
     function bat.get_batteries()
@@ -42,7 +42,7 @@ local function factory(args)
             if bstr then
                 batteries[#batteries + 1] = bstr
             else
-                ac = string.match(line, "A%w+") or "AC0"
+                ac = string.match(line, "A%w+") or "AC"
             end
         end)
     end
@@ -52,15 +52,15 @@ local function factory(args)
     bat_notification_critical_preset = {
         title   = "Battery exhausted",
         text    = "Shutdown imminent",
-        timeout = 15,
+        timeout = 30,
         fg      = "#000000",
         bg      = "#FFFFFF"
     }
 
     bat_notification_low_preset = {
         title   = "Battery low",
-        text    = "Plug the cable!",
-        timeout = 15,
+        text    = "Plug the cable",
+        timeout = 180,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }
@@ -68,7 +68,7 @@ local function factory(args)
     bat_notification_charged_preset = {
         title   = "Battery full",
         text    = "You can unplug the cable",
-        timeout = 15,
+        timeout = 300,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }

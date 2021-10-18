@@ -1,4 +1,6 @@
-# ~/ sweet ~/
+# Welcome ~/
+
+-- Under construction --
 
 ![screenshot.png](screenshot.png)
 
@@ -26,3 +28,9 @@ You might want to ignore that, this is just for my personal setup.
 ```bash
 ~/dotfiles/install.sh
 ```
+
+### Slack Theme
+My Gruvbox Slack theme.
+I don't know where else to put this, so I just paste it here.
+Paste into `Preferences` > `Themes`.
+`#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
