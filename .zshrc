@@ -1,11 +1,5 @@
 # ~/.zshrc
-
 source ~/.zsh-alias
-
-# colors and prompt
-autoload -U colors && colors
-PS1="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$ "
-#PS1="%n@%M %~ # "
 
 # general settings
 setopt autocd extendedglob nomatch
@@ -29,16 +23,10 @@ compinit
 bindkey -v
 export KEYTIMEOUT=1
 
-# cursor options:
-# 0 - blinking block
-# 1 - blinking block (default)
-# 2 - steady block
-# 3 - blinking underline
-# 4 - steady underline
-# 5 - blinking bar, xterm
-# 6 - steady bar, xterm
-
 # Change cursor shape for different vi modes.
+# cursor options:
+# 2 - steady block
+# 4 - steady underline
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
      [[ $1 = 'block' ]]; then
@@ -61,13 +49,22 @@ zle -N zle-line-init
 echo -ne '\e[4 q'
 preexec() { echo -ne '\e[4 q' ;}
 
-# Edit line in vim with ctrl-e (requires 'export VISUAL=nvim' in .profile)
+# Edit line in vim with ctrl-e (requires 'export VISUAL=nvim' in .zshenv)
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+# show current git branch in git repos
+# https://gist.github.com/reinvanoyen/05bcfe95ca9cb5041a4eafd29309ff29
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1)/p'
+}
+
+# colors and prompt
+autoload -U colors && colors
+setopt prompt_subst
+export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
+export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load syntax highlighting; should be last.
 # sudo pacman -S zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
