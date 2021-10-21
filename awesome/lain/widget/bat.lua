@@ -52,7 +52,7 @@ local function factory(args)
     bat_notification_critical_preset = {
         title   = "Battery exhausted",
         text    = "Shutdown imminent",
-        timeout = 30,
+        timeout = 15,
         fg      = "#000000",
         bg      = "#FFFFFF"
     }
@@ -60,7 +60,7 @@ local function factory(args)
     bat_notification_low_preset = {
         title   = "Battery low",
         text    = "Plug the cable",
-        timeout = 180,
+        timeout = 15,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }
@@ -68,7 +68,7 @@ local function factory(args)
     bat_notification_charged_preset = {
         title   = "Battery full",
         text    = "You can unplug the cable",
-        timeout = 300,
+        timeout = 15,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }

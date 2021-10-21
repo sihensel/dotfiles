@@ -17,30 +17,37 @@ local my_table = awful.util.table or gears.table
 
 -- define colors here
 local colors = {
-    bg      = '#1d2021',
-    red     = '#fb4934',
-    green   = '#b8bb26',
-    yellow  = '#fabd2f',
-    blue    = '#83a598',
-    purple  = '#d3869b',
-    aqua    = '#8ec07c',
-    orange  = '#fe8019',
-    fg      = '#fbf1c7',
-    arch    = '#1793d1'
+    bg          = '#1d2021',
+    red         = '#fb4934',
+    red_dark    = '#cc241d',
+    green       = '#b8bb26',
+    green_dark  = '#98971a',
+    yellow      = '#fabd2f',
+    yellow_dark = '#d79921',
+    blue        = '#83a598',
+    blue_dark   = '#458588',
+    purple      = '#d3869b',
+    purple_dark = '#b16286',
+    aqua        = '#8ec07c',
+    aqua_dark   = '#689d6a',
+    orange      = '#fe8019',
+    orange_dark = '#d65d0e',
+    fg          = '#fbf1c7',
+    arch        = '#1793d1'
 }
 
 -- Icon Font https://www.nerdfonts.com/cheat-sheet
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
-theme.wallpaper                                 = theme.walldir .. "/wall.jpg"
-theme.font                                      = "Jetbrains Mono Nerd Font 9"
+theme.wallpaper                                 = theme.walldir .. "/campfire.jpg"
+theme.font                                      = "Jetbrains Mono Nerd Font 10"
 theme.bg_normal                                 = colors.bg
 theme.bg_focus                                  = colors.bg
 theme.bg_urgent                                 = colors.bg
 theme.bg_systray                                = theme.bg_normal
 theme.fg_normal                                 = colors.fg
 theme.fg_focus                                  = colors.orange
-theme.fg_urgent                                 = colors.red
+theme.fg_urgent                                 = colors.red_dark
 
 theme.border_width                              = dpi(2)
 theme.border_normal                             = colors.bg
@@ -51,7 +58,7 @@ theme.taglist_font                              = theme.font
 theme.taglist_bg_normal                         = theme.bg_normal
 theme.taglist_fg_empty                          = theme.fg_normal
 theme.taglist_fg_focus                          = theme.fg_focus
-theme.taglist_fg_occupied                       = colors.aqua
+theme.taglist_fg_occupied                       = colors.blue_dark
 
 theme.useless_gap                               = 8
 theme.systray_icon_spacing                      = 4
@@ -61,7 +68,7 @@ local separators = lain.util.separators
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local textclock = wibox.widget.textclock(markup(colors.orange, "  %A %d %B  %H:%M "))
+local textclock = wibox.widget.textclock(markup(colors.orange, " %A %d %B  %H:%M "))
 textclock.font = theme.font
 
 -- Calendar
@@ -85,25 +92,25 @@ theme.weather = lain.widget.weather({
         bg = theme.bg_normal,
         margin = 5
     },
-    weather_na_markup = markup.fontfg(theme.font, colors.green, "N/A "),
+    weather_na_markup = markup.fontfg(theme.font, colors.green_dark, "N/A "),
     settings = function()
         descr = weather_now["weather"][1]["description"]:lower()
         units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fontfg(theme.font, colors.green, '  ' .. descr .. " @ " .. units .. "°C"))
+        widget:set_markup(markup.fontfg(theme.font, colors.green_dark, '  ' .. descr .. " @ " .. units .. "°C"))
     end
 })
 
 -- CPU
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, colors.orange, "礪 " .. cpu_now.usage .. "%"))
+        widget:set_markup(markup.fontfg(theme.font, colors.orange_dark, "礪 " .. cpu_now.usage .. "%"))
     end
 })
 
 -- Coretemp
 local temp = lain.widget.temp({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, colors.purple, ' ' .. coretemp_now .. "°C"))
+        widget:set_markup(markup.fontfg(theme.font, colors.blue, ' ' .. coretemp_now .. "°C"))
     end
 })
 
@@ -117,20 +124,32 @@ local bat = lain.widget.bat({
         else
             perc = ' ' .. perc
         end
-        widget:set_markup(markup.fontfg(theme.font, colors.yellow, perc))
-    end,
-    bat_notification_charged_preset = {
-        fg = theme.fg_normal,
-        bg = theme.bg_normal
-    },
-    bat_notification_low_preset = {
-        fg = theme.fg_normal,
-        bg = theme.bg_normal
-    },
-    bat_notification_charged_preset = {
-        fg = theme.fg_normal,
-        bg = theme.bg_normal
-    }
+        widget:set_markup(markup.fontfg(theme.font, colors.yellow_dark, perc))
+        bat_notification_charged_preset = {
+            title = 'Battery full',
+            text = 'You can unplug the cable',
+            font = theme.font,
+            fg = theme.fg_normal,
+            bg = theme.bg_normal,
+            timeout = 300
+        }
+        bat_notification_low_preset = {
+            title = 'Battery low',
+            text = 'Plug the cable',
+            font = theme.font,
+            fg = theme.fg_normal,
+            bg = theme.bg_normal,
+            timeout = 180
+        }
+        bat_notification_critical_preset = {
+            title = 'Battery exhausted',
+            text = 'Plug the cable now!',
+            font = theme.font,
+            fg = theme.fg_normal,
+            bg = theme.bg_normal,
+            timeout = 15
+        }
+    end
 })
 
 
@@ -139,9 +158,9 @@ theme.volume = lain.widget.alsa({
     settings = function()
         if volume_now.status == "off" then
             --volume_now.level = ' ' .. volume_now.level
-            widget:set_markup(markup.fontfg(theme.font, colors.blue, " " .. volume_now.level .. "%"))
+            widget:set_markup(markup.fontfg(theme.font, colors.blue_dark, " " .. volume_now.level .. "%"))
         else
-            widget:set_markup(markup.fontfg(theme.font, colors.blue, " " .. volume_now.level .. "%"))
+            widget:set_markup(markup.fontfg(theme.font, colors.blue_dark, " " .. volume_now.level .. "%"))
 
         end
 
@@ -174,7 +193,7 @@ local memory = lain.widget.mem({
 -- Disk Usage
 local fs = lain.widget.fs({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, colors.red, ' ' .. math.ceil(fs_now['/'].used) .. ' ' .. fs_now['/'].units))
+        widget:set_markup(markup.fontfg(theme.font, colors.aqua, ' ' .. math.ceil(fs_now['/'].used) .. ' ' .. fs_now['/'].units))
     end,
     notification_preset = {
         font = theme.font,
@@ -187,18 +206,19 @@ local fs = lain.widget.fs({
 -- Taskwarrior
 local task_widget = wibox.widget.textbox()
 task_widget.font = theme.font
-task_widget.markup = '<span foreground="' .. colors.aqua .. '"> todo</span>'
+task_widget.markup = '<span foreground="' .. colors.aqua_dark .. '"> todo</span>'
 lain.widget.contrib.task.attach(task_widget)
 
 -- MOC
-strlen = 19 -- length of '/home/simon/music/
+strlen = 19 -- length of '/home/simon/music/'
 local moc_widget = lain.widget.contrib.moc({
     music_dir = '~/music',
     settings = function () 
         if moc_now.state == 'PLAY' then
-            widget:set_markup(markup.fontfg(theme.font, colors.aqua, ' ' .. string.sub(moc_now.file, 19, -5)))
+            -- cut off /path/to/file and the file exension (.mp3 etc)
+            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' ' .. string.sub(moc_now.file, strlen, -5)))
         else
-            widget:set_markup(markup.fontfg(theme.font, colors.aqua, ' '))
+            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' '))
         end
         moc_notification_preset = {
             title = ' Now Playing',

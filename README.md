@@ -52,3 +52,5 @@ You might need to change the owner to root with
 ```bash
 sudo chown root: clear_cache.hook`
 ```
+### Note:
+The files `.vimrc` and `.bashrc` are outdated, since I no longer use these programs.
