@@ -12,7 +12,7 @@ setxkbmap -model pc105 -layout us -variant altgr-intl
 export EDITOR="nvim"
 export VIISUAL="nvim"
 export TERMINAL="alacritty"
-export BROWSER="google-chrome-stable"
+export BROWSER="brave"
 export READER="zathura"
 export GTK_THEME=Materia:dark
 export PATH="$HOME/.local/bin:$PATH"

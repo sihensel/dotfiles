@@ -61,7 +61,6 @@ set smartcase
 " this would remap :nohlsearch to the space-key
 ":nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-
 " show matching brackets
 set showmatch
 
@@ -97,7 +96,6 @@ colorscheme gruvbox
 set background=dark
 
 hi Normal guibg=None ctermbg=None
-
 
 " Autocomplete HTML/CSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
