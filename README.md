@@ -16,11 +16,13 @@ My Awesome theme is based on Multicolor from [Awesome Copycats](https://github.c
 
 ## Dependencies (WIP)
 - Jetbrains Mono Nerd Font
+- Roboto Mono
 - Moc
 - taskwarrior
 - pulseaudio
 - dmenu (to be rofi)
 - alacritty
+- pcmanfm-gtk3
 - etc.
 
 ## Installation
@@ -43,3 +45,10 @@ My Gruvbox Slack theme.
 I don't know where else to put this, so I just paste it here.
 Paste into `Preferences` > `Themes`.
 `#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
+
+### Pacman Hook
+Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.
+You might need to change the owner to root with
+```bash
+sudo chown root: clear_cache.hook`
+```
