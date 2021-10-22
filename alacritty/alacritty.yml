@@ -18,15 +18,15 @@ scrolling:
 
 font:
   normal:
-    family: RobotoMono 
+    family: Roboto Mono Nerd Font
     style: Regular
   bold:
-    family: RobotoMono
+    family: Roboto Mono Nerd Font
     style: Bold
   italic:
-    family: RobotoMono
+    family: Roboto Mono Nerd Font
     style: Italic
-  size: 9.5
+  size: 8.5
 
 # Colors (Gruvbox dark)
 # Color scheme from https://github.com/alacritty/alacritty/wiki/Color-schemes
