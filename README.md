@@ -1,39 +1,51 @@
 # Welcome ~/
 
--- Under construction --
+This repository contains my personal Linux dotfiles.
+They are often (speak: all the time) a work in progress and may or may not work for you.
+I use [Awesome](https://awesomewm.org) with my own theme called _Groovebox_ and `picom-git` on Arch.
 
 ![screenshot.png](screenshot.png)
 
-This repository contains my personal Linux dotfiles.
-They are often (speak: all the time) a work in progress and may or may not work for you.
-
-Programs in the screenshot (outdated, will get updated soon):
+Programs in the screenshot:
 - Neovim
 - Neofetch
-- MOC (with the Gruvbox color scheme, based on [this](https://github.com/hringriin/dotfiles/blob/master/moc/themes/hringriin_theme))
-
-My Awesome theme is based on Multicolor from [Awesome Copycats](https://github.com/lcpz/awesome-copycats).
-
-## Dependencies (WIP)
-- Jetbrains Mono Nerd Font
-- Roboto Mono
-- Moc
-- taskwarrior
-- pulseaudio
-- dmenu (to be rofi)
-- alacritty
-- pcmanfm-gtk3
-- etc.
+- tty-clock
 
 ## Installation
 
-Clone the repo into your home directory or download the zip.
+### Dependencies
+
+Some of these are not hard dependencies and can be changed in the config files.
+This is more of a list for me, the packages are for `pacman`.
+
+Dependency | Package
+--- | ---
+Awesome | `awesome`
+Picom | `picom-git` (AUR)
+Alacritty | `alacritty`
+Zsh | `zsh zsh-syntax-highlighting`
+Rofi | `rofi`
+Slock | `slock`
+NetworkManager-Applet | `network-manager-applet networkmanager-openvpn`
+Brave | `brave-bin` (AUR)
+PCmanFM | `pcmanfm-gtk3`
+Moc | `moc-pulse` (AUR)
+taskwarrior | `task`
+Flameshot | `flameshot`
+Typora | `typora` (AUR)
+Zathura | `zathura zathura-pdf-poppler`
+Roboto Mono Nerd Font | `nerd-fonts-roboto-mono` (AUR)
+Materia Theme | `materia-gtk-theme`
+
+Clone the repo into your home directory.
 
 ```bash
 git clone https://github.com/sihensel/dotfiles.git ~/
 ```
 
-There is an install script that places symlinks to the local repo. 
+There is no wallpaper included, Awesome looks for a file in `~/wallpapers`. This can be configured in `awesome/themes/groovebox/theme.lua`.
+
+The script `install.sh` places symlinks to the local repo, so all files can stay in one place.
 You might want to ignore that, this is just for my personal setup.
 
 ```bash
@@ -48,9 +60,11 @@ Paste into `Preferences` > `Themes`.
 
 ### Pacman Hook
 Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.
+Also make sure to install the `pacman-contrib` package.
 You might need to change the owner to root with
 ```bash
 sudo chown root: clear_cache.hook`
 ```
-### Note:
+
+### Note
 The files `.vimrc` and `.bashrc` are outdated, since I no longer use these programs.

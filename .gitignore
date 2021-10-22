@@ -1,6 +1,7 @@
 # moc files
 last_directory
 softmixer
+pid
 
 # ignore vim-plug dir
 plugged/
