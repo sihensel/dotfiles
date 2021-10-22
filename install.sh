@@ -5,14 +5,6 @@
 # this script should be POSIX compliant.
 
 dotdir=~/dotfiles   # specify the FULL path to the repo here
-laptop=false
-
-echo "Configure dotfiles for the laptop? (y/n)"
-read -r usrcmd
-
-if [ "$usrcmd" = "y" ] || [ "$usrcmd" = "Y" ]; then
-    laptop=true
-fi
 
 # check if dotfiles repo exists
 if [ ! -d "$dotdir" ]; then
@@ -25,7 +17,7 @@ cd ~/ || exit 1
 
 # start creating symlinks
 # files in ~/
-for i in .xinitrc .zshrc .zshenv; do
+for i in .xinitrc .zshrc .zshenv .zsh-alias; do
     if [ -f "$i" ]; then
         rm -f "$i"
     fi
@@ -33,19 +25,10 @@ for i in .xinitrc .zshrc .zshenv; do
 done
 
 # MOC
-if [ "$laptop" = false ]; then
-    if [ ! -d ~/.moc ]; then
-        mkdir -p ~/.moc
-    fi
-    cd ~/.moc || exit 1
-
-    for i in eqsets themes config equalizer; do
-        if [ -d "$i" ] || [ -f "$i" ]; then
-            rm -rf "$i"
-        fi
-    ln -sf "$dotdir"/moc/"$i" "$i"
-    done
+if [ -d ~/.moc ]; then
+    rm -rf ~/.moc
 fi
+ln -sf "$dotdir"/moc ~/.moc
 
 # .config
 if [ ! -d ~/.config ]; then
@@ -53,42 +36,15 @@ if [ ! -d ~/.config ]; then
 fi
 cd ~/.config || exit 1
 
-if [ "$laptop" = true ]; then
-    for i in alacritty awesome; do
-        if [ -d "$i" ] || [ -f "$i" ]; then
-            rm -rf "$i"
-        fi
-        if [ "$i" = "alacritty" ] || [ "$i" = "awesome" ]; then
-            cp -r "$dotdir"/"$i" .
-        else
-            ln -sf "$dotdir"/"$i" "$i"
-        fi
-    done
-    
-    # put laptop dotfiles in place
-    rm -f alacritty/alacritty.yml
-    mv alacritty/alacritty_laptop.yml alacritty/alacritty.yml
-    rm -f awesome/rc.lua
-    mv awesome/rc_laptop.lua awesome/rc.lua
-else
-    for i in alacritty awesome neofetch picom zathura; do
-        if [ -d "$i" ] || [ -f "$i" ]; then
-            rm -rf "$i"
-        fi
-        ln -sf "$dotdir"/"$i" "$i"
-    done
-fi
+for i in alacritty awesome neofetch nvim picom rofi zathura; do
+    if [ -d "$i" ] || [ -f "$i" ]; then
+        rm -rf "$i"
+    fi
+    ln -sf "$dotdir"/"$i" "$i"
+done
 
-# Neovim
-if [ ! -d nvim ]; then
-    mkdir -p nvim
-fi
-cd nvim || exit 1
-ln -sf "$dotdir"/nvim/init.vim init.vim
-
-# finish
+# wrap up
 cd ~/ || exit 1
 unset $dotdir
-unset $laptop
 echo "All done, no errors."
 exit 0
