@@ -1,0 +1,6 @@
+# moc files
+last_directory
+softmixer
+
+# ignore vim-plug dir
+plugged/
