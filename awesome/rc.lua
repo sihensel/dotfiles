@@ -11,15 +11,15 @@
 
     Programs used in this config:
         - Alacritty
-        - dmenu
+        - Rofi
         - slock
         - Flameshot
         - Chrome
         - Brave
         - PCManFM
+        - Typora
 
     Based on Awesome Copycats: github.com/lcpz
-
     Maintainer:
         Simon Hensel
         https://github.com/sihensel/dotfiles
@@ -68,30 +68,15 @@ end
 -- }}}
 
 -- {{{ Autostart windowless processes
-
 -- This function will run once every time Awesome is started
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
         awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
     end
 end
-
---run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
-
--- This function implements the XDG autostart specification
---[[
-awful.spawn.with_shell(
-    'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
-    'xrdb -merge <<< "awesome.started:true";' ..
-    -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
-    'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
-)
---]]
-
 -- }}}
 
 -- {{{ Variable definitions
-
 local theme        = "groovebox"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
@@ -238,32 +223,6 @@ globalkeys = my_table.join(
         {description = "focus previous by index", group = "client"}
     ),
 
-    -- By direction client focus
-    --awful.key({ modkey }, "j",
-    --    function()
-    --        awful.client.focus.global_bydirection("down")
-    --        if client.focus then client.focus:raise() end
-    --    end,
-    --    {description = "focus down", group = "client"}),
-    --awful.key({ modkey }, "k",
-    --    function()
-    --        awful.client.focus.global_bydirection("up")
-    --        if client.focus then client.focus:raise() end
-    --    end,
-    --    {description = "focus up", group = "client"}),
-    --awful.key({ modkey }, "h",
-    --    function()
-    --        awful.client.focus.global_bydirection("left")
-    --        if client.focus then client.focus:raise() end
-    --    end,
-    --    {description = "focus left", group = "client"}),
-    --awful.key({ modkey }, "l",
-    --    function()
-    --        awful.client.focus.global_bydirection("right")
-    --        if client.focus then client.focus:raise() end
-    --    end,
-    --    {description = "focus right", group = "client"}),
-
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -408,17 +367,8 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "F12", function () awful.spawn("slock") end,
               {description = "Lock Screen", group = "_custom"}),
     
-
-    --dmenu
-    awful.key({ modkey }, "space", function ()
-            os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-           -- bg_normal, fg_normal, bg_focus, fg_focus
-            "#000000", "#aaaaaa", "#000000", "#ff8c00"))
-        end,
-        {description = "run dmenu", group = "_custom"}),
-
     --rofi
-    awful.key({ modkey }, "r", function ()
+    awful.key({ modkey }, "space", function ()
             os.execute('rofi -show run')
         end,
         {description = "run rofi", group = "_custom"})
@@ -633,10 +583,6 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
--- possible workaround for tag preservation when switching back to default screen:
--- https://github.com/lcpz/awesome-copycats/issues/251
--- }}}
-
 -- Custom autostart programs
---awful.spawn.with_shell("picom")
+awful.spawn.with_shell("picom --experimental-backends")
 awful.spawn.with_shell("nm-applet")
