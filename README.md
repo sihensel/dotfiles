@@ -1,7 +1,7 @@
 # Welcome ~/
 
-This repository contains my personal Linux dotfiles.
-They are often (speak: all the time) a work in progress and may or may not work for you.
+This repository contains my personal Linux dotfiles.  
+They are often (speak: all the time) a work in progress and may or may not work for you.  
 I use [Awesome](https://awesomewm.org) with my own theme called _Groovebox_ and `picom-git` on Arch.
 
 ![screenshot.png](screenshot.png)
@@ -15,7 +15,7 @@ Programs in the screenshot:
 
 ### Dependencies
 
-Some of these are not hard dependencies and can be changed in the config files.
+Some of these are not hard dependencies and can be changed in the config files.  
 This is more of a list for me, the packages are for `pacman`.
 
 Dependency | Package
@@ -43,9 +43,10 @@ Clone the repo into your home directory.
 git clone https://github.com/sihensel/dotfiles.git ~/
 ```
 
-There is no wallpaper included, Awesome looks for a file in `~/wallpapers`. This can be configured in `awesome/themes/groovebox/theme.lua`.
+There is no wallpaper included, Awesome looks for a file in `~/wallpapers`.  
+This can be configured in `awesome/themes/groovebox/theme.lua`.
 
-The script `install.sh` places symlinks to the local repo, so all files can stay in one place.
+The script `install.sh` places symlinks to the local repo, so all files can stay in one place.  
 You might want to ignore that, this is just for my personal setup.
 
 ```bash
@@ -53,15 +54,15 @@ You might want to ignore that, this is just for my personal setup.
 ```
 
 ### Slack Theme
-My Gruvbox Slack theme.
-I don't know where else to put this, so I just paste it here.
-Paste into `Preferences` > `Themes`.
+My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
+Paste into `Preferences` > `Themes`.  
 `#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
 
 ### Pacman Hook
-Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.
-Also make sure to install the `pacman-contrib` package.
+Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.  
+Also make sure to install the `pacman-contrib` package.  
 You might need to change the owner to root with
+
 ```bash
 sudo chown root: clear_cache.hook`
 ```
