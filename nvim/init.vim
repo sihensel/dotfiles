@@ -24,6 +24,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'ap/vim-css-color'
 
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
