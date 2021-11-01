@@ -15,31 +15,64 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local os, string, math = os, string, math
 local my_table = awful.util.table or gears.table
 
+local themes = {'groovebox', 'spacewave'}
+local theme_name = themes[2]
+
 -- define colors here
 local colors = {
-    bg          = '#1d2021',
-    red         = '#fb4934',
-    red_dark    = '#cc241d',
-    green       = '#b8bb26',
-    green_dark  = '#98971a',
-    yellow      = '#fabd2f',
-    yellow_dark = '#d79921',
-    blue        = '#83a598',
-    blue_dark   = '#458588',
-    purple      = '#d3869b',
-    purple_dark = '#b16286',
-    aqua        = '#8ec07c',
-    aqua_dark   = '#689d6a',
-    orange      = '#fe8019',
-    orange_dark = '#d65d0e',
-    fg          = '#fbf1c7',
-    arch        = '#1793d1'
+    {
+        bg          = '#1d2021',
+        fg          = '#fbf1c7',
+        red         = '#fb4934',
+        red_dark    = '#cc241d',
+        green       = '#b8bb26',
+        green_dark  = '#98971a',
+        yellow      = '#fabd2f',
+        yellow_dark = '#d79921',
+        blue        = '#83a598',
+        blue_dark   = '#458588',
+        purple      = '#d3869b',
+        purple_dark = '#b16286',
+        aqua        = '#8ec07c',
+        aqua_dark   = '#689d6a',
+        orange      = '#fe8019',
+        orange_dark = '#d65d0e',
+        arch        = '#1793d1'
+    },
+    {
+        bg          = '#070819',
+        fg          = '#f8f5e9',
+        red         = '#ef3a2a',
+        red_dark    = '#d5152f',
+        green       = '#6aff5a',
+        green_dark  = '#3ade48',
+        yellow      = '#ffcf3a',
+        yellow_dark = '#ffbd25',
+        blue        = '#3dc0ed',
+        blue_dark   = '#2d34c5',
+        purple      = '#df299a',
+        purple_dark = '#801580',
+        aqua        = '#80e1bd',
+        aqua_dark   = '#34bfa4',
+        orange      = '#ff9f00',
+        orange_dark = '#ef6c26',
+        arch        = '#1793d1'
+    }
 }
 
--- Icon Font https://www.nerdfonts.com/cheat-sheet
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
-theme.wallpaper                                 = theme.walldir .. "/campfire.jpg"
+
+if theme_name == 'groovebox' then
+    colors = colors[1]
+    theme.wallpaper = theme.walldir .. '/campfire.jpg'
+elseif theme_name == 'spacewave' then
+    colors = colors[2]
+    theme.wallpaper = theme.walldir .. '/synth.jpg'
+end
+
+-- Icon Font https://www.nerdfonts.com/cheat-sheet
+--theme.wallpaper                                 = theme.walldir .. "/synth.jpg"
 theme.font                                      = "Roboto Mono Nerd Font 10"
 theme.bg_normal                                 = colors.bg
 theme.bg_focus                                  = colors.bg
