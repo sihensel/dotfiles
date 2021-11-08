@@ -16,7 +16,7 @@ local os, string, math = os, string, math
 local my_table = awful.util.table or gears.table
 
 local themes = {'groovebox', 'spacewave'}
-local theme_name = themes[2]
+local theme_name = themes[1]
 
 -- define colors here
 local colors = {

@@ -81,7 +81,7 @@ schemes:
       cyan:    '#80e1bd'
       white:   '#f8f8f8'
 
-colors: *spacewave
+colors: *gruvbox
 
 visual_bell:
   duration: 0

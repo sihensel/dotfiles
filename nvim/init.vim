@@ -76,7 +76,6 @@ set smartcase
 " this would remap :nohlsearch to the space-key
 ":nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-
 " show matching brackets
 set showmatch
 
@@ -88,9 +87,12 @@ set hidden
 set noshowmode
 set timeoutlen=1000 ttimeoutlen=10
 
-" autocomplete
+" autocomplete for find
 set wildmenu
-set wildmode=longest,list,full
+set wildmode=longest,list:longest,list:full
+
+" set the path to the current dir
+set path=.,**
 
 " disable automatic commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -137,10 +139,6 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Autocomplete HTML/CSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" Autocomplete Python
-"let g:pydiction_location = '/home/simon/.vim/bundle/pydiction/complete-dict'
-"let g:pydiction_menu_height = 5
 
 " autocomplete certain characters
 "inoremap ( ()<Esc>i

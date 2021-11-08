@@ -64,7 +64,7 @@ Also make sure to install the `pacman-contrib` package.
 You might need to change the owner to root with
 
 ```bash
-sudo chown root: clear_cache.hook`
+sudo chown root: clear_cache.hook
 ```
 
 ### Note
