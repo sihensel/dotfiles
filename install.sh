@@ -1,14 +1,31 @@
 #!/bin/sh
 
-# creates symbolic links for my dotfiles so all files can stay in ~/dotfiles
-# WARNING: this script will overwrite existing files that match the filenames from the dotfiles repo!
-# this script should be POSIX compliant.
+# creates symbolic links for my dotfiles so all files can stay in the dotfiles folder
+# WARNING: this script will overwrite existing files
+# this script should be POSIX compliant (checked with https://www.shellcheck.net/)
 
-dotdir=~/dotfiles   # specify the FULL path to the repo here
+dot_dir=~/dotfiles   # FULL path to the repo
+
+# see https://archive.md/TRzn4
+while getopts ":d:" opt; do
+    case $opt in
+        d)
+            dot_dir=$OPTARG
+        ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
 
 # check if dotfiles repo exists
-if [ ! -d "$dotdir" ]; then
-    echo "${dotdir} not found, either clone the git repo or specift the correct path, exiting."
+if [ ! -d "$dot_dir" ]; then
+    echo "Directory '${dot_dir}' not found, you can specify a path with -d"
     exit 1
 fi
 
@@ -21,30 +38,31 @@ for i in .xinitrc .zshrc .zshenv .zsh-alias; do
     if [ -f "$i" ]; then
         rm -f "$i"
     fi
-    ln -sf "$dotdir"/"$i" "$i"
+    ln -sf "$dot_dir"/"$i" "$i"
 done
 
-# MOC
+# MOC (~/.moc)
 if [ -d ~/.moc ]; then
     rm -rf ~/.moc
 fi
-ln -sf "$dotdir"/moc ~/.moc
+ln -sf "$dot_dir"/moc ~/.moc
 
-# .config
+# ~/.config
 if [ ! -d ~/.config ]; then
     mkdir -p ~/.config
 fi
+
 cd ~/.config || exit 1
 
 for i in alacritty awesome neofetch nvim picom rofi zathura; do
     if [ -d "$i" ] || [ -f "$i" ]; then
         rm -rf "$i"
     fi
-    ln -sf "$dotdir"/"$i" "$i"
+    ln -sf "$dot_dir"/"$i" "$i"
 done
 
 # wrap up
+unset "$dot_dir"
 cd ~/ || exit 1
-unset $dotdir
 echo "All done, no errors."
 exit 0

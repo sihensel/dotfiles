@@ -39,8 +39,8 @@ Materia Theme | `materia-gtk-theme`
 
 Clone the repo into your home directory.
 
-```bash
-git clone https://github.com/sihensel/dotfiles.git ~/
+```sh
+git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, Awesome looks for a file in `~/wallpapers`.  
@@ -49,8 +49,9 @@ This can be configured in `awesome/themes/groovebox/theme.lua`.
 The script `install.sh` places symlinks to the local repo, so all files can stay in one place.  
 You might want to ignore that, this is just for my personal setup.
 
-```bash
-~/dotfiles/install.sh
+```sh
+./install.sh   # or
+./install.sh -d /path/to/dotfiles/
 ```
 
 ### Slack Theme
@@ -63,7 +64,7 @@ Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.
 Also make sure to install the `pacman-contrib` package.  
 You might need to change the owner to root with
 
-```bash
+```sh
 sudo chown root: clear_cache.hook
 ```
 
