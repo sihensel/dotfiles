@@ -12,6 +12,7 @@ alias gc='git commit -m'
 
 # some aliases
 alias ls='ls -hlN --color=auto --group-directories-first'
+alias ll=ls
 alias la='ls -AhlN --color=auto --group-directories-first'
 alias free='free -m'
 alias grep='grep --color=auto'
