@@ -174,6 +174,7 @@ screen.connect_signal("property::geometry", function(s)
 end)
 
 -- No borders when rearranging only 1 non-floating or maximized client
+--[[
 screen.connect_signal("arrange", function (s)
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
@@ -184,9 +185,12 @@ screen.connect_signal("arrange", function (s)
         end
     end
 end)
+--]]
 
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
+awful.screen.connect_for_each_screen(function(s)
+    beautiful.at_screen_connect(s)
+end)
 -- }}}
 
 -- {{{ Key bindings
