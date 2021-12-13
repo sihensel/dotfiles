@@ -60,13 +60,8 @@ Paste into `Preferences` > `Themes`.
 `#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
 
 ### Pacman Hook
-Copy `clear_cache.hook` to `/etc/pacman.d/hooks`.  
-Also make sure to install the `pacman-contrib` package.  
-You might need to change the owner to root with
+Make sure to install the `pacman-contrib` package, then copy the file to `/etc/pacman.d/hooks`.
 
 ```sh
-sudo chown root: clear_cache.hook
+sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
-
-### Note
-The files `.vimrc` and `.bashrc` are outdated, since I no longer use these programs.
