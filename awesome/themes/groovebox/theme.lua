@@ -93,7 +93,7 @@ theme.taglist_fg_empty                          = theme.fg_normal
 theme.taglist_fg_focus                          = theme.fg_focus
 theme.taglist_fg_occupied                       = colors.blue_dark
 
-theme.useless_gap                               = 8
+theme.useless_gap                               = dpi(8)
 theme.systray_icon_spacing                      = 4
 
 local markup = lain.util.markup
@@ -287,13 +287,13 @@ function theme.at_screen_connect(s)
     awful.tag(awful.util.tagnames, s, awful.layout.layouts)
     s.taglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-    -- separators
+    -- Separators
     local spr= wibox.widget.textbox(" | ")
     spr.font = theme.font
     local first_spr= wibox.widget.textbox("| ")
     first_spr.font = theme.font
     
-    -- create the systray
+    -- Create the systray
     local systray = wibox.widget.systray()
     local systray = wibox.widget {
         {
@@ -315,6 +315,14 @@ function theme.at_screen_connect(s)
         widget = wibox.container.margin
     }
 
+    -- Set the width of the wibar accordingly to the screen width
+    local screen_width = 0
+    if tostring(s.workarea.width) == '2560' then
+        screen_width = dpi(s.workarea.width - dpi(150) - theme.border_width)
+    elseif tostring(s.workarea.width) == '1920' then
+        screen_width = dpi(s.workarea.width - dpi(125) - theme.border_width)
+    end
+
     -- Create the wibox
     s.mywibox = awful.wibar({
         position = "top",
@@ -323,13 +331,11 @@ function theme.at_screen_connect(s)
         bg = theme.bg_normal,
         fg = theme.fg_normal,
         border_width = 10,
-
-        width = dpi(s.workarea.width - dpi(30) - theme.border_width),
+        width = screen_width,
         ontop = false,
         x = screen[1].geometry.width / 2 - 150,
         y = 2,
         expand = true,
-        screen = mouse.screen,
         opacity = 0.85
     })
 
