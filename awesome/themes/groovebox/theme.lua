@@ -315,14 +315,6 @@ function theme.at_screen_connect(s)
         widget = wibox.container.margin
     }
 
-    -- Set the width of the wibar accordingly to the screen width
-    local screen_width = 0
-    if tostring(s.workarea.width) == '2560' then
-        screen_width = dpi(s.workarea.width - dpi(150) - theme.border_width)
-    elseif tostring(s.workarea.width) == '1920' then
-        screen_width = dpi(s.workarea.width - dpi(125) - theme.border_width)
-    end
-
     -- Create the wibox
     s.mywibox = awful.wibar({
         position = "top",
@@ -331,7 +323,7 @@ function theme.at_screen_connect(s)
         bg = theme.bg_normal,
         fg = theme.fg_normal,
         border_width = 10,
-        width = screen_width,
+        width = s.workarea.width - 35 - theme.border_width,
         ontop = false,
         x = screen[1].geometry.width / 2 - 150,
         y = 2,
