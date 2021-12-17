@@ -2,6 +2,7 @@
 last_directory
 softmixer
 pid
+*.m3u
 
 # ignore vim-plug dir
 plugged/
