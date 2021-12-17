@@ -353,11 +353,11 @@ globalkeys = my_table.join(
         {description = "mpc on/off", group = "widgets"}),
 
     -- Custom program shortcuts
-    awful.key({ modkey }, "b", function () awful.spawn("google-chrome-stable") end,
-              {description = "Google Chrome", group = "_custom"}),
-
-    awful.key({ modkey, "Shift"  }, "b", function () awful.spawn("brave") end,
+    awful.key({ modkey }, "b", function () awful.spawn("brave") end,
               {description = "Brave", group = "_custom"}),
+
+    awful.key({ modkey, "Shift"  }, "b", function () awful.spawn("google-chrome-stable") end,
+              {description = "Google Chrome", group = "_custom"}),
 
     awful.key({ modkey }, "t", function () awful.spawn("typora") end,
               {description = "Typora", group = "_custom"}),
