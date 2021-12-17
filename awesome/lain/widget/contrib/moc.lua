@@ -75,12 +75,7 @@ local function factory(args)
                         replaces_id = moc.id,
                     }
 
-                    local path   = string.format("%s/%s", music_dir, string.match(moc_now.file, ".*/"))
-                    local cover  = string.format("find '%s' -maxdepth 1 -type f | egrep -i -m1 '%s'", path, cover_pattern)
-                    helpers.async({ shell, "-c", cover }, function(current_icon)
-                        common.icon = current_icon:gsub("\n", "")
-                        moc.id = naughty.notify(common).id
-                    end)
+                    moc.id = naughty.notify(common).id
                 end
             elseif  moc_now.state ~= "PAUSE" then
                 helpers.set_map("current moc track", nil)
