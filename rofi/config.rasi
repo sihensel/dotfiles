@@ -5,7 +5,7 @@
 
 configuration {
 	modi: "run,ssh";
-	font: "RobotoMono 12";
+	font: "Roboto Mono Nerd Font 12";
 	location: 0;
     show-icons: false;
 	terminal: "alacritty";
