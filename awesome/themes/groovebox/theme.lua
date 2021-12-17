@@ -7,7 +7,7 @@
 --]]
 
 local gears = require("gears")
-local lain  = require("lain")
+local lain  = require("lain")   -- https://github.com/lcpz/lainhttps://github.com/lcpz/lain
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
@@ -21,6 +21,7 @@ local theme_name = themes[1]
 -- define colors here
 local colors = {
     {
+        -- Groovebox
         bg          = '#1d2021',
         fg          = '#fbf1c7',
         red         = '#fb4934',
@@ -40,6 +41,7 @@ local colors = {
         arch        = '#1793d1'
     },
     {
+        -- Spacewave (WIP)
         bg          = '#070819',
         fg          = '#f8f5e9',
         red         = '#ef3a2a',
@@ -62,6 +64,7 @@ local colors = {
 
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
+theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome"
 
 if theme_name == 'groovebox' then
     colors = colors[1]
@@ -72,8 +75,7 @@ elseif theme_name == 'spacewave' then
 end
 
 -- Icon Font https://www.nerdfonts.com/cheat-sheet
---theme.wallpaper                                 = theme.walldir .. "/synth.jpg"
-theme.font                                      = "Roboto Mono Nerd Font 10"
+theme.font                                      = "Roboto Mono Nerd Font 9.5"
 theme.bg_normal                                 = colors.bg
 theme.bg_focus                                  = colors.bg
 theme.bg_urgent                                 = colors.bg
@@ -94,18 +96,18 @@ theme.taglist_fg_focus                          = theme.fg_focus
 theme.taglist_fg_occupied                       = colors.blue_dark
 
 theme.useless_gap                               = dpi(8)
-theme.systray_icon_spacing                      = 4
+theme.systray_icon_spacing                      = 5
 
 local markup = lain.util.markup
-local separators = lain.util.separators
 
 -- Textclock
 os.setlocale(os.getenv("LANG")) -- to localize the clock
-local textclock = wibox.widget.textclock(markup(colors.orange, " %A %d %B  %H:%M "))
+local textclock = wibox.widget.textclock(markup(colors.orange, " %A %d %B  %H:%M  "))
 textclock.font = theme.font
 
 -- Calendar
 theme.cal = lain.widget.cal({
+    followtag = true,
     week_number = 'left',
     attach_to = { textclock },
     notification_preset = {
@@ -118,6 +120,7 @@ theme.cal = lain.widget.cal({
 
 -- Weather
 theme.weather = lain.widget.weather({
+    followtag = true,
     city_id = 2832939,
     notification_preset = {
         font = theme.font,
@@ -126,17 +129,25 @@ theme.weather = lain.widget.weather({
         margin = 5
     },
     weather_na_markup = markup.fontfg(theme.font, colors.green_dark, "N/A "),
+
     settings = function()
         descr = weather_now["weather"][1]["description"]:lower()
         units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fontfg(theme.font, colors.green_dark, '  ' .. descr .. " @ " .. units .. "°C"))
+        widget:set_markup(markup.fontfg(theme.font, colors.green_dark, '  ' .. descr .. " " .. units .. "°C"))
     end
 })
 
 -- CPU
 local cpu = lain.widget.cpu({
     settings = function()
-        widget:set_markup(markup.fontfg(theme.font, colors.orange_dark, "礪 " .. cpu_now.usage .. "%"))
+        widget:set_markup(markup.fontfg(theme.font, colors.aqua_dark, "礪 " .. cpu_now.usage .. "%"))
+    end
+})
+
+-- Sysload
+local sysload = lain.widget.sysload({
+    settings = function()
+        widget:set_markup(markup.fontfg(theme.font, colors.orange_dark, "﬘ " .. load_1 .. '%'))
     end
 })
 
@@ -158,6 +169,7 @@ local bat = lain.widget.bat({
             perc = ' ' .. perc
         end
         widget:set_markup(markup.fontfg(theme.font, colors.yellow_dark, perc))
+
         bat_notification_charged_preset = {
             title = 'Battery full',
             text = 'You can unplug the cable',
@@ -190,13 +202,10 @@ local bat = lain.widget.bat({
 theme.volume = lain.widget.alsa({
     settings = function()
         if volume_now.status == "off" then
-            --volume_now.level = ' ' .. volume_now.level
             widget:set_markup(markup.fontfg(theme.font, colors.blue_dark, " " .. volume_now.level .. "%"))
         else
             widget:set_markup(markup.fontfg(theme.font, colors.blue_dark, " " .. volume_now.level .. "%"))
-
         end
-
     end
 })
 
@@ -225,6 +234,7 @@ local memory = lain.widget.mem({
 
 -- Disk Usage
 local fs = lain.widget.fs({
+    followtag = true,
     settings = function()
         widget:set_markup(markup.fontfg(theme.font, colors.aqua, ' ' .. math.ceil(fs_now['/'].used) .. ' ' .. fs_now['/'].units))
     end,
@@ -236,31 +246,29 @@ local fs = lain.widget.fs({
     }
 })
 
--- Taskwarrior
-local task_widget = wibox.widget.textbox()
-task_widget.font = theme.font
-task_widget.markup = '<span foreground="' .. colors.aqua_dark .. '"> todo</span>'
-lain.widget.contrib.task.attach(task_widget)
-
 -- MOC
-strlen = 19 -- length of '/home/simon/music/'
 local moc_widget = lain.widget.contrib.moc({
-    music_dir = '~/music',
-    settings = function () 
+    default_art = theme.confdir .. "/lain/icons/music.png",
+    cover_size = 75,
+    timeout = 1,
+    settings = function ()
         if moc_now.state == 'PLAY' then
-            -- cut off /path/to/file and the file exension (.mp3 etc)
-            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' ' .. string.sub(moc_now.file, strlen, -5)))
-        else
+            -- cut off the file path and extension (.mp3 etc)
+            music_file = string.sub(moc_now.file:gsub('.*/', ''), 0,  -5)
+            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' ' .. music_file))
+        elseif moc_now.state == 'PAUSE' then
             widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' '))
+        else
+            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' '))
         end
+
         moc_notification_preset = {
             title = ' Now Playing',
-            timeout = 3,
-            text = string.format('%s - %s', string.sub(moc_now.file, strlen), moc_now.total),
+            text = string.format('%s | %s', music_file, moc_now.total),
             font = theme.font,
             fg = theme.fg_normal,
             bg = theme.bg_normal,
-            margin = 7,
+            margin = 7
         }
     end
 
@@ -268,13 +276,12 @@ local moc_widget = lain.widget.contrib.moc({
 
 -- First Icon (maybe add click-menu later)
 local menu_widget = wibox.widget.textbox()
-menu_widget.markup = '<span foreground="' .. colors.arch .. '">  </span>'
+menu_widget.markup = '<span foreground="' .. colors.arch .. '">   </span>'
 menu_widget.font = theme.font
+
 
 -- Connect to screen
 function theme.at_screen_connect(s)
-    -- Quake application
-    s.quake = lain.util.quake({ app = awful.util.terminal })
 
     -- If wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
@@ -319,7 +326,7 @@ function theme.at_screen_connect(s)
     s.mywibox = awful.wibar({
         position = "top",
         screen = s,
-        height = dpi(30),
+        height = 30,
         bg = theme.bg_normal,
         fg = theme.fg_normal,
         border_width = 10,
@@ -356,13 +363,13 @@ function theme.at_screen_connect(s)
             spr,
             cpu.widget,
             spr,
+            sysload.widget,
+            spr,
             temp.widget,
             spr,
             fs.widget,
             spr,
             bat.widget,
-            spr,
-            task_widget,
             spr,
             moc_widget,
             spr,
