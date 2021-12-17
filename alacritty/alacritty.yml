@@ -26,7 +26,7 @@ font:
   italic:
     family: Roboto Mono Nerd Font
     style: Italic
-  size: 8.5
+  size: 11
 
 # Colors (Gruvbox dark)
 # Color scheme from https://github.com/alacritty/alacritty/wiki/Color-schemes
