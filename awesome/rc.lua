@@ -173,8 +173,8 @@ screen.connect_signal("property::geometry", function(s)
     end
 end)
 
--- No borders when rearranging only 1 non-floating or maximized client
 --[[
+-- No borders when rearranging only 1 non-floating or maximized client
 screen.connect_signal("arrange", function (s)
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
@@ -191,6 +191,47 @@ end)
 awful.screen.connect_for_each_screen(function(s)
     beautiful.at_screen_connect(s)
 end)
+-- }}}
+
+
+-- {{{ Create a wallpaper carousel
+-- currently mapped to 'modkey + [' and 'modkey + ]')
+walldir = '/home/simon/wallpapers'
+position = 1
+function set_wallpaper(direction)
+    local directory = io.popen('ls ' .. walldir)    -- read the <walldir> directory
+    local wallpapers = {}                           -- table with all wallpaper (image) files
+
+    -- add all images to the wallpapers table
+    for image in directory:lines() do
+        table.insert(wallpapers, image)
+    end
+
+    if direction then
+        -- increase the position by 1
+        position = position + 1
+
+        -- handle carry over
+        if position > #wallpapers then
+            position = 1
+        end
+    else
+        -- decrease the position by 1
+        position = position - 1
+
+        -- handle carry over
+        if position == 0 then
+            position = #wallpapers
+        end
+    end
+
+    -- get next wallpaper and set it to all screens
+    -- there is no type checking yes, this function assumes that only images are stored in <walldir>
+    next_wallpaper = wallpapers[position]
+    for s = 1, screen.count() do
+        gears.wallpaper.maximized(walldir .. '/' .. next_wallpaper, s, true)
+    end
+end
 -- }}}
 
 -- {{{ Key bindings
@@ -233,23 +274,23 @@ globalkeys = my_table.join(
 
     -- Standard programs
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "_custom"}),
+              {description = "open a terminal", group = "awesome"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey,    }, "l",     function () awful.tag.incmwfact( 0.05) end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,    }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey,    }, "h",     function () awful.tag.incmwfact(-0.05) end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true) end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true) end,
               {description = "decrease the number of columns", group = "layout"}),
 
     -- Brightness
@@ -286,28 +327,34 @@ globalkeys = my_table.join(
 
     -- Custom program shortcuts
     awful.key({ modkey }, "b", function () awful.spawn("brave") end,
-              {description = "Brave", group = "_custom"}),
+              {description = "Brave", group = "custom"}),
 
     awful.key({ modkey, "Shift"  }, "b", function () awful.spawn("google-chrome-stable") end,
-              {description = "Google Chrome", group = "_custom"}),
+              {description = "Google Chrome", group = "custom"}),
 
     awful.key({ modkey }, "t", function () awful.spawn("typora") end,
-              {description = "Typora", group = "_custom"}),
+              {description = "Typora", group = "custom"}),
 
     awful.key({ modkey }, "e", function () awful.spawn("pcmanfm") end,
-              {description = "PCManFM", group = "_custom"}),
+              {description = "PCManFM", group = "custom"}),
     
     awful.key({ modkey }, "F11", function () awful.spawn("flameshot gui") end,
-              {description = "Take Screenshot", group = "_custom"}),
+              {description = "Take Screenshot", group = "custom"}),
     
     awful.key({ modkey }, "F12", function () awful.spawn("slock") end,
-              {description = "Lock Screen", group = "_custom"}),
+              {description = "Lock Screen", group = "custom"}),
     
     --rofi
     awful.key({ modkey }, "space", function ()
             os.execute('rofi -show run')
         end,
-        {description = "run rofi", group = "_custom"})
+        {description = "run rofi", group = "custom"}),
+
+    awful.key({ modkey }, "[", function () set_wallpaper(false) end,
+              {description = "Cycle wallpaper carousel up", group = "custom"}),
+
+    awful.key({ modkey }, "]", function () set_wallpaper(true) end,
+              {description = "Cycle wallpaper carousel down", group = "custom"})
 )
 
 clientkeys = my_table.join(
@@ -319,13 +366,13 @@ clientkeys = my_table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey,    }, "c",      function (c) c:kill()                         end,
+    awful.key({ modkey,    }, "c",      function (c) c:kill() end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
+    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen() end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
