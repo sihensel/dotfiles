@@ -41,6 +41,26 @@ local colors = {
         arch        = '#1793d1'
     },
     {
+        -- Groovebox light
+        bg          = '#fbf1c7',
+        fg          = '#3c3836',
+        red         = '#cc241d',
+        red_dark    = '#9d0006',
+        green       = '#98971a',
+        green_dark  = '#79740e',
+        yellow_dark = '#b57614',
+        yellow      = '#d79921',
+        blue_dark   = '#076678',
+        blue        = '#458588',
+        purple_dark = '#8f3f71',
+        purple      = '#b16286',
+        aqua_dark   = '#427b58',
+        aqua        = '#689d6a',
+        orange_dark = '#af3a03',
+        orange      = '#d65d0e',
+        arch        = '#1793d1'
+    },
+    {
         -- Spacewave (WIP)
         bg          = '#070819',
         fg          = '#f8f5e9',
@@ -68,7 +88,7 @@ theme.confdir                                   = os.getenv("HOME") .. "/.config
 
 if theme_name == 'groovebox' then
     colors = colors[1]
-    theme.wallpaper = theme.walldir .. '/campfire.jpg'
+    theme.wallpaper = theme.walldir .. '/firewatch.jpg'
 elseif theme_name == 'spacewave' then
     colors = colors[2]
     theme.wallpaper = theme.walldir .. '/synth.jpg'

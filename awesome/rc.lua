@@ -196,7 +196,7 @@ end)
 
 -- {{{ Create a wallpaper carousel
 -- currently mapped to 'modkey + [' and 'modkey + ]')
-walldir = '/home/simon/wallpapers'
+walldir = os.getenv('HOME') .. '/wallpapers'
 position = 1
 function set_wallpaper(direction)
     local directory = io.popen('ls ' .. walldir)    -- read the <walldir> directory
