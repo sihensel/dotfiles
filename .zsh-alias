@@ -5,14 +5,12 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Git
-alias g='git'
 alias gs='git status'
 alias ga='git add'
-alias gc='git commit -m'
+alias gc='git commit'
 
 # some aliases
-alias ls='ls -hlN --color=auto --group-directories-first'
-alias ll=ls
+alias ll='ls -hlN --color=auto --group-directories-first'
 alias la='ls -AhlN --color=auto --group-directories-first'
 alias free='free -m'
 alias grep='grep --color=auto'

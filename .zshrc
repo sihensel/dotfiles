@@ -2,7 +2,6 @@
 source ~/.zsh-alias
 
 # general settings
-setopt autocd extendedglob nomatch
 unsetopt beep notify
 stty stop undef
 
