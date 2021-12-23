@@ -54,6 +54,16 @@ You might want to ignore that, this is just for my personal setup.
 ./install.sh -d /path/to/dotfiles/
 ```
 
+### Neovim plugin
+To make the Neovim config work, install the following packages:  
+`nodejs` (or an lts release) and `npm`.  
+Then run `PlugInstall` in neovim to install all plugins.  
+Finally, install the langauge server packs for your preferred langauge, e.g.:
+```
+CocInstall coc-pyright coc-sumneko-lua coc-json
+```
+Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) for more info.
+
 ### Slack Theme
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
 Paste into `Preferences` > `Themes`.  
