@@ -46,6 +46,7 @@ set title
 set mouse+=a
 set ruler
 set cursorline
+set colorcolumn=79
 
 " display whitespaces and other invisible chars (use set list)
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
@@ -137,13 +138,16 @@ hi Normal guibg=None guifg=None ctermbg=None ctermfg=None
 hi CursorLine cterm=bold ctermbg=None ctermfg=None gui=bold guibg=None guifg=None
 hi Comment cterm=italic gui=italic
 
+" NERDTree settings
 " If more than one window and previous buffer was NERDTree, go back to it
 autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 " prevent crashes with vim-plug
 let g:plug_window = 'noautocmd vertical topleft new'
 
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
+" Call NERDTree with CTRL-n
+nmap <C-n> :NERDTree<cr>
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
