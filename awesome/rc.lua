@@ -196,9 +196,9 @@ end)
 
 -- {{{ Create a wallpaper carousel
 -- currently mapped to 'modkey + [' and 'modkey + ]')
-walldir = os.getenv('HOME') .. '/wallpapers'
-position = 1
-function set_wallpaper(direction)
+local walldir = os.getenv('HOME') .. '/wallpapers'
+local position = 1
+local function set_wallpaper(direction)
     local directory = io.popen('ls ' .. walldir)    -- read the <walldir> directory
     local wallpapers = {}                           -- table with all wallpaper (image) files
 
@@ -227,7 +227,7 @@ function set_wallpaper(direction)
 
     -- get next wallpaper and set it to all screens
     -- there is no type checking yes, this function assumes that only images are stored in <walldir>
-    next_wallpaper = wallpapers[position]
+    local next_wallpaper = wallpapers[position]
     for s = 1, screen.count() do
         gears.wallpaper.maximized(walldir .. '/' .. next_wallpaper, s, true)
     end

@@ -15,9 +15,6 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local os, string, math = os, string, math
 local my_table = awful.util.table or gears.table
 
-local themes = {'groovebox', 'spacewave'}
-local theme_name = themes[1]
-
 -- define colors here
 local colors = {
     {
@@ -82,15 +79,18 @@ local colors = {
     }
 }
 
+local themes = {'groovebox', 'spacewave'}
+local theme_name = themes[1]
+
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome"
 
 if theme_name == 'groovebox' then
     colors = colors[1]
-    theme.wallpaper = theme.walldir .. '/firewatch.jpg'
+    theme.wallpaper = theme.walldir .. '/winter.jpg'
 elseif theme_name == 'spacewave' then
-    colors = colors[2]
+    colors = colors[3]
     theme.wallpaper = theme.walldir .. '/synth.jpg'
 end
 
