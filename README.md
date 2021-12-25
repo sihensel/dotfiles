@@ -10,6 +10,7 @@ Programs in the screenshot:
 - Neovim
 - Neofetch
 - tty-clock
+- the notification from MOC
 
 ## Installation
 
@@ -28,14 +29,11 @@ Rofi | `rofi`
 Slock | `slock`
 NetworkManager-Applet | `network-manager-applet networkmanager-openvpn`
 Brave | `brave-bin` (AUR)
-PCmanFM | `pcmanfm-gtk3`
 Moc | `moc-pulse` (AUR)
-taskwarrior | `task`
 Flameshot | `flameshot`
 Typora | `typora` (AUR)
 Zathura | `zathura zathura-pdf-poppler`
 Roboto Mono Nerd Font | `nerd-fonts-roboto-mono` (AUR)
-Materia Theme | `materia-gtk-theme`
 
 Clone the repo into your home directory.
 
@@ -44,7 +42,8 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, Awesome looks for a file in `~/wallpapers`.  
-This can be configured in `awesome/themes/groovebox/theme.lua`.
+This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua).  
+Use `Super + s` to see all available shortcuts.
 
 The script `install.sh` places symlinks to the local repo, so all files can stay in one place.  
 You might want to ignore that, this is just for my personal setup.
@@ -54,22 +53,21 @@ You might want to ignore that, this is just for my personal setup.
 ./install.sh -d /path/to/dotfiles/
 ```
 
-### Neovim plugin
-To make the Neovim config work, install the following packages:  
-`nodejs` (or an lts release) and `npm`.  
-Then run `PlugInstall` in neovim to install all plugins.  
+## Configure Neovim plugins
+To make the Neovim config work, install `nodejs` (or an lts release) and `npm`.  
+Then run `PlugInstall` in Neovim to install all plugins.  
 Finally, install the langauge server packs for your preferred langauge, e.g.:
 ```
 CocInstall coc-pyright coc-sumneko-lua coc-json
 ```
-Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) for more info.
+Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
 
-### Slack Theme
+## Slack Theme
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
 Paste into `Preferences` > `Themes`.  
 `#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
 
-### Pacman Hook
+## Pacman Hook
 Make sure to install the `pacman-contrib` package, then copy the file to `/etc/pacman.d/hooks`.
 
 ```sh
