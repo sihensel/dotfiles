@@ -60,7 +60,8 @@ Finally, install the langauge server packs for your preferred langauge, e.g.:
 ```
 CocInstall coc-pyright coc-sumneko-lua coc-json
 ```
-Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
+Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.  
+To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.
 
 ## Slack Theme
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  

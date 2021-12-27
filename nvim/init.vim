@@ -21,7 +21,6 @@
 " more info: https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
-" Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -31,8 +30,16 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 
+" telescope fzf
+" external dependencies: fd and ripgrep
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
 Plug 'itchyny/lightline.vim'
 Plug 'morhetz/gruvbox'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
@@ -115,6 +122,32 @@ map <C-l> <C-w>l
 
 " disable Q in normal mode
 nmap Q <Nop>
+
+" change some keyboard shortcts
+" make Y behave like C and D
+nnoremap Y y$
+" change search find behaviour
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Change undo behaviour
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" When jumping, mark the last position, so you can jump back with <C-o>
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
+" Moving text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
+nnoremap <leader>j :m .+1<CR>==
+nnoremap <leader>k :m .-2<CR>==
 
 " Colors
 set termguicolors
@@ -212,3 +245,62 @@ endfunction
 
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>ft <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+lua << EOF
+local previewers = require("telescope.previewers")
+local Job = require("plenary.job")
+local new_maker = function(filepath, bufnr, opts)
+  filepath = vim.fn.expand(filepath)
+  Job:new({
+    command = "file",
+    args = { "--mime-type", "-b", filepath },
+    on_exit = function(j)
+      local mime_type = vim.split(j:result()[1], "/")[1]
+      if mime_type == "text" then
+        previewers.buffer_previewer_maker(filepath, bufnr, opts)
+      else
+        -- maybe we want to write something to the buffer here
+        vim.schedule(function()
+          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { " BINARY" })
+        end)
+      end
+    end
+  }):sync()
+end
+
+local actions = require('telescope.actions')
+require('telescope').setup {
+    defaults = {
+        buffer_previewer_maker = new_maker,
+        file_sorter = require('telescope.sorters').get_fzy_sorter,
+        color_devicons = true,
+
+        file_previewer = previewers.vim_buffer_cat.new,
+        grep_previewer = previewers.vim_buffer_vimgrep.new,
+
+        mappings = {
+            -- use the same mappings as NERDTree
+            i = {
+                ["<leader>s"] = actions.file_vsplit,
+                ["<leader>i"] = actions.file_split
+            },
+            n = {
+                ["<leader>s"] = actions.file_vsplit,
+                ["<leader>i"] = actions.file_split
+            },
+
+        }
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
+    }
+}
+require('telescope').load_extension('fzy_native')
+EOF
