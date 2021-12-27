@@ -1,12 +1,12 @@
 --[[
 
-    ########   ######      ##       ##     ##    ###    
-    ##     ## ##    ##     ##       ##     ##   ## ##   
-    ##     ## ##           ##       ##     ##  ##   ##  
-    ########  ##           ##       ##     ## ##     ## 
-    ##   ##   ##           ##       ##     ## ######### 
-    ##    ##  ##    ## ### ##       ##     ## ##     ## 
-    ##     ##  ######  ### ########  #######  ##     ## 
+    ########   ######      ##       ##     ##    ###
+    ##     ## ##    ##     ##       ##     ##   ## ##
+    ##     ## ##           ##       ##     ##  ##   ##
+    ########  ##           ##       ##     ## ##     ##
+    ##   ##   ##           ##       ##     ## #########
+    ##    ##  ##    ## ### ##       ##     ## ##     ##
+    ##     ##  ######  ### ########  #######  ##     ##
 
 
     Programs used in this config:
@@ -26,8 +26,8 @@
 --]]
 
 -- {{{ Required libraries
-local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
-local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
+local awesome, client, screen = awesome, client, screen
+local ipairs, string, os, table, tostring, type = ipairs, string, os, table, tostring, tonumber, type
 
 local gears         = require("gears")
 local awful         = require("awful")
@@ -36,7 +36,6 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
-local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -69,11 +68,13 @@ end
 
 -- {{{ Autostart windowless processes
 -- This function will run once every time Awesome is started
+--[[
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
         awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
     end
 end
+--]]
 -- }}}
 
 -- {{{ Variable definitions
@@ -82,11 +83,6 @@ local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "alacritty"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
-local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
-local editor       = os.getenv("EDITOR") or "nvim"
-local gui_editor   = os.getenv("GUI_EDITOR") or "nvim"
-local browser      = os.getenv("BROWSER") or "brave"
-local scrlocker    = "slock"
 
 awful.util.terminal = terminal
 -- icons from https://www.nerdfonts.com/cheat-sheet
@@ -235,7 +231,7 @@ end
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = my_table.join(
+Globalkeys = my_table.join(
 
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -394,7 +390,7 @@ for i = 1, 9 do
         descr_move = {description = "move focused client to tag #", group = "tag"}
         descr_toggle_focus = {description = "toggle focused client on tag #", group = "tag"}
     end
-    globalkeys = my_table.join(globalkeys,
+    Globalkeys = my_table.join(Globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
@@ -444,7 +440,7 @@ clientbuttons = gears.table.join(
 )
 
 -- Set keys
-root.keys(globalkeys)
+root.keys(Globalkeys)
 -- }}}
 
 -- {{{ Rules
@@ -479,54 +475,6 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
-end)
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- Custom
-    if beautiful.titlebar_fun then
-        beautiful.titlebar_fun(c)
-        return
-    end
-
-    -- Default
-    -- buttons for the titlebar
-    local buttons = my_table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 2, function() c:kill() end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    awful.titlebar(c, {size = dpi(16)}) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
