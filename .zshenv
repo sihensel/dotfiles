@@ -20,5 +20,5 @@ export VIISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
-export GTK_THEME=Materia:dark
+export GTK_THEME=Adwaita:dark
 export PATH="$HOME/.local/bin:$PATH"
