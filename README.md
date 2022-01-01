@@ -54,14 +54,16 @@ You might want to ignore that, this is just for my personal setup.
 ```
 
 ## Configure Neovim plugins
+The keybinds are listed in `nvim/init.vim`.
 To make the Neovim config work, install `nodejs` (or an lts release) and `npm`.  
 Then run `PlugInstall` in Neovim to install all plugins.  
 Finally, install the langauge server packs for your preferred langauge, e.g.:
-```
+```sh
 CocInstall coc-pyright coc-sumneko-lua coc-json
 ```
 Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.  
-To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.
+To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.  
+`Glow` needs the glow binary, install with `yay -S glow-bin`.
 
 ## Slack Theme
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
