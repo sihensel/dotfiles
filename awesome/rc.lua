@@ -17,7 +17,7 @@
         - Brave
         - MOC
         - PCManFM
-        - Typora
+        - Marktext
 
     Based on Awesome Copycats: github.com/lcpz
     Maintainer:
@@ -328,8 +328,8 @@ Globalkeys = my_table.join(
     awful.key({ modkey, "Shift"  }, "b", function () awful.spawn("google-chrome-stable") end,
               {description = "Google Chrome", group = "custom"}),
 
-    awful.key({ modkey }, "t", function () awful.spawn("typora") end,
-              {description = "Typora", group = "custom"}),
+    awful.key({ modkey }, "t", function () awful.spawn("marktext") end,
+              {description = "Marktext", group = "custom"}),
 
     awful.key({ modkey }, "e", function () awful.spawn("pcmanfm") end,
               {description = "PCManFM", group = "custom"}),
