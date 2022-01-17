@@ -85,13 +85,12 @@ local theme_name = themes[1]
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome"
+theme.wallpaper                                 = theme.walldir .. '/wall.jpg'
 
 if theme_name == 'groovebox' then
     colors = colors[1]
-    theme.wallpaper = theme.walldir .. '/winter.jpg'
 elseif theme_name == 'spacewave' then
     colors = colors[3]
-    theme.wallpaper = theme.walldir .. '/synth.jpg'
 end
 
 -- Icon Font https://www.nerdfonts.com/cheat-sheet
