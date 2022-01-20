@@ -61,7 +61,7 @@ function parse_git_branch() {
 # colors and prompt
 autoload -U colors && colors
 setopt prompt_subst
-export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
+export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load syntax highlighting; should be last.
