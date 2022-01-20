@@ -277,6 +277,28 @@ let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_group_empty = 1
 let g:nvim_tree_disable_window_picker = 1
 let g:nvim_tree_special_files = { 'README.md': 1, 'LICENSE': 1 }
+let g:nvim_tree_icons = {
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': " ",
+    \   'untracked': "",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'arrow_open': "",
+    \   'arrow_closed': "",
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   }
+    \ }
 
 lua << EOF
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
