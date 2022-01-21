@@ -136,6 +136,7 @@ map <C-l> <C-w>l
 nmap Q <Nop>
 " change some keyboard shortcts
 " make Y behave like C and D
+nnoremap E ge
 nnoremap Y y$
 " change search find behaviour
 nnoremap n nzzzv
