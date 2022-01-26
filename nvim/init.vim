@@ -17,6 +17,7 @@
 " <leader>s             open in vsplit
 "
 " <leader>g             open glow markdown preview
+" <leader>r             run current file (if it has a shebang)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -64,6 +65,8 @@ set title
 set mouse+=a
 set ruler
 set cursorline
+set shell=zsh
+set shellcmdflag=-ic
 set colorcolumn=79
 
 " display whitespaces and other invisible chars (use set list)
