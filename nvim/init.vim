@@ -62,12 +62,21 @@ set encoding=utf-8
 set history=500
 set nocompatible
 set title
-set mouse+=a
 set ruler
 set cursorline
 set shell=zsh
 set shellcmdflag=-ic
 set colorcolumn=79
+
+" only enable mouse movement in normal mode
+set mouse=n
+" disable cursor move on mouse click
+:nmap <LeftMouse> <nop>
+:imap <LeftMouse> <nop>
+:vmap <LeftMouse> <nop>
+:nmap <2-LeftMouse> <nop>
+:imap <2-LeftMouse> <nop>
+:vmap <2-LeftMouse> <nop>
 
 " display whitespaces and other invisible chars (use set list)
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
