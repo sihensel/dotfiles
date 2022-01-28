@@ -31,3 +31,6 @@ alias msfconsole="msfconsole --quiet -x \"db_connect ${USER}@msf\""
 alias diff='diff -y --color'
 
 alias checkgit='for i in $(ls); do echo "--$i"; cd $i; git status; cd ..; done'
+
+# use the NAME of the VPN connection ('vpn_students' in this case)
+alias connect='nmcli connection up vpn_students ifname tun0'
