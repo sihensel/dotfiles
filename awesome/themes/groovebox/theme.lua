@@ -13,85 +13,33 @@ local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
 
 local os, string, math = os, string, math
-local my_table = awful.util.table or gears.table
 
 -- define colors here
 local colors = {
-    {
-        -- Groovebox
-        bg          = '#1d2021',
-        fg          = '#fbf1c7',
-        red         = '#fb4934',
-        red_dark    = '#cc241d',
-        green       = '#b8bb26',
-        green_dark  = '#98971a',
-        yellow      = '#fabd2f',
-        yellow_dark = '#d79921',
-        blue        = '#83a598',
-        blue_dark   = '#458588',
-        purple      = '#d3869b',
-        purple_dark = '#b16286',
-        aqua        = '#8ec07c',
-        aqua_dark   = '#689d6a',
-        orange      = '#fe8019',
-        orange_dark = '#d65d0e',
-        arch        = '#1793d1'
-    },
-    {
-        -- Groovebox light
-        bg          = '#fbf1c7',
-        fg          = '#3c3836',
-        red         = '#cc241d',
-        red_dark    = '#9d0006',
-        green       = '#98971a',
-        green_dark  = '#79740e',
-        yellow_dark = '#b57614',
-        yellow      = '#d79921',
-        blue_dark   = '#076678',
-        blue        = '#458588',
-        purple_dark = '#8f3f71',
-        purple      = '#b16286',
-        aqua_dark   = '#427b58',
-        aqua        = '#689d6a',
-        orange_dark = '#af3a03',
-        orange      = '#d65d0e',
-        arch        = '#1793d1'
-    },
-    {
-        -- Spacewave (WIP)
-        bg          = '#070819',
-        fg          = '#f8f5e9',
-        red         = '#ef3a2a',
-        red_dark    = '#d5152f',
-        green       = '#6aff5a',
-        green_dark  = '#3ade48',
-        yellow      = '#ffcf3a',
-        yellow_dark = '#ffbd25',
-        blue        = '#3dc0ed',
-        blue_dark   = '#2d34c5',
-        purple      = '#df299a',
-        purple_dark = '#801580',
-        aqua        = '#80e1bd',
-        aqua_dark   = '#34bfa4',
-        orange      = '#ff9f00',
-        orange_dark = '#ef6c26',
-        arch        = '#1793d1'
-    }
+    -- Groovebox
+    bg          = '#1d2021',
+    fg          = '#fbf1c7',
+    red         = '#fb4934',
+    red_dark    = '#cc241d',
+    green       = '#b8bb26',
+    green_dark  = '#98971a',
+    yellow      = '#fabd2f',
+    yellow_dark = '#d79921',
+    blue        = '#83a598',
+    blue_dark   = '#458588',
+    purple      = '#d3869b',
+    purple_dark = '#b16286',
+    aqua        = '#8ec07c',
+    aqua_dark   = '#689d6a',
+    orange      = '#fe8019',
+    orange_dark = '#d65d0e',
+    arch        = '#1793d1'
 }
-
-local themes = {'groovebox', 'spacewave'}
-local theme_name = themes[1]
 
 local theme                                     = {}
 theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome"
 theme.wallpaper                                 = theme.walldir .. '/wall.jpg'
-
-if theme_name == 'groovebox' then
-    colors = colors[1]
-elseif theme_name == 'spacewave' then
-    colors = colors[3]
-end
 
 -- Icon Font https://www.nerdfonts.com/cheat-sheet
 theme.font                                      = "Roboto Mono Nerd Font 9.5"
@@ -183,14 +131,14 @@ local bat = lain.widget.bat({
         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
         if bat_now.ac_status == 1 then
-            perc = ' ' .. perc
+            perc = ' ' .. perc
         else
-            perc = ' ' .. perc
+            perc = ' ' .. perc
         end
         widget:set_markup(markup.fontfg(theme.font, colors.yellow_dark, perc))
 
         bat_notification_charged_preset = {
-            title = 'Battery full',
+            title = ' Battery full',
             text = 'You can unplug the cable',
             font = theme.font,
             fg = theme.fg_normal,
@@ -198,7 +146,7 @@ local bat = lain.widget.bat({
             timeout = 300
         }
         bat_notification_low_preset = {
-            title = 'Battery low',
+            title = ' Battery low',
             text = 'Plug the cable',
             font = theme.font,
             fg = theme.fg_normal,
@@ -206,7 +154,7 @@ local bat = lain.widget.bat({
             timeout = 180
         }
         bat_notification_critical_preset = {
-            title = 'Battery exhausted',
+            title = ' Battery exhausted',
             text = 'Plug the cable now!',
             font = theme.font,
             fg = theme.fg_normal,
@@ -318,7 +266,7 @@ function theme.at_screen_connect(s)
     spr.font = theme.font
     local first_spr= wibox.widget.textbox("| ")
     first_spr.font = theme.font
-    
+
     -- Create the systray
     local systray = wibox.widget.systray()
     local systray = wibox.widget {
