@@ -11,6 +11,7 @@ window:
   class:
     instance: Alacritty
     general: Alacritty
+  opacity: 0.8
 
 scrolling:
   history: 10000
@@ -85,8 +86,6 @@ colors: *gruvbox
 
 visual_bell:
   duration: 0
-
-background_opacity: 0.8
 
 selection:
   save_to_clipboard: true

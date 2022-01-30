@@ -45,6 +45,8 @@ There is no wallpaper included, Awesome looks for `~/wallpapers/wall.jpg`.
 This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua).  
 Use `Super + s` to see all available shortcuts.
 
+### Install Script
+
 The script `install.sh` places symlinks to the local repo, so all files can stay in one place.  
 You might want to ignore that, this is just for my personal setup.
 
@@ -53,7 +55,8 @@ You might want to ignore that, this is just for my personal setup.
 ./install.sh -d /path/to/dotfiles/
 ```
 
-## Configure Neovim plugins
+## Configure Neovim Plugins
+
 The keybinds are listed in `nvim/init.vim`.
 To make the Neovim config work, install `nodejs` (or an lts release) and `npm`. Then run `PlugInstall` in Neovim to install all plugins.  
 Finally, install the langauge server packs for your preferred langauge, e.g.:
@@ -66,11 +69,13 @@ To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.
 Also get `glow` for Markdown rendering.
 
 ## Slack Theme
+
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
 Paste into `Preferences` > `Themes`.  
 `#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
 
 ## Pacman Hook
+
 Make sure to install the `pacman-contrib` package, then copy the file to `/etc/pacman.d/hooks`.
 
 ```sh
