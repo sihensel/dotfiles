@@ -11,12 +11,20 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt hist_ignore_all_dups
 
+# configure completion
+# https://thevaluable.dev/zsh-completion-guide-examples/
 zstyle :compinstall filename '/home/simon/.zshrc'
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
 autoload -Uz compinit
 compinit
+zstyle ':completion:*' menu select
+setopt list_rows_first
+setopt glob_complete
+setopt always_to_end
+setopt list_packed
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # vi mode
 bindkey -v
@@ -63,6 +71,16 @@ autoload -U colors && colors
 setopt prompt_subst
 export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Manpage colors
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS=-R
 
 # Load syntax highlighting; should be last.
 # sudo pacman -S zsh-syntax-highlighting
