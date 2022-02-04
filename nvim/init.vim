@@ -65,7 +65,7 @@ set title
 set ruler
 set cursorline
 set shell=zsh
-set shellcmdflag=-ic
+set shellcmdflag=-c
 set colorcolumn=79
 
 " only enable mouse movement in normal mode
