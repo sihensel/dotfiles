@@ -3,7 +3,7 @@ source ~/.zsh-alias
 
 # general settings
 unsetopt beep notify
-stty stop undef
+[[ $- == *i* ]] && stty stop undef
 
 # history
 HISTFILE=~/.histfile
