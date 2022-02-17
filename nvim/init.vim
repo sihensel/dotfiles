@@ -4,7 +4,7 @@
 " K                     show documentation for word under cursor
 "
 " nvim-tree
-" CTRL-N                toggle nvim-tree
+" CTRL-n                toggle nvim-tree
 " i                     open in split
 " s                     open in vsplit
 " o                     cd into directory
@@ -18,7 +18,8 @@
 "
 " <leader>g             open glow markdown preview
 " <leader>r             run current file (if it has a shebang)
-
+"
+" CTRL-b                toggle blamer.nvim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
@@ -29,6 +30,7 @@ Plug 'tpope/vim-commentary'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'ap/vim-css-color'
 Plug 'xiyaowong/nvim-cursorword'
+Plug 'APZelos/blamer.nvim'
 
 " File explorer and status line
 Plug 'kyazdani42/nvim-tree.lua'
@@ -49,7 +51,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 
-" Glow, use yay -S glow-bin
+" Glow, install glow package with pacman
 Plug 'ellisonleao/glow.nvim'
 
 call plug#end()
@@ -171,6 +173,10 @@ inoremap <C-j> <esc>:m .+1<CR>==
 inoremap <C-k> <esc>:m .-2<CR>==
 " run the current file if it has a shebang
 nnoremap <leader>r :!%:p<CR>
+" search for visual selection with '//'
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+" search for the current line
+nnoremap <leader>/ 0y$/\V<c-r>"<cr>
 
 " Colors
 set termguicolors
@@ -367,3 +373,13 @@ EOF
 nnoremap <leader>g :Glow<CR>
 let g:glow_border = "rounded"
 let g:glow_width = 200
+
+" blamer.nvim settings
+nnoremap <C-b> :BlamerToggle<CR>
+let g:blamer_enabled = 0
+let g:blamer_delay = 500
+let g:blamer_show_in_visual_modes = 0
+let g:blamer_show_in_insert_modes = 0
+let g:blamer_prefix = '  '
+" let g:blamer_date_format = '%d/%m/%y'
+let g:blamer_relative_time = 1
