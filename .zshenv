@@ -24,3 +24,6 @@ export BROWSER="brave"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
 export PATH="$HOME/.local/bin:$PATH"
+
+# paste this into /etc/profile
+# export WINIT_X11_SCALE_FACTOR=1.66 alacritty
