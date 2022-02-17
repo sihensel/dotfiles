@@ -80,7 +80,7 @@ export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
 export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-export LESS=-R
+export LESS="-RF"
 
 # Load syntax highlighting; should be last.
 # sudo pacman -S zsh-syntax-highlighting
