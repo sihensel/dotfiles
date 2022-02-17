@@ -86,7 +86,7 @@ local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awe
 
 awful.util.terminal = terminal
 -- icons from https://www.nerdfonts.com/cheat-sheet
-awful.util.tagnames = { " ", " ", " ", " ", " ", " ", " " }
+awful.util.tagnames = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
 awful.layout.layouts = {
     awful.layout.suit.tile,
 }
