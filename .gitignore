@@ -4,5 +4,6 @@ softmixer
 pid
 *.m3u
 
-# ignore vim-plug dir
+# ignore nvim plugin files
 plugged/
+coc-settings.json
