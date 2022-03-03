@@ -20,6 +20,8 @@
 " <leader>r             run current file (if it has a shebang)
 "
 " CTRL-b                toggle blamer.nvim
+" " (normal or visual)  show :Registers
+" CTRL-R (insert)       show :Registers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
@@ -28,9 +30,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-commentary'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'ap/vim-css-color'
 Plug 'xiyaowong/nvim-cursorword'
 Plug 'APZelos/blamer.nvim'
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 
 " File explorer and status line
 Plug 'kyazdani42/nvim-tree.lua'
@@ -50,8 +52,9 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " Colors/Icons
 Plug 'gruvbox-community/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'norcalli/nvim-colorizer.lua'
 
-" Glow, install glow package with pacman
+" Glow, install 'glow' package with pacman
 Plug 'ellisonleao/glow.nvim'
 
 call plug#end()
@@ -294,7 +297,6 @@ EOF
 nmap <C-n> :NvimTreeToggle<CR>
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_group_empty = 1
-let g:nvim_tree_disable_window_picker = 1
 let g:nvim_tree_special_files = { 'README.md': 1, 'LICENSE': 1 }
 let g:nvim_tree_icons = {
     \ 'symlink': '',
@@ -325,6 +327,11 @@ require'nvim-tree'.setup {
     auto_close = true,
     git = {
         ignore = false,
+    },
+    actions = {
+        window_picker = {
+            enable = false
+        }
     },
     view = {
         mappings = {
@@ -383,3 +390,5 @@ let g:blamer_show_in_insert_modes = 0
 let g:blamer_prefix = '  '
 " let g:blamer_date_format = '%d/%m/%y'
 let g:blamer_relative_time = 1
+
+lua require'colorizer'.setup()
