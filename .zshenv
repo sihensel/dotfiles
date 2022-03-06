@@ -23,7 +23,7 @@ export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # paste this into /etc/profile
 # export WINIT_X11_SCALE_FACTOR=1.66 alacritty
