@@ -17,18 +17,19 @@
 " <leader>s             open in vsplit
 "
 " <leader>g             open glow markdown preview
-" <leader>r             run current file (if it has a shebang)
+" <leader>r             run current file with Jaq
 "
 " CTRL-b                toggle blamer.nvim
 " " (normal or visual)  show :Registers
 " CTRL-R (insert)       show :Registers
+" CTRL-T                toggle a terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
 " SEE https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'tpope/vim-commentary'
+Plug 'numToStr/Comment.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'xiyaowong/nvim-cursorword'
 Plug 'APZelos/blamer.nvim'
@@ -37,6 +38,7 @@ Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 " File explorer and status line
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/toggleterm.nvim'
 
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -54,8 +56,9 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
 
-" Glow, install 'glow' package with pacman
-Plug 'ellisonleao/glow.nvim'
+Plug 'ellisonleao/glow.nvim'        " requires 'glow' package
+Plug 'gennaro-tedesco/nvim-jqx'     " requires 'jq' package
+Plug 'is0n/jaq-nvim'
 
 call plug#end()
 
@@ -115,8 +118,6 @@ set nohlsearch
 set incsearch
 set ignorecase
 set smartcase
-" this would remap :nohlsearch to the space-key
-":nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " show matching brackets
 set showmatch
@@ -142,7 +143,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " change split behaviour
 set splitbelow
 set splitright
-
 " Optimize shortcuts for split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -152,12 +152,13 @@ map <C-l> <C-w>l
 " disable Q in normal mode
 nmap Q <Nop>
 " change some keyboard shortcts
-" make Y behave like C and D
 nnoremap E ge
 nnoremap Y y$
 " change search find behaviour
 nnoremap n nzzzv
 nnoremap N Nzzzv
+nnoremap * *zzzv
+nnoremap # #zzzv
 nnoremap J mzJ`z
 " Change undo behaviour
 inoremap , ,<c-g>u
@@ -174,10 +175,6 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 inoremap <C-j> <esc>:m .+1<CR>==
 inoremap <C-k> <esc>:m .-2<CR>==
-" run the current file if it has a shebang
-nnoremap <leader>r :!%:p<CR>
-" search for visual selection with '//'
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " search for the current line
 nnoremap <leader>/ 0y$/\V<c-r>"<cr>
 
@@ -196,7 +193,6 @@ set updatetime=300
 set shortmess+=c
 
 if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
@@ -214,7 +210,6 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
-
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -231,8 +226,22 @@ function! s:show_documentation()
   endif
 endfunction
 
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+" Glow settings
+nnoremap <leader>g :Glow<CR>
+let g:glow_border = "rounded"
+let g:glow_width = 200
+
+" blamer.nvim settings
+nnoremap <C-b> :BlamerToggle<CR>
+let g:blamer_enabled = 0
+let g:blamer_delay = 500
+let g:blamer_show_in_visual_modes = 0
+let g:blamer_show_in_insert_modes = 0
+let g:blamer_prefix = '  '
+let g:blamer_relative_time = 1
 
 " Telescope settings
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<CR>
@@ -240,6 +249,7 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>ft <cmd>lua require('telescope.builtin').help_tags()<CR>
 
 lua << EOF
+-- {{{ telescope.nvim
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
 local new_maker = function(filepath, bufnr, opts)
@@ -280,7 +290,6 @@ require('telescope').setup {
                 ["<leader>s"] = actions.file_vsplit,
                 ["<leader>i"] = actions.file_split
             },
-
         }
     },
     extensions = {
@@ -291,6 +300,7 @@ require('telescope').setup {
     }
 }
 require('telescope').load_extension('fzy_native')
+-- }}} telescope.nvim
 EOF
 
 " settings for nvim-tree.lua
@@ -322,6 +332,7 @@ let g:nvim_tree_icons = {
     \ }
 
 lua << EOF
+-- {{{ nvim-tree.lua
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
     auto_close = true,
@@ -357,10 +368,9 @@ require'nvim-tree'.setup {
         },
     },
 }
-EOF
+-- }}} nvim-tree.lua
 
-" settings for lualine
-lua << EOF
+-- {{{ lualine
 require'lualine'.setup {
     options = {
         theme = 'gruvbox',
@@ -375,20 +385,57 @@ require'lualine'.setup {
     },
     extensions = {'nvim-tree'}
 }
+-- }}} lualine
+
+-- {{{ nvim-colorizer
+require'colorizer'.setup()
+-- }}} nvim-colorizer
+
+-- {{{ Comment.nvim
+require('Comment').setup {
+    ignore = "^$"   -- ignore empty lines
+}
+-- }}} Comment.nvim
+
+-- {{{ toggleterm
+require("toggleterm").setup{
+    size = 18,
+    open_mapping = [[<c-t>]],
+    start_in_insert = true,
+    insert_mappings = true,
+    terminal_mappings = true,
+    persist_size = true,
+    close_on_exit = true,
+    direction = 'horizontal'
+}
+-- }}} toggleterm
 EOF
 
-nnoremap <leader>g :Glow<CR>
-let g:glow_border = "rounded"
-let g:glow_width = 200
-
-" blamer.nvim settings
-nnoremap <C-b> :BlamerToggle<CR>
-let g:blamer_enabled = 0
-let g:blamer_delay = 500
-let g:blamer_show_in_visual_modes = 0
-let g:blamer_show_in_insert_modes = 0
-let g:blamer_prefix = '  '
-" let g:blamer_date_format = '%d/%m/%y'
-let g:blamer_relative_time = 1
-
-lua require'colorizer'.setup()
+nnoremap <leader>r :Jaq<CR>
+lua << EOF
+-- {{{ jaq-nvim
+require('jaq-nvim').setup{
+    cmds = {
+        default = "toggleterm",
+        external = {
+            markdown = "glow %",
+            python = "python3 %",
+            c = "gcc % -o $fileBase && ./$fileBase",
+            sh = "sh %"
+        },
+        internal = {
+            lua = "luafile %",
+            vim = "source %"
+        }
+    },
+    ui = {
+        startinsert = false,
+        wincmd      = true,     -- stay in toggleterm after running Jaq
+        toggleterm = {
+            position = "horizontal",
+            size     = 10
+        },
+    }
+}
+-- }}} jaq-nvim
+EOF
