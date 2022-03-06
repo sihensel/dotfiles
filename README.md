@@ -31,7 +31,7 @@ NetworkManager-Applet | `network-manager-applet networkmanager-openvpn`
 Brave | `brave-bin` (AUR)
 Moc | `moc-pulse` (AUR)
 Flameshot | `flameshot`
-Typora | `typora` (AUR)
+Marktext | `marktext-bin` (AUR)
 Zathura | `zathura zathura-pdf-poppler`
 Roboto Mono Nerd Font | `nerd-fonts-roboto-mono` (AUR)
 
@@ -66,13 +66,15 @@ CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
 ```
 Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.  
 To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.  
-Also get `glow` for Markdown rendering.
+Also `jq`, `xclip` and `glow` for Markdown rendering.
 
 ## Slack Theme
 
 My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
 Paste into `Preferences` > `Themes`.  
-`#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7`
+```
+#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7
+```
 
 ## Pacman Hook
 
