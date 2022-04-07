@@ -6,12 +6,6 @@ I use [Awesome](https://awesomewm.org) with my own theme called _Groovebox_ and 
 
 ![screenshot.png](screenshot.png)
 
-Programs in the screenshot:
-- Neovim
-- Neofetch
-- tty-clock
-- the notification from MOC
-
 ## Installation
 
 ### Dependencies
@@ -31,7 +25,6 @@ NetworkManager-Applet | `network-manager-applet networkmanager-openvpn`
 Brave | `brave-bin` (AUR)
 Moc | `moc-pulse` (AUR)
 Flameshot | `flameshot`
-Marktext | `marktext-bin` (AUR)
 Zathura | `zathura zathura-pdf-poppler`
 Roboto Mono Nerd Font | `nerd-fonts-roboto-mono` (AUR)
 
@@ -42,7 +35,7 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, Awesome looks for `~/wallpapers/wall.jpg`.  
-This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua).  
+This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42).  
 Use `Super + s` to see all available shortcuts.
 
 ### Install Script
@@ -57,16 +50,25 @@ You might want to ignore that, this is just for my personal setup.
 
 ## Configure Neovim Plugins
 
-The keybinds are listed in `nvim/init.vim`.
-To make the Neovim config work, install `nodejs` (or an lts release) and `npm`. Then run `PlugInstall` in Neovim to install all plugins.  
-Finally, install the langauge server packs for your preferred langauge, e.g.:
+The keybinds are listed in [init.vim](nvim/init.vim).
+Run `:PlugInstall` in Neovim to install all plugins. `nodejs` (or an lts release) and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
 
 ```sh
 CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
 ```
 Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.  
-To make `telescope.nvim` work, install the external packages `fd` and `ripgrep`.  
-Also `jq`, `xclip` and `glow` for Markdown rendering.
+Install the following packages with your package manager:
+```
+fd ripgrep jp xclip glow
+```
+
+## LF File Manager
+
+To make file previews work, install the following packages:
+```
+ueberzug imagemagick ffmpeg ghostscript
+```
+Make sure the scripts `lf-cleaner`, `lf-previewer` and `lf-run` in [lf](lf) are executable and in your `PATH`.
 
 ## Slack Theme
 
