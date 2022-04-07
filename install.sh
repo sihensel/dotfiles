@@ -54,7 +54,7 @@ fi
 
 cd ~/.config || exit 1
 
-for i in alacritty awesome neofetch nvim picom rofi zathura; do
+for i in alacritty awesome lf neofetch nvim picom rofi zathura; do
     if [ -d "$i" ] || [ -f "$i" ]; then
         rm -rf "$i"
     fi
