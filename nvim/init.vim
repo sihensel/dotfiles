@@ -290,6 +290,23 @@ require('telescope').setup {
                 ["<leader>s"] = actions.file_vsplit,
                 ["<leader>i"] = actions.file_split
             },
+        },
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--trim",
+            "--hidden"
+        }
+    },
+    pickers = {
+        find_files = {
+            find_command = { "fd", "--type", "f", "--exclude", "*.git", "--strip-cwd-prefix" },
+            hidden = true
         }
     },
     extensions = {
