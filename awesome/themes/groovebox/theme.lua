@@ -37,8 +37,8 @@ local colors = {
 }
 
 local theme                                     = {}
-theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome"
+theme.walldir                                   = os.getenv("HOME") .. "/wallpapers"
 theme.wallpaper                                 = theme.walldir .. '/wall.jpg'
 
 -- Icon Font https://www.nerdfonts.com/cheat-sheet
@@ -246,6 +246,10 @@ local menu_widget = wibox.widget.textbox()
 menu_widget.markup = '<span foreground="' .. colors.arch .. '">   </span>'
 menu_widget.font = theme.font
 
+-- Set the wibar shape to a rounded rectangle
+local function wibar_shape(cr, width, height)
+    gears.shape.rounded_rect(cr, width, height, 16)
+end
 
 -- Connect to screen
 function theme.at_screen_connect(s)
@@ -293,6 +297,7 @@ function theme.at_screen_connect(s)
     s.mywibox = awful.wibar({
         position = "top",
         screen = s,
+        shape = wibar_shape,
         height = 30,
         bg = theme.bg_normal,
         fg = theme.fg_normal,
