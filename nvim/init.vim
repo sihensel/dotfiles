@@ -322,7 +322,6 @@ EOF
 
 " settings for nvim-tree.lua
 nmap <C-n> :NvimTreeToggle<CR>
-let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_group_empty = 1
 let g:nvim_tree_special_files = { 'README.md': 1, 'LICENSE': 1 }
 let g:nvim_tree_icons = {
@@ -352,7 +351,6 @@ lua << EOF
 -- {{{ nvim-tree.lua
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
-    auto_close = true,
     git = {
         ignore = false,
     },
@@ -384,6 +382,11 @@ require'nvim-tree'.setup {
             },
         },
     },
+    renderer = {
+        indent_markers = {
+            enable = true
+        }
+    }
 }
 -- }}} nvim-tree.lua
 
