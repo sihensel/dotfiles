@@ -108,50 +108,6 @@ awful.util.taglist_buttons = my_table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
-awful.util.tasklist_buttons = my_table.join(
-    awful.button({ }, 1, function (c)
-        if c == client.focus then
-            c.minimized = true
-        else
-            --c:emit_signal("request::activate", "tasklist", {raise = true})<Paste>
-
-            -- Without this, the following :isvisible() makes no sense
-            c.minimized = false
-            if not c:isvisible() and c.first_tag then
-                c.first_tag:view_only()
-            end
-            -- This will also un-minimize the client, if needed
-            client.focus = c
-            c:raise()
-        end
-    end),
-    awful.button({ }, 2, function (c) c:kill() end),
-    awful.button({ }, 3, function ()
-        local instance = nil
-
-        return function ()
-            if instance and instance.wibox.visible then
-                instance:hide()
-                instance = nil
-            else
-                instance = awful.menu.clients({theme = {width = dpi(250)}})
-            end
-        end
-    end),
-    awful.button({ }, 4, function () awful.client.focus.byidx(1) end),
-    awful.button({ }, 5, function () awful.client.focus.byidx(-1) end)
-)
-
-lain.layout.termfair.nmaster           = 3
-lain.layout.termfair.ncol              = 1
-lain.layout.termfair.center.nmaster    = 3
-lain.layout.termfair.center.ncol       = 1
-lain.layout.cascade.tile.offset_x      = dpi(2)
-lain.layout.cascade.tile.offset_y      = dpi(32)
-lain.layout.cascade.tile.extra_padding = dpi(5)
-lain.layout.cascade.tile.nmaster       = 5
-lain.layout.cascade.tile.ncol          = 2
-
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), theme))
 -- }}}
 
@@ -289,10 +245,10 @@ Globalkeys = my_table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true) end,
               {description = "decrease the number of columns", group = "layout"}),
 
-    -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end,
+    -- Brightness, install the 'acpilight' package
+    awful.key({ altkey }, "Up", function () os.execute("xbacklight -inc 5") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end,
+    awful.key({ altkey }, "Down", function () os.execute("xbacklight -inc 5") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
@@ -308,7 +264,7 @@ Globalkeys = my_table.join(
             beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
+    awful.key({ modkey }, "m",
         function ()
             os.execute(string.format("amixer -D pulse set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
@@ -369,13 +325,7 @@ clientkeys = my_table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen() end,
-              {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized = not c.maximized
-            c:raise()
-        end ,
-        {description = "maximize", group = "client"})
+              {description = "move to screen", group = "client"})
 )
 
 -- Bind all key numbers to tags.
