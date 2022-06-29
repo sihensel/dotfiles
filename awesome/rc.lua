@@ -84,6 +84,7 @@ local altkey       = "Mod1"
 local terminal     = "alacritty"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 
+naughty.config.padding = dpi(10)    -- set padding for notifications
 awful.util.terminal = terminal
 -- icons from https://www.nerdfonts.com/cheat-sheet
 awful.util.tagnames = { " ", " ", " ", " ", " ", " ", " ", " ", " " }
@@ -148,40 +149,46 @@ end)
 
 -- {{{ Create a wallpaper carousel
 -- currently mapped to 'modkey + [' and 'modkey + ]')
-local walldir = os.getenv('HOME') .. '/wallpapers'
+local walldir = os.getenv("HOME") .. "/wallpapers"
 local position = 1
 local function set_wallpaper(direction)
-    local directory = io.popen('ls ' .. walldir)    -- read the <walldir> directory
+    local directory = io.popen("ls " .. walldir)    -- read the <walldir> directory
     local wallpapers = {}                           -- table with all wallpaper (image) files
 
-    -- add all images to the wallpapers table
-    for image in directory:lines() do
-        table.insert(wallpapers, image)
+    if directory then
+        for image in directory:lines() do
+            -- check if the file is an image (png and jpg in this case)
+            local file_ending = string.sub(image, -4)
+            if file_ending == ".png" or file_ending == ".jpg" then
+                table.insert(wallpapers, image)
+            end
+        end
     end
 
     if direction then
-        -- increase the position by 1
         position = position + 1
-
-        -- handle carry over
         if position > #wallpapers then
-            position = 1
+            position = 1    -- handle carry over
         end
     else
-        -- decrease the position by 1
         position = position - 1
-
-        -- handle carry over
         if position == 0 then
-            position = #wallpapers
+            
+            position = #wallpapers  -- handle carry over
         end
     end
 
-    -- get next wallpaper and set it to all screens
-    -- there is no type checking yes, this function assumes that only images are stored in <walldir>
     local next_wallpaper = wallpapers[position]
+    if not next_wallpaper then
+        -- dispay an error message
+        naughty.notify({ preset = naughty.config.presets.critical,
+                         title = "There was an error setting the wallpaper",
+                         text = "Make sure ~/wallpapers exists and contains image files" })
+        return false
+    end
+
     for s = 1, screen.count() do
-        gears.wallpaper.maximized(walldir .. '/' .. next_wallpaper, s, true)
+        gears.wallpaper.maximized(walldir .. "/" .. next_wallpaper, s, true)
     end
 end
 -- }}}
