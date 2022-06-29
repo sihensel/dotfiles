@@ -26,7 +26,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
-" SEE https://github.com/junegunn/vim-plug
+" https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'numToStr/Comment.nvim'
@@ -189,7 +189,7 @@ hi CursorLine cterm=bold ctermbg=None ctermfg=None gui=bold guibg=None guifg=Non
 hi Comment cterm=italic gui=italic
 
 " Settings for coc.vim
-" See https://github.com/neoclide/coc.nvim
+" https://github.com/neoclide/coc.nvim
 set updatetime=300
 set shortmess+=c
 
@@ -199,22 +199,20 @@ else
   set signcolumn=yes
 endif
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
+inoremap <silent><expr> <TAB>
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use K to show documentation in preview window.
+" Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -226,9 +224,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
 
 " Glow settings
 nnoremap <leader>g :Glow<CR>
@@ -254,22 +249,22 @@ lua << EOF
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
 local new_maker = function(filepath, bufnr, opts)
-  filepath = vim.fn.expand(filepath)
-  Job:new({
-    command = "file",
-    args = { "--mime-type", "-b", filepath },
-    on_exit = function(j)
-      local mime_type = vim.split(j:result()[1], "/")[1]
-      if mime_type == "text" then
-        previewers.buffer_previewer_maker(filepath, bufnr, opts)
-      else
-        -- maybe we want to write something to the buffer here
-        vim.schedule(function()
-          vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { " BINARY" })
-        end)
-      end
-    end
-  }):sync()
+    filepath = vim.fn.expand(filepath)
+    Job:new({
+        command = "file",
+        args = { "--mime-type", "-b", filepath },
+        on_exit = function(j)
+            local mime_type = vim.split(j:result()[1], "/")[1]
+            if mime_type == "text" then
+                previewers.buffer_previewer_maker(filepath, bufnr, opts)
+            else
+                -- maybe we want to write something to the buffer here
+                vim.schedule(function()
+                    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { " BINARY" })
+                end)
+            end
+        end
+    }):sync()
 end
 
 local actions = require('telescope.actions')
@@ -323,31 +318,6 @@ EOF
 
 " settings for nvim-tree.lua
 nmap <C-n> :NvimTreeToggle<CR>
-let g:nvim_tree_group_empty = 1
-let g:nvim_tree_special_files = { 'README.md': 1, 'LICENSE': 1 }
-let g:nvim_tree_icons = {
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': " ",
-    \   'untracked': "",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'arrow_open': "",
-    \   'arrow_closed': "",
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   }
-    \ }
-
 lua << EOF
 -- {{{ nvim-tree.lua
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -356,8 +326,10 @@ require'nvim-tree'.setup {
         ignore = false,
     },
     actions = {
-        window_picker = {
-            enable = false
+        open_file = {
+            window_picker = {
+                enable = false
+            }
         }
     },
     view = {
@@ -365,27 +337,54 @@ require'nvim-tree'.setup {
             custom_only = true,
             list = {
                 -- custom keybinds for nvim-tree
-                { key = "<CR>", cb = tree_cb("edit") },
-                { key = "o", cb = tree_cb("cd") },
-                { key = "s", cb = tree_cb("vsplit") },
-                { key = "i", cb = tree_cb("split") },
-                { key = "<", cb = tree_cb("prev_sibling") },
-                { key = ">", cb = tree_cb("next_sibling") },
+                { key = "<CR>",  cb = tree_cb("edit") },
+                { key = "o",     cb = tree_cb("cd") },
+                { key = "s",     cb = tree_cb("vsplit") },
+                { key = "i",     cb = tree_cb("split") },
+                { key = "<",     cb = tree_cb("prev_sibling") },
+                { key = ">",     cb = tree_cb("next_sibling") },
                 { key = "<Tab>", cb = tree_cb("preview") },
-                { key = "K", cb = tree_cb("first_sibling") },
-                { key = "J", cb = tree_cb("last_sibling") },
+                { key = "K",     cb = tree_cb("first_sibling") },
+                { key = "J",     cb = tree_cb("last_sibling") },
                 { key = "<C-i>", cb = tree_cb("toggle_ignored") },
                 { key = "<C-h>", cb = tree_cb("toggle_dotfiles") },
-                { key = "R", cb = tree_cb("refresh") },
-                { key = "a", cb = tree_cb("create") },
-                { key = "d", cb = tree_cb("remove") },
-                { key = "r", cb = tree_cb("rename") },
+                { key = "R",     cb = tree_cb("refresh") },
+                { key = "a",     cb = tree_cb("create") },
+                { key = "d",     cb = tree_cb("remove") },
+                { key = "r",     cb = tree_cb("rename") },
             },
         },
     },
     renderer = {
+        group_empty = true,
+        special_files = { 'README.md', 'LICENSE' },
         indent_markers = {
             enable = true
+        },
+        icons = {
+            webdev_colors = true,
+            glyphs = {
+                symlink = '',
+                git = {
+                    unstaged  = "",
+                    staged    = "✓",
+                    unmerged  = "",
+                    renamed   = " ",
+                    untracked = "",
+                    deleted   = "",
+                    ignored   = "◌"
+                },
+                folder = {
+                    arrow_open   = "",
+                    arrow_closed = "",
+                    default      = "",
+                    open         = "",
+                    empty        = "",
+                    empty_open   = "",
+                    symlink      = "",
+                    symlink_open = "",
+                }
+            }
         }
     }
 }
@@ -437,25 +436,22 @@ lua << EOF
 -- {{{ jaq-nvim
 require('jaq-nvim').setup{
     cmds = {
-        default = "toggleterm",
-        external = {
-            markdown = "glow %",
-            python = "python3 %",
-            c = "gcc % -o $fileBase && ./$fileBase",
-            sh = "sh %"
-        },
-        internal = {
+        internal = {  -- vim commands
             lua = "luafile %",
             vim = "source %"
+        },
+        external = {  -- shell commands
+            python   = "python3 %",
+            c        = "gcc % -o $fileBase && ./$fileBase",
+            sh       = "sh %",
+            lua      = "lua %"
         }
     },
-    ui = {
+    behavior = {
+        default     = "bang",
         startinsert = false,
-        wincmd      = true,     -- stay in toggleterm after running Jaq
-        toggleterm = {
-            position = "horizontal",
-            size     = 10
-        },
+        autosave    = false,
+        wincmd      = false
     }
 }
 -- }}} jaq-nvim
