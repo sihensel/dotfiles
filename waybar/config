@@ -1,0 +1,163 @@
+{
+	"layer": "top",
+    "height": 30,
+	"modules-left": [
+        "river/tags"
+    ],
+
+	"modules-center": [
+    ],
+
+	"modules-right": [
+        "tray",
+        "network",
+        "memory",
+        "cpu",
+        "temperature",
+        "disk",
+        "custom/pacman",
+        "battery",
+        "backlight",
+        "custom/pipewire",
+        "mpd",
+        "custom/weather",
+        "clock",
+    ],
+
+	"river/tags": {
+		"tag-labels":[
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9"
+		],
+		"disable-click": false,
+		"num-tags": 9
+	},
+
+	"tray":{
+        "icon-size": 17,
+        "spacing": 8,
+		"show-passive-items":true,
+		"tooltip": false
+	},
+
+    "network": {
+        "interval": 2,
+        "format-wifi": "   {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-ethernet": "  {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-linked": " {ifname} (No IP)",
+        "format-disconnected": "  Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "family": "ipv4",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}/{cidr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz",
+        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}/{cidr}"
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": " {used:0.3f}",
+        "states": {
+            "warning": 85,
+        },
+        "tooltip": false
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "礪 {usage}%",
+        "tooltip": false
+    },
+
+	"temperature": {
+		"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "format": " {temperatureC}°C",
+        "tooltip": false
+	},
+
+    "disk": {
+        "interval": 3600,
+        "format": " {used}"
+    },
+
+    "custom/pacman": {
+        "format": "{} ",
+        "interval": 9000,
+        "exec": "checkupdates | wc -l",
+        "exec-if": "exit 0",
+        "signal": 8,
+    },
+
+    "mpd": {
+        "interval": 2,
+        "timeout": 5,
+        "format": "{stateIcon} {artist} - {title}",
+        "unknown-tag": "  N/A",
+        "format-stopped": "",
+        "format-paused": "{stateIcon} {artist} - {title}",
+        "tooltip-format": "{repeatIcon} {artist} - {title} ({totalTime:%M:%S})\n{album}",
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "repeat-icons": {
+            "on": "凌",
+            "off": "稜"
+        }
+    },
+
+    "custom/pipewire": {
+        "exec": "~/.config/river/get_volume.py 2> /dev/null",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "format": "{icon} {percentage}%",
+        "format-icons": {
+            "mute": "婢",
+			"nomute": ["", "", ""]
+        },
+        "tooltip": false
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5",
+        "format": "{icon} {percent}%",
+        "format-icons": ["","","",""],
+        "tooltip": false
+    },
+
+	"battery": {
+        "interval": 1,
+		"states": {
+			"good": 100,
+			"warning": 20,
+			"critical": 10
+		},
+		"format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "tooltip": false
+	},
+
+    "custom/weather": {
+        "format": "  {}",
+        "exec": "curl 'https://wttr.in/?format=1' | awk '{print $2}'",
+        "interval": 3600,
+        "tooltip": false
+    },
+
+    "clock": {
+        "format": " {:%A %d %B %Y   %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+        "today-format": "<b>{}</b>",
+        /*"on-click": "gnome-calendar"*/
+    },
+}

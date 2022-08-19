@@ -1,29 +1,37 @@
-# set the screen layout
-if [[ $(xrandr | grep "eDP1") ]] then
-    # Detect if an external screen is connected to the Laptop via HDMI
-    if [[ $(xrandr | grep "HDMI1" | awk '{ printf$2 }') = "connected" ]] then
-        xrandr --output eDP1 --primary --mode 1920x1080 --pos 928x1440 --rotate normal --output HDMI1 --mode 2560x1440 --pos 928x0 --rotate normal > /dev/null 2>&1
-    elif [[ $(xrandr | grep "HDMI1" | awk '{ printf$2 }') = "disconnected" ]] then
-        xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off
-    fi
-else
-    # PC settings
-    if [[ $(xrandr | grep "HDMI-0" | awk '{ printf$2 }') = "connected" ]] && [[ $(xrandr | grep "DP-0" | awk '{ printf$2 }') = "connected" ]] then
-        xrandr --output DP-0 --primary --mode 2560x1440 --pos 1920x0 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x172 --rotate normal > /dev/null 2>&1
-    fi
-fi
-
-# set keyboard layout and disable caps
-setxkbmap -model pc105 -layout us -variant altgr-intl
-setxkbmap -option caps:none
-
 export EDITOR="nvim"
 export VIISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
-export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.config/lf:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
-# paste this into /etc/profile
-# export WINIT_X11_SCALE_FACTOR=1.66 alacritty
+# Manpage colors
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS="-RF"
+
+# Wayland
+export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP=river
+export XDG_SESSION_TYPE=wayland
+
+export SDL_VIDEODRIVER=wayland
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export GPG_TTY=$(tty)
+
+# check river(1) and xkeyboard-config(7)
+export XKB_DEFAULT_LAYOUT=us(altgr-intl)
+export XKB_DEFAULT_OPTIONS=caps:none
+
+# autostart River
+if [[ -z $WAYLAND_DISPLAY && $(tty) = "/dev/tty1" ]]; then
+	exec dbus-run-session river -log-level debug > /tmp/river-${timestamp}.log 2>&1
+fi

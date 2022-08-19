@@ -2,31 +2,30 @@
 
 This repository contains my personal Linux dotfiles.  
 They are often (speak: all the time) a work in progress and may or may not work for you.  
-I use [Awesome](https://awesomewm.org) with my own theme called _Groovebox_ and `picom-git` on Arch.
+I recently switched from X11 to Wayland using the [River](https://github.com/riverwm/river) compositor.
 
 ![screenshot.png](screenshot.png)
 
-## Installation
+## Dependencies
 
-### Dependencies
+Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.
 
-Some of these are not hard dependencies and can be changed in the config files.  
-This is more of a list for me, the packages are for `pacman`.
+Install with `pacman -S --needed <PACKAGE>`.
+```
+zsh zsh-syntax-highlighting networkmanager-openvpn network-manager-applet zathura zathura-pdf-poppler wayland wl-clipboard waybar xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty polkit brightnessctl
+```
 
-Dependency | Package
---- | ---
-Awesome | `awesome`
-Picom | `picom-git` (AUR)
-Alacritty | `alacritty`
-Zsh | `zsh zsh-syntax-highlighting`
-Rofi | `rofi`
-Slock | `slock`
-NetworkManager-Applet | `network-manager-applet networkmanager-openvpn`
-Brave | `brave-bin` (AUR)
-Moc | `moc-pulse` (AUR)
-Flameshot | `flameshot`
-Zathura | `zathura zathura-pdf-poppler`
-Roboto Mono Nerd Font | `nerd-fonts-roboto-mono` (AUR)
+AUR Packages
+```
+river rofi-lbonn-wayland wdisplays brave-bin nerd-fonts-roboto-mono ctpv-git
+```
+
+The configs for `awesome`, `picom` and `alacritty` are outdated, it you want to use then, make sure to install these packages as well.
+```
+awesome rofi slock flameshot picom-git (AUR) moc-pulse (AUR)
+```
+
+# Installation
 
 Clone the repo into your home directory.
 
@@ -34,9 +33,8 @@ Clone the repo into your home directory.
 git clone https://github.com/sihensel/dotfiles.git
 ```
 
-There is no wallpaper included, Awesome looks for `~/wallpapers/wall.jpg`.  
-This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42).  
-Use `Super + s` to see all available shortcuts.
+There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.  
+This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh) for river.
 
 ### Install Script
 
@@ -45,35 +43,27 @@ You might want to ignore that, this is just for my personal setup.
 
 ```sh
 ./install.sh   # or
-./install.sh -d /path/to/dotfiles/
+./install.sh -p /path/to/dotfiles/
 ```
 
 ## Configure Neovim Plugins
 
 The keybinds are listed in [init.vim](nvim/init.vim).
-Run `:PlugInstall` in Neovim to install all plugins. `nodejs` (or an lts release) and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
+Run `:PlugInstall` in Neovim to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
 
 ```sh
 CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
 ```
-Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.  
+Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
+
 Install the following packages with your package manager:
 ```
 fd ripgrep jp xclip glow
 ```
 
-## LF File Manager
-
-To make file previews work, install the following packages:
-```
-ueberzug imagemagick ffmpeg ghostscript
-```
-Make sure the scripts `lf-cleaner`, `lf-previewer` and `lf-run` in [lf](lf) are executable and in your `PATH`.
-
 ## Slack Theme
 
-My Gruvbox Slack theme. I don't know where else to put this, so I just paste it here.  
-Paste into `Preferences` > `Themes`.  
+Gruvbox Slack theme. Paste into `Preferences` > `Themes`.
 ```
 #282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7
 ```
@@ -85,3 +75,16 @@ Make sure to install the `pacman-contrib` package, then copy the file to `/etc/p
 ```sh
 sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
+
+## Miscellaneous
+
+Disable mouse acceleration:
+```sh
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
+```
+
+### Enable screen sharing
+
+For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.
+
+Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.

@@ -1,0 +1,158 @@
+/* custom colors */
+@define-color bg          #1d2021;
+@define-color bg_bright   #32302f;
+@define-color fg          #fbf1c7;
+@define-color red         #fb4934;
+@define-color red_dark    #cc241d;
+@define-color green       #b8bb26;
+@define-color green_dark  #98971a;
+@define-color yellow      #fabd2f;
+@define-color yellow_dark #d79921;
+@define-color blue        #83a598;
+@define-color blue_dark   #458588;
+@define-color purple      #d3869b;
+@define-color purple_dark #b16286;
+@define-color aqua        #8ec07c;
+@define-color aqua_dark   #689d6a;
+@define-color orange      #fe8019;
+@define-color orange_dark #d65d0e;
+@define-color arch        #1793d1;
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "RobotoMono Nerd Font";
+    font-size: 12px;
+    transition: none;
+    margin: 0 0.3em 0 0.3em;
+    min-height: 0;
+}
+
+@keyframes blink_red {
+    to {
+        background-color: @red;
+        color: @fg;
+    }
+}
+
+.warning, .critical, .urgent {
+    animation-name: blink_red;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#window {
+    background: @bg;
+}
+
+window > box {
+    margin: 8px;
+    padding: 6px 0 6px 0;
+    background-color: @bg;
+    border-radius: 7px;
+}
+
+#tags {
+    background: @bg_bright;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+#tags button {
+    color: @fg;
+}
+
+#tags button.occupied {
+    color: @blue_dark;
+}
+
+#tags button.urgent {
+    color: @red_dark;
+}
+
+#tags button.focused {
+    color: @orange;
+    border-bottom: 2px solid @orange;
+}
+
+#mode, #clock, #disk, #memory, #temperature, #cpu, #temperature, #backlight, #network, #battery, #custom-weather, #mpd, #custom-pipewire, #custom-pacman {
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 4px;
+    background: @bg_bright;
+}
+
+#mpd {
+    color: @purple;
+}
+
+#network {
+    color: @green;
+}
+
+#memory {
+    color: @yellow;
+}
+
+#custom-weather {
+    color: @green_dark;
+}
+
+#network.upload {
+    color: @red;
+}
+
+#temperature {
+    color: @blue;
+}
+
+#custom-pipewire {
+    color: @blue_dark;
+}
+
+#custom-pacman {
+    color: @red;
+}
+
+#battery.charging, #battery.full, #battery.discharging {
+    color: @yellow_dark;
+}
+
+#battery.critical:not(.charging) {
+    color: @yellow_dark;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#backlight {
+    color: @orange_dark;
+}
+
+#disk {
+    color: @aqua;
+}
+
+#cpu {
+    color: @aqua_dark;
+}
+
+#clock {
+    margin-right: 6px;
+    color: @orange;
+}
+
+#tray {
+    margin-right: 10px;
+}

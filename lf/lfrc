@@ -5,9 +5,11 @@ set scrolloff 10
 set icons
 set period 1
 
-# File previews
-set previewer lf-previewer
-set cleaner lf-cleaner
+# File previews, install ctpv-git (AUR)
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 # stay in the current directory when quitting with 'x'
 map x quitcd

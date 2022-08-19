@@ -11,7 +11,7 @@ window:
   class:
     instance: Alacritty
     general: Alacritty
-  opacity: 0.8
+  opacity: 0.87
 
 scrolling:
   history: 10000
@@ -27,17 +27,17 @@ font:
   italic:
     family: Roboto Mono Nerd Font
     style: Italic
-  size: 8.5
+  size: 12
+  use_thin_strokes: false
 
-# Colors (Gruvbox dark)
 # Color scheme from https://github.com/alacritty/alacritty/wiki/Color-schemes
 schemes:
   gruvbox: &gruvbox
     primary:
       background: '#111111'
-      foreground: '#fbf1c7'
+      foreground: '#f9f5d7'
     cursor:
-      cursor: '#fbf1c7'
+      cursor: '#f9f5d7'
     normal:
       black:   '#282828'
       red:     '#cc241d'
@@ -56,31 +56,6 @@ schemes:
       magenta: '#d3869b'
       cyan:    '#8ec07c'
       white:   '#ebdbb2'
-
-  spacewave: &spacewave
-    primary:
-      background: '#070819'
-      foreground: '#f8f5e9'
-    cursor:
-      cursor: '#f8f5e9'
-    normal:
-      black:   '#010110'
-      red:     '#d5152f'
-      green:   '#3ade48'
-      yellow:  '#ffbd25'
-      blue:    '#2d34c5'
-      magenta: '#801580'
-      cyan:    '#34bfa4'
-      white:   '#d7d7d5'
-    bright:
-      black:   '#020221'
-      red:     '#ef3a2a'
-      green:   '#6aff5a'
-      yellow:  '#ffcf3a'
-      blue:    '#3dc0ed'
-      magenta: '#df299a'
-      cyan:    '#80e1bd'
-      white:   '#f8f8f8'
 
 colors: *gruvbox
 
@@ -103,8 +78,8 @@ mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 key_bindings:
-  - { key: V,        mods: Control|Shift, action: Paste            }
-  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: V, mods: Control|Shift, action: Paste            }
+  - { key: C, mods: Control|Shift, action: Copy             }
 
 debug:
   log_level: Warn

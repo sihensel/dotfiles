@@ -7,9 +7,9 @@
 dot_dir=~/dotfiles   # FULL path to the repo
 
 # see https://archive.md/TRzn4
-while getopts ":d:" opt; do
+while getopts ":p:" opt; do
     case $opt in
-        d)
+        p)
             dot_dir=$OPTARG
         ;;
         \?)
@@ -24,8 +24,9 @@ while getopts ":d:" opt; do
 done
 
 # check if dotfiles repo exists
-if [ ! -d "$dot_dir" ]; then
-    echo "Directory '${dot_dir}' not found, you can specify a path with -d"
+if [ ! -d "$dot_dir" ]
+then
+    echo "Directory '${dot_dir}' not found, you can specify a path with -p"
     exit 1
 fi
 
@@ -34,27 +35,24 @@ cd ~/ || exit 1
 
 # start creating symlinks
 # files in ~/
-for i in .xinitrc .zshrc .zshenv .zsh-alias; do
+for i in .zshrc .zshenv .zsh-alias
+do
     if [ -f "$i" ]; then
         rm -f "$i"
     fi
     ln -sf "$dot_dir"/"$i" "$i"
 done
 
-# MOC (~/.moc)
-if [ -d ~/.moc ]; then
-    rm -rf ~/.moc
-fi
-ln -sf "$dot_dir"/moc ~/.moc
-
 # ~/.config
-if [ ! -d ~/.config ]; then
+if [ ! -d ~/.config ]
+then
     mkdir -p ~/.config
 fi
 
 cd ~/.config || exit 1
 
-for i in alacritty awesome lf neofetch nvim picom rofi zathura; do
+for i in kitty lf mako mpd ncmpcpp neofetch nvim river rofi waybar zathura
+do
     if [ -d "$i" ] || [ -f "$i" ]; then
         rm -rf "$i"
     fi

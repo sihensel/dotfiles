@@ -7,3 +7,12 @@ pid
 # ignore nvim plugin files
 plugged/
 coc-settings.json
+
+# MPD
+database
+pid
+sticker.sql
+state
+
+# ncmpcpp
+error.log

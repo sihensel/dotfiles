@@ -26,9 +26,8 @@ alias mount='sudo mount'
 alias umount='sudo umount'
 alias ufw='sudo ufw'
 alias ack='ack -i'
-alias light='sudo light'
-alias msfconsole="msfconsole --quiet -x \"db_connect ${USER}@msf\""
 alias diff='diff -y --color'
+alias ncm='ncmpcpp'
 
 alias checkgit='for i in $(ls); do echo "--$i"; cd $i; git status; cd ..; done'
 

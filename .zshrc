@@ -72,27 +72,5 @@ setopt prompt_subst
 export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# Manpage colors
-export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
-export LESS_TERMCAP_me=$(tput sgr0)
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
-export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
-export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-export LESS="-RF"
-
-# config for LF
-lf () {
-	LF_TEMPDIR="$(mktemp -d -t lf-tempdir-XXXXXX)"
-	LF_TEMPDIR="$LF_TEMPDIR" lf-run -last-dir-path="$LF_TEMPDIR/lastdir" "$@"
-	if [ "$(cat "$LF_TEMPDIR/cdtolastdir" 2>/dev/null)" = "1" ]; then
-		cd "$(cat "$LF_TEMPDIR/lastdir")"
-	fi
-	rm -r "$LF_TEMPDIR"
-	unset LF_TEMPDIR
-}
-
 # Load syntax highlighting; should be last.
-# sudo pacman -S zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
