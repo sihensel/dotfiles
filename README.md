@@ -6,6 +6,12 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 
 ![screenshot.png](screenshot.png)
 
+<details>
+  <summary>Screenshot for AwesomeWM</summary>
+
+  ![screenshot_awesome.png](screenshot_awesome.png)
+</details>
+
 ## Dependencies
 
 Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.
@@ -25,7 +31,7 @@ The configs for `awesome`, `picom` and `alacritty` are outdated, it you want to 
 awesome rofi slock flameshot picom-git (AUR) moc-pulse (AUR)
 ```
 
-# Installation
+## Installation
 
 Clone the repo into your home directory.
 
@@ -77,6 +83,11 @@ sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
 
 ## Miscellaneous
+
+Make sure to create the directory for MPD playlists.
+```sh
+mkdir -p ~/.config/mpd/playlists
+```
 
 Disable mouse acceleration:
 ```sh
