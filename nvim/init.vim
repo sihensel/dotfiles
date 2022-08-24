@@ -31,7 +31,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'numToStr/Comment.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'xiyaowong/nvim-cursorword'
 Plug 'APZelos/blamer.nvim'
 Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 
@@ -73,7 +72,7 @@ set nocompatible
 set title
 set ruler
 set cursorline
-set shell=zsh
+set shell=/bin/zsh
 set shellcmdflag=-c
 set colorcolumn=79
 
