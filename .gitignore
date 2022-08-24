@@ -6,7 +6,6 @@ pid
 
 # ignore nvim plugin files
 plugged/
-coc-settings.json
 
 # MPD
 database

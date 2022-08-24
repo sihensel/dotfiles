@@ -90,7 +90,7 @@
         "interval": 9000,
         "exec": "checkupdates | wc -l",
         "exec-if": "exit 0",
-        "signal": 8,
+        "signal": 8
     },
 
     "mpd": {
