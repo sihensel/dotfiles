@@ -37,7 +37,10 @@ Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 " File explorer and status line
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-lualine/lualine.nvim'
+
+" Terminal and quickfix window
 Plug 'akinsho/toggleterm.nvim'
+Plug 'kevinhwang91/nvim-bqf'
 
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -192,11 +195,7 @@ hi Comment cterm=italic gui=italic
 set updatetime=300
 set shortmess+=c
 
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=yes
 
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -210,6 +209,12 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use leader + d to show CocDiagnostics location window
+nnoremap <silent><leader>d :CocDiagnostics<CR>
+nmap <silent>]k <Plug>(coc-diagnostic-prev)
+nmap <silent>]j <Plug>(coc-diagnostic-next)
+map <silent> gd <Plug>(coc-definition)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>

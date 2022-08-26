@@ -1,17 +1,16 @@
 {
   "sumneko-lua.prompt": false,
   "sumneko-lua.checkUpdate": false,
-  "Lua.diagnostics.enable": false,
   "Lua.hint.enable": false,
   "Lua.telemetry.enable": false,
 
   "clangd.checkUpdates": false,
-  "clangd.disableDiagnostics": true,
   "clangd.disableProgressNotifications": true,
   "clangd.inlayHints.enable": false,
 
   "python.analysis.diagnosticMode": "openFilesOnly",
-  "pyright.disableDiagnostics": true,
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
   "pyright.disableProgressNotifications": true,
   "pyright.inlayHints.enable": false
 }

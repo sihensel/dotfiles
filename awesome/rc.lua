@@ -173,7 +173,6 @@ local function set_wallpaper(direction)
     else
         position = position - 1
         if position == 0 then
-            
             position = #wallpapers  -- handle carry over
         end
     end
@@ -296,13 +295,13 @@ Globalkeys = my_table.join(
 
     awful.key({ modkey }, "e", function () awful.spawn("pcmanfm") end,
               {description = "PCManFM", group = "custom"}),
-    
+
     awful.key({ modkey }, "F11", function () awful.spawn("flameshot gui") end,
               {description = "Take Screenshot", group = "custom"}),
-    
+
     awful.key({ modkey }, "F12", function () awful.spawn("slock") end,
               {description = "Lock Screen", group = "custom"}),
-    
+
     --rofi
     awful.key({ modkey }, "space", function ()
             os.execute('rofi -show run')
