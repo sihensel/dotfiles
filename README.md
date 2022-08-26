@@ -18,7 +18,7 @@ Some of these are not hard dependencies and can be changed in the config files. 
 
 Install with `pacman -S --needed <PACKAGE>`.
 ```
-zsh zsh-syntax-highlighting networkmanager-openvpn network-manager-applet zathura zathura-pdf-poppler wayland wl-clipboard waybar xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty polkit brightnessctl
+zsh zsh-syntax-highlighting networkmanager-openvpn network-manager-applet zathura zathura-pdf-poppler wayland wl-clipboard waybar xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty polkit brightnessctl reflector easyeffects
 ```
 
 AUR Packages
@@ -89,10 +89,7 @@ Make sure to create the directory for MPD playlists.
 mkdir -p ~/.config/mpd/playlists
 ```
 
-Disable mouse acceleration:
-```sh
-gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
-```
+A soundprofile for `easyeffects` is located in the corresponding directory.
 
 ### Enable screen sharing
 

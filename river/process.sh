@@ -15,6 +15,7 @@ brightnessctl set 40%
 riverctl default-layout rivertile &
 exec rivertile -main-ratio 0.5 -view-padding 5 -outer-padding 4 &
 
+# Touchpad settings
 for pad in $(riverctl list-inputs | grep -i touchpad)
 do
   riverctl input $pad events enabled
@@ -25,6 +26,15 @@ do
   riverctl input $pad disable-while-typing enabled
   riverctl input $pad scroll-method two-finger
   riverctl input $pad tap-button-map left-right-middle
+done
+
+# Mouse settings
+for mouse in $(riverctl list-inputs | grep -i mouse)
+do
+  riverctl input $mouse events enabled
+  riverctl input $mouse accel-profile flat
+  riverctl input $mouse pointer-accel 0.4
+  riverctl input $mouse natural-scroll disabled
 done
 
 # for screen sharing
