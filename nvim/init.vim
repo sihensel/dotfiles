@@ -2,6 +2,7 @@
 " This config uses the following custom keybinds:
 " gcc/gc{Operation}     toggle comment
 " K                     show documentation for word under cursor
+" <leader>d             show Coc Diagnostics
 "
 " nvim-tree
 " CTRL-n                toggle nvim-tree
@@ -23,6 +24,14 @@
 " " (normal or visual)  show :Registers
 " CTRL-R (insert)       show :Registers
 " CTRL-T                toggle a terminal
+
+" VimTex
+" <leader>ll            start/stop compiling document
+" <leader>lk            stop compiling document
+" <leader>lc            clear auxiliary compiler files
+" <leader>lv            forward search in compiled document (pdf)
+" <leader>le            toggle quickfix window
+" <leader>lt            show table of contents for latex document
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
@@ -45,6 +54,9 @@ Plug 'kevinhwang91/nvim-bqf'
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
+
+" Latex
+Plug 'lervag/vimtex'
 
 " Telescope fzf
 " External dependencies: fd and ripgrep
@@ -228,6 +240,9 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+" VimTex settings
+let g:vimtex_view_method = 'zathura'
 
 " Glow settings
 nnoremap <leader>g :Glow<CR>

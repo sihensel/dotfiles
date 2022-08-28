@@ -4,7 +4,7 @@ export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
-export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
 
 # Manpage colors
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
