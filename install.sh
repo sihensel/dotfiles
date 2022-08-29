@@ -35,7 +35,7 @@ cd ~/ || exit 1
 
 # start creating symlinks
 # files in ~/
-for i in .zshrc .zshenv .zsh-alias
+for i in .tigrc .zshrc .zshenv .zsh-alias
 do
     if [ -f "$i" ]; then
         rm -f "$i"
