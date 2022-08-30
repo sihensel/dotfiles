@@ -1,4 +1,4 @@
-# Aliases for ZSH
+# Shell aliases for ZSH
 
 # confirm before overwriting something
 alias cp='cp -i'
@@ -10,9 +10,9 @@ alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
 
-# some aliases
-alias ll='ls -hlNv --color=auto --group-directories-first'
-alias la='ls -AhlNv --color=auto --group-directories-first'
+# more aliases
+alias ll='exa -lhg --color=automatic --group-directories-first --icons --no-filesize'
+alias la='exa -lhag --color=automatic --group-directories-first --icons --no-filesize'
 alias free='free -m'
 alias grep='grep --color=auto'
 alias ..='cd ..'
@@ -28,6 +28,8 @@ alias ufw='sudo ufw'
 alias ack='ack -i'
 alias diff='diff -y --color'
 alias ncm='ncmpcpp'
+alias df='duf'
+alias less='bat'
 
 alias checkgit='for i in $(ls); do echo "--$i"; cd $i; git status; cd ..; done'
 

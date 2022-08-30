@@ -14,21 +14,27 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 
 ## Dependencies
 
-Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.
-
+Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.  
 Install with `pacman -S --needed <PACKAGE>`.
+
+Packages used for these dotfiles (in no particular order):
 ```
-zsh zsh-syntax-highlighting networkmanager-openvpn network-manager-applet zathura zathura-pdf-poppler wayland wl-clipboard waybar xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty polkit brightnessctl reflector easyeffects
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector easyeffects exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3
+```
+
+Other Packages I use:
+```
+ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop qview ruby-rogue tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie
 ```
 
 AUR Packages
 ```
-river rofi-lbonn-wayland wdisplays brave-bin nerd-fonts-roboto-mono ctpv-git
+river rofi-lbonn-wayland wdisplays brave-bin nerd-fonts-roboto-mono ctpv-git qview
 ```
 
-The configs for `awesome`, `picom` and `alacritty` are outdated, it you want to use then, make sure to install these packages as well.
+The configs for `awesome`, `picom`, `alacritty` and `moc` are outdated, it you want to use then, make sure to install these packages as well.
 ```
-awesome rofi slock flameshot picom-git (AUR) moc-pulse (AUR)
+awesome alacritty rofi slock flameshot picom-git (AUR) moc-pulse (AUR)
 ```
 
 ## Installation
@@ -96,3 +102,11 @@ A soundprofile for `easyeffects` is located in the corresponding directory.
 For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.
 
 Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.
+
+# Packages to uninstall
+
+```
+pac -Rnscd awesome alacritty light flameshot picom-git arandr go colorpicker slock xclip libpipewire02 xorg-drivers
+```
+
+Run `yay -Yc` and `yay -Sc` afterwards.

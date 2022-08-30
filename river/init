@@ -119,5 +119,6 @@ riverctl border-color-unfocused 0x1d2021
 riverctl set-repeat 100 300
 
 riverctl focus-follows-cursor normal
+riverctl xcursor-theme capitaine-cursors
 
 bash $HOME/.config/river/process.sh
