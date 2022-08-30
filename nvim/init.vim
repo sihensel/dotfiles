@@ -206,8 +206,9 @@ hi Comment cterm=italic gui=italic
 " https://github.com/neoclide/coc.nvim
 set updatetime=300
 set shortmess+=c
-
 set signcolumn=yes
+
+hi CocMenuSel cterm=bold ctermfg=239 ctermbg=109 gui=bold guifg=#504945 guibg=#83a598
 
 function! s:check_back_space() abort
     let col = col('.') - 1

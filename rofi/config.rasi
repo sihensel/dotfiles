@@ -4,28 +4,28 @@
 // ---------------------------------------
 
 configuration {
-	modi: "run,ssh";
-	font: "Roboto Mono Nerd Font 12";
-	location: 0;
+    modi: "run,ssh";
+    font: "Roboto Mono Nerd Font 12";
+    location: 0;
     show-icons: false;
-	terminal: "alacritty";
-	disable-history: false;
-	sort: false;
-	case-sensitive: false;
-	cycle: true;
-	sidebar-mode: true;
-	hover-select: false;
-	parse-known-hosts: true;
-	click-to-exit: true;
-	max-history-size: 50;
-  timeout {
-      action: "kb-cancel";
-      delay:  0;
-  }
-  filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
-  }
+    terminal: "kitty";
+    disable-history: false;
+    sort: false;
+    case-sensitive: false;
+    cycle: true;
+    sidebar-mode: true;
+    hover-select: false;
+    parse-known-hosts: true;
+    click-to-exit: true;
+    max-history-size: 50;
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method: "name";
+    }
 }
 
 
