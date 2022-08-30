@@ -7,7 +7,7 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 ![screenshot.png](screenshot.png)
 
 <details>
-  <summary>Screenshot for AwesomeWM</summary>
+  <summary>Screenshot for AwesomeWM (Same but different)</summary>
 
   ![screenshot_awesome.png](screenshot_awesome.png)
 </details>
@@ -19,17 +19,17 @@ Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack libpipewire02 helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector easyeffects exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector easyeffects exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 firefox firefox-tridactyl
 ```
 
 Other Packages I use:
 ```
-ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop qview ruby-rogue tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie
+ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie
 ```
 
 AUR Packages
 ```
-river rofi-lbonn-wayland wdisplays brave-bin nerd-fonts-roboto-mono ctpv-git qview
+river rofi-lbonn-wayland wdisplays librewolf-bin nerd-fonts-roboto-mono ctpv-git qview
 ```
 
 The configs for `awesome`, `picom`, `alacritty` and `moc` are outdated, it you want to use then, make sure to install these packages as well.
@@ -73,6 +73,25 @@ Install the following packages with your package manager:
 fd ripgrep fzf jq glow
 ```
 
+## Firefox userChrome.css
+
+This theme is heavily based on [Dook97's](https://github.com/Dook97/firefox-qutebrowser-userchrome) config with a few additions.
+It is intended to use with the [tridactyl](https://github.com/tridactyl/tridactyl) extension (Install the `firefox-tridactyl` package for Arch, and restart Firefox _twice_).
+
+Go to `about:config`:
+1. set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
+2. set `browser.compactmode.show` to `true`
+3. also set `extensions.pocket.enabled` to `false` while we're at it
+
+Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.  
+Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).  
+Copy the `userChrome.css` to the `chrome` directory in your firefox profile. If there is none create it.  
+Check `about:profiles` for the path to your profile.
+
+The navbar can be opened with `CTRL+L`.
+
+When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
+
 ## Slack Theme
 
 Gruvbox Slack theme. Paste into `Preferences` > `Themes`.
@@ -99,14 +118,8 @@ A soundprofile for `easyeffects` is located in the corresponding directory.
 
 ### Enable screen sharing
 
-For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.
+For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.  
+Also, install the `libpipewire02` package.  
+Start Chrome with `google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland`.
 
 Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.
-
-# Packages to uninstall
-
-```
-pac -Rnscd awesome alacritty light flameshot picom-git arandr go colorpicker slock xclip libpipewire02 xorg-drivers
-```
-
-Run `yay -Yc` and `yay -Sc` afterwards.
