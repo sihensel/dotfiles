@@ -16,6 +16,8 @@ export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
 export LESS="-RF"
 
+export BAT_THEME="gruvbox-dark"
+
 # Wayland
 export XDG_CURRENT_DESKTOP=river
 export XDG_SESSION_DESKTOP=river

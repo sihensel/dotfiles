@@ -11,6 +11,7 @@
   "python.analysis.diagnosticMode": "openFilesOnly",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--ignore=E501"],
   "pyright.disableProgressNotifications": true,
   "pyright.inlayHints.enable": false
 }

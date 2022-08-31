@@ -22,6 +22,7 @@ alias vim='nvim'
 alias pac='sudo pacman'
 alias updatepac='sudo reflector --country France --country Germany --latest 10 --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 alias p='python3'
+alias updatepip="pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U"
 alias mount='sudo mount'
 alias umount='sudo umount'
 alias ufw='sudo ufw'
