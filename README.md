@@ -85,12 +85,11 @@ Go to `about:config`:
 
 Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.  
 Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).  
-Copy the `userChrome.css` to the `chrome` directory in your firefox profile. If there is none create it.  
-Check `about:profiles` for the path to your profile.
-
-The navbar can be opened with `CTRL+L`.
+Copy the `chrome` directory to the root directory of your firefox profile. Check `about:profiles` for the path to your profile.
 
 When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
+
+The custom folder icon for the bookmark toolbar ist from [icons8.com](https://icons8.com/icon/12160/folder).
 
 ## Slack Theme
 
