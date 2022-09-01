@@ -32,9 +32,9 @@ AUR Packages
 river rofi-lbonn-wayland wdisplays librewolf-bin nerd-fonts-roboto-mono ctpv-git qview
 ```
 
-The configs for `awesome`, `picom`, `alacritty` and `moc` are outdated, it you want to use then, make sure to install these packages as well.
+The configs for `awesome`, `picom`, and `alacritty` are outdated, it you want to use then, make sure to install these packages as well.
 ```
-awesome alacritty rofi slock flameshot picom-git (AUR) moc-pulse (AUR)
+awesome alacritty rofi slock flameshot picom-git (AUR)
 ```
 
 ## Installation

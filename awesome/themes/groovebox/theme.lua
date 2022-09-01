@@ -213,35 +213,7 @@ local fs = lain.widget.fs({
     }
 })
 
--- MOC
-local moc_widget = lain.widget.contrib.moc({
-    default_art = theme.confdir .. "/lain/icons/music.png",
-    cover_size = 75,
-    timeout = 1,
-    settings = function ()
-        if moc_now.state == 'PLAY' then
-            -- cut off the file path and extension (.mp3 etc)
-            music_file = string.sub(moc_now.file:gsub('.*/', ''), 0,  -5)
-            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' ' .. music_file))
-        elseif moc_now.state == 'PAUSE' then
-            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' '))
-        else
-            widget:set_markup(markup.fontfg(theme.font, colors.purple_dark, ' '))
-        end
-
-        moc_notification_preset = {
-            title = ' Now Playing',
-            text = string.format('%s | %s', music_file, moc_now.total),
-            font = theme.font,
-            fg = theme.fg_normal,
-            bg = theme.bg_normal,
-            margin = 7
-        }
-    end
-
-})
-
--- First Icon (maybe add click-menu later)
+-- First Icon
 local menu_widget = wibox.widget.textbox()
 menu_widget.markup = '<span foreground="' .. colors.arch .. '">   </span>'
 menu_widget.font = theme.font
@@ -343,9 +315,6 @@ function theme.at_screen_connect(s)
             spr,
             bat.widget,
             spr,
-            moc_widget,
-            spr,
-            theme.volume.widget,
             spr,
             theme.weather.widget,
             spr,
