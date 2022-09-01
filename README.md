@@ -19,7 +19,7 @@ Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 firefox firefox-tridactyl
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv
 ```
 
 Other Packages I use:
@@ -29,10 +29,10 @@ ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-ne
 
 AUR Packages
 ```
-river rofi-lbonn-wayland wdisplays librewolf-bin nerd-fonts-roboto-mono ctpv-git qview
+river rofi-lbonn-wayland wdisplays librewolf-bin nerd-fonts-roboto-mono ctpv-git
 ```
 
-The configs for `awesome`, `picom`, and `alacritty` are outdated, it you want to use then, make sure to install these packages as well.
+The configs for `awesome`, `picom`, and `alacritty` are outdated, if you want to use them, make sure to install these packages as well.
 ```
 awesome alacritty rofi slock flameshot picom-git (AUR)
 ```
@@ -46,7 +46,7 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.  
-This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh) for river.
+This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh#44) for river.
 
 ### Install Script
 
@@ -89,7 +89,7 @@ Copy the `chrome` directory to the root directory of your firefox profile. Check
 
 When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
 
-The custom folder icon for the bookmark toolbar ist from [icons8.com](https://icons8.com/icon/12160/folder).
+The custom folder icon for the bookmarks toolbar ist from [icons8.com](https://icons8.com/icon/12160/folder).
 
 ## Slack Theme
 
@@ -106,14 +106,7 @@ Make sure to install the `pacman-contrib` package, then copy the file to `/etc/p
 sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
 
-## Miscellaneous
-
-Make sure to create the directory for MPD playlists.
-```sh
-mkdir -p ~/.config/mpd/playlists
-```
-
-### Enable screen sharing
+## Enable screen sharing for Chrome and Slack
 
 For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.  
 Also, install the `libpipewire02` package.  

@@ -1,9 +1,3 @@
-# moc files
-last_directory
-softmixer
-pid
-*.m3u
-
 # ignore nvim plugin files
 plugged/
 
@@ -12,6 +6,7 @@ database
 pid
 sticker.sql
 state
+playlists
 
 # ncmpcpp
 error.log

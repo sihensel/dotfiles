@@ -59,6 +59,9 @@ do
     ln -sf "$dot_dir"/"$i" "$i"
 done
 
+# create MPD playlists directory
+mkdir -p ~/.config/mpd/playlists
+
 # wrap up
 unset "$dot_dir"
 cd ~/ || exit 1
