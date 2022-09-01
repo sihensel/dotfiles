@@ -51,7 +51,7 @@ fi
 
 cd ~/.config || exit 1
 
-for i in kitty lf mako mpd ncmpcpp neofetch nvim river rofi waybar zathura
+for i in kitty lf mako mpd ncmpcpp neofetch nvim river rofi waybar zathura mimeapps.list
 do
     if [ -d "$i" ] || [ -f "$i" ]; then
         rm -rf "$i"
