@@ -19,7 +19,7 @@ Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector easyeffects exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 firefox firefox-tridactyl
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 firefox firefox-tridactyl
 ```
 
 Other Packages I use:
@@ -113,8 +113,6 @@ Make sure to create the directory for MPD playlists.
 ```sh
 mkdir -p ~/.config/mpd/playlists
 ```
-
-A soundprofile for `easyeffects` is located in the corresponding directory.
 
 ### Enable screen sharing
 
