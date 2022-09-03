@@ -69,8 +69,14 @@ function parse_git_branch() {
 # colors and prompt
 autoload -U colors && colors
 setopt prompt_subst
-export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# disable prompt colors for the root user
+if [[ $EUID = 0 ]]; then
+	export PROMPT='[%n@%M %2~]$(parse_git_branch)$ '
+else
+	export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
+fi
 
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
