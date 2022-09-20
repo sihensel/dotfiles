@@ -35,5 +35,5 @@ export XKB_DEFAULT_OPTIONS=caps:none
 
 # autostart River
 if [[ -z $WAYLAND_DISPLAY && $(tty) = "/dev/tty1" ]]; then
-	exec dbus-run-session river -log-level debug > /tmp/river-${timestamp}.log 2>&1
+    exec dbus-run-session river > /dev/null 2>&1
 fi
