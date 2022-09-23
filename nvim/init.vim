@@ -345,13 +345,6 @@ require'nvim-tree'.setup {
     git = {
         ignore = false,
     },
-    actions = {
-        open_file = {
-            window_picker = {
-                enable = false
-            }
-        }
-    },
     view = {
         mappings = {
             custom_only = true,
