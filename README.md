@@ -64,7 +64,7 @@ The keybinds are listed in [init.vim](nvim/init.vim).
 Run `:PlugInstall` in Neovim to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
 
 ```sh
-CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
+CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake coc-texlab
 ```
 Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
 
