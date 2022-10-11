@@ -1,7 +1,8 @@
+export LANG="en_US.UTF-8"
 export EDITOR="nvim"
 export VIISUAL="nvim"
-export TERMINAL="alacritty"
-export BROWSER="brave"
+export TERMINAL="kitty"
+export BROWSER="librewolf"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
 export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$PATH"
