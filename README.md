@@ -6,12 +6,6 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 
 ![screenshot.png](screenshot.png)
 
-<details>
-  <summary>Screenshot for AwesomeWM (Same but different)</summary>
-
-  ![screenshot_awesome.png](screenshot_awesome.png)
-</details>
-
 ## Dependencies
 
 Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.<br>
