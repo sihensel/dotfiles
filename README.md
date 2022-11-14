@@ -1,7 +1,7 @@
 # Welcome ~/
 
-This repository contains my personal Linux dotfiles.  
-They are often (speak: all the time) a work in progress and may or may not work for you.  
+This repository contains my personal Linux dotfiles.<br>
+They are often (speak: all the time) a work in progress and may or may not work for you.<br>
 I recently switched from X11 to Wayland using the [River](https://github.com/riverwm/river) compositor.
 
 ![screenshot.png](screenshot.png)
@@ -14,12 +14,12 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 
 ## Dependencies
 
-Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.  
+Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.<br>
 Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs
 ```
 
 Other Packages I use:
@@ -45,18 +45,20 @@ Clone the repo into your home directory.
 git clone https://github.com/sihensel/dotfiles.git
 ```
 
-There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.  
+There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.<br>
 This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh#44) for river.
 
 ### Install Script
 
-The script `install.sh` places symlinks to the local repo, so all files can stay in one place.  
+The script `install.sh` places symlinks to the local repo, so all files can stay in one place.<br>
 You might want to ignore that, this is just for my personal setup.
 
 ```sh
 ./install.sh   # or
 ./install.sh -p /path/to/dotfiles/
 ```
+
+*Note*: I use the `xdg-user-dirs` package to get rid of most of the standard XDG directories. See the [user-dirs.dirs](./user-dirs.dirs) file for details.
 
 ## Configure Neovim Plugins
 
@@ -83,8 +85,8 @@ Go to `about:config`:
 2. set `browser.compactmode.show` to `true`
 3. also set `extensions.pocket.enabled` to `false` while we're at it
 
-Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.  
-Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).  
+Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.<br>
+Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).<br>
 Copy the `chrome` directory to the root directory of your firefox profile. Check `about:profiles` for the path to your profile.
 
 When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
@@ -108,8 +110,8 @@ sudo cp clear_cache.hook /etc/pacman.d/hooks
 
 ## Enable screen sharing for Chrome and Slack
 
-For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.  
-Also, install the `libpipewire02` package.  
+For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.<br>
+Also, install the `libpipewire02` package.<br>
 Start Chrome with `google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland`.
 
 Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.
