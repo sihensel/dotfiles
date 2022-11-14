@@ -66,7 +66,7 @@ Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 
 Install the following packages with your package manager:
 ```
-fd ripgrep fzf jq glow
+fd ripgrep fzf jq
 ```
 
 ## Firefox userChrome.css

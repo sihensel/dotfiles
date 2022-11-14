@@ -17,7 +17,6 @@
 " <leader>i             open in split
 " <leader>s             open in vsplit
 "
-" <leader>g             open glow markdown preview
 " <leader>r             run current file with Jaq
 "
 " CTRL-b                toggle blamer.nvim
@@ -70,7 +69,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
 
-Plug 'ellisonleao/glow.nvim'        " requires 'glow' package
 Plug 'gennaro-tedesco/nvim-jqx'     " requires 'jq' package
 Plug 'is0n/jaq-nvim'
 
@@ -244,11 +242,6 @@ endfunction
 
 " VimTex settings
 let g:vimtex_view_method = 'zathura'
-
-" Glow settings
-nnoremap <leader>g :Glow<CR>
-let g:glow_border = "rounded"
-let g:glow_width = 200
 
 " blamer.nvim settings
 nnoremap <C-b> :BlamerToggle<CR>
