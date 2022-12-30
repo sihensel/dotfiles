@@ -12,7 +12,7 @@ riverctl map normal $mod+Shift B spawn firefox
 riverctl map normal $mod+Shift N spawn "google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
 riverctl map normal $mod E       spawn pcmanfm
 riverctl map normal $mod S       spawn "slack --enable-features=WebRTCPipeWireCapturer"
-riverctl map normal $mod D       spawn "discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy"
+riverctl map normal $mod D       spawn "discord --ignore-gpu-blocklist --enable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --ozone-platform=wayland "
 
 # Open rofi
 riverctl map normal $mod space spawn "rofi -show run"

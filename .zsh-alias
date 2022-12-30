@@ -39,3 +39,7 @@ alias connect='nmcli connection up vpn_students ifname tun0'
 
 # use Google Chrome on Wayland, see the README for required flags
 alias chrome='google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland'
+
+alias docker='sudo docker'
+alias dockerstop='sudo docker stop $(docker ps -aq)'
+alias dockerrm='sudo docker rm $(docker ps -aq)'

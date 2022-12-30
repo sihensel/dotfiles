@@ -41,6 +41,7 @@ Plug 'numToStr/Comment.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'APZelos/blamer.nvim'
 Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+Plug 'danilamihailov/beacon.nvim'
 
 " File explorer and status line
 Plug 'kyazdani42/nvim-tree.lua'
@@ -56,6 +57,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Latex
 Plug 'lervag/vimtex'
+Plug 'anufrievroman/vim-angry-reviewer'
 
 " Telescope fzf
 " External dependencies: fd and ripgrep
@@ -199,6 +201,11 @@ colorscheme gruvbox
 hi Normal guibg=None guifg=None ctermbg=None ctermfg=None
 hi CursorLine cterm=bold ctermbg=None ctermfg=None gui=bold guibg=None guifg=None
 hi Comment cterm=italic gui=italic
+
+" Disable some warnings for :CheckHealth
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+let g:loaded_perl_provider = 0
 
 " Settings for coc.vim
 " https://github.com/neoclide/coc.nvim
@@ -450,7 +457,8 @@ require('jaq-nvim').setup{
             python   = "python3 %",
             c        = "gcc % -o $fileBase && ./$fileBase",
             sh       = "sh %",
-            lua      = "lua %"
+            lua      = "lua %",
+            tex      = "make"
         }
     },
     behavior = {

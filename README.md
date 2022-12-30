@@ -6,6 +6,7 @@ I recently switched from X11 to Wayland using the [River](https://github.com/riv
 
 ![screenshot.png](screenshot.png)
 
+
 ## Dependencies
 
 Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.<br>
@@ -31,6 +32,7 @@ The configs for `awesome`, `picom`, and `alacritty` are outdated, if you want to
 awesome alacritty rofi slock flameshot picom-git (AUR)
 ```
 
+
 ## Installation
 
 Clone the repo into your home directory.
@@ -54,13 +56,14 @@ You might want to ignore that, this is just for my personal setup.
 
 *Note*: I use the `xdg-user-dirs` package to get rid of most of the standard XDG directories. See the [user-dirs.dirs](./user-dirs.dirs) file for details.
 
+
 ## Configure Neovim Plugins
 
 The keybinds are listed in [init.vim](nvim/init.vim).
 Run `:PlugInstall` in Neovim to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
 
 ```sh
-CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake coc-texlab
+CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
 ```
 Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
 
@@ -69,10 +72,18 @@ Install the following packages with your package manager:
 fd ripgrep fzf jq
 ```
 
+Also install the Python provider for Neovim.
+```
+pip install pynvim
+```
+
+
 ## Firefox userChrome.css
 
 This theme is heavily based on [Dook97's](https://github.com/Dook97/firefox-qutebrowser-userchrome) config with a few additions.
 It is intended to use with the [tridactyl](https://github.com/tridactyl/tridactyl) extension (Install the `firefox-tridactyl` package for Arch, and restart Firefox _twice_).
+
+When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
 
 Go to `about:config`:
 1. set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
@@ -81,11 +92,10 @@ Go to `about:config`:
 
 Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.<br>
 Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).<br>
-Copy the `chrome` directory to the root directory of your firefox profile. Check `about:profiles` for the path to your profile.
+Copy the `chrome` directory to the root directory of your Firefox profile. Check `about:profiles` for the path to your profile.
 
-When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
+The custom folder icon for the bookmarks toolbar is from [icons8.com](https://icons8.com/icon/12160/folder).
 
-The custom folder icon for the bookmarks toolbar ist from [icons8.com](https://icons8.com/icon/12160/folder).
 
 ## Slack Theme
 
@@ -93,6 +103,7 @@ Gruvbox Slack theme. Paste into `Preferences` > `Themes`.
 ```
 #282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7
 ```
+
 
 ## Pacman Hook
 
@@ -102,10 +113,10 @@ Make sure to install the `pacman-contrib` package, then copy the file to `/etc/p
 sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
 
+
 ## Enable screen sharing for Chrome and Slack
 
 For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.<br>
-Also, install the `libpipewire02` package.<br>
 Start Chrome with `google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland`.
 
 Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.
