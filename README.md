@@ -59,8 +59,8 @@ You might want to ignore that, this is just for my personal setup.
 
 ## Configure Neovim Plugins
 
-The keybinds are listed in [init.vim](nvim/init.vim).
-Run `:PlugInstall` in Neovim to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
+The keybinds are listed in [init.vim](nvim/init.vim).<br>
+Install [vim-plug](https://github.com/junegunn/vim-plug#neovim) and run `:PlugInstall` to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
 
 ```sh
 CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
@@ -74,15 +74,14 @@ fd ripgrep fzf jq
 
 Also install the Python provider for Neovim.
 ```
-pip install pynvim
+pip install neovim
 ```
 
 
 ## Firefox userChrome.css
 
 This theme is heavily based on [Dook97's](https://github.com/Dook97/firefox-qutebrowser-userchrome) config with a few additions.
-It is intended to use with the [tridactyl](https://github.com/tridactyl/tridactyl) extension (Install the `firefox-tridactyl` package for Arch, and restart Firefox _twice_).
-
+It is intended to use with the [tridactyl](https://github.com/tridactyl/tridactyl) extension (Install the `firefox-tridactyl` package for Arch, and restart Firefox _twice_).<br>
 When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
 
 Go to `about:config`:
@@ -110,6 +109,7 @@ Gruvbox Slack theme. Paste into `Preferences` > `Themes`.
 Make sure to install the `pacman-contrib` package, then copy the file to `/etc/pacman.d/hooks`.
 
 ```sh
+sudo mkdir /etc/pacman.d/hooks
 sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
 
