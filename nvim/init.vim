@@ -20,9 +20,12 @@
 " <leader>r             run current file with Jaq
 "
 " CTRL-b                toggle blamer.nvim
+" CTRL-T                toggle a terminal
+
 " " (normal or visual)  show :Registers
 " CTRL-R (insert)       show :Registers
-" CTRL-T                toggle a terminal
+" CTRL-K / CTRL-J       move cursor up / down in registers windos
+" DEL / BACKSPACE       delete highlighted entry from registers
 
 " VimTex
 " <leader>ll            start/stop compiling document
@@ -40,7 +43,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'numToStr/Comment.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'APZelos/blamer.nvim'
-Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
+Plug 'tversteeg/registers.nvim'
 Plug 'danilamihailov/beacon.nvim'
 
 " File explorer and status line
@@ -87,9 +90,9 @@ set nocompatible
 set title
 set ruler
 set cursorline
+set colorcolumn=79
 set shell=/bin/zsh
 set shellcmdflag=-c
-set colorcolumn=79
 
 " only enable mouse movement in normal mode
 set mouse=n
@@ -442,6 +445,18 @@ require("toggleterm").setup{
     direction = 'horizontal'
 }
 -- }}} toggleterm
+
+-- {{{ registers
+require("registers").setup({
+    show_empty = false,
+    window = {
+        max_width = 79,
+        highlight_cursorline = true,
+        border = "none",
+        transparency = 0
+    }
+})
+-- }}} registers
 EOF
 
 nnoremap <leader>r :Jaq<CR>
