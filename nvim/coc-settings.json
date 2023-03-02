@@ -6,7 +6,7 @@
 
   "clangd.checkUpdates": false,
   "clangd.disableProgressNotifications": true,
-  "clangd.inlayHints.enable": false,
+  "clangd.disableSnippetCompletion": true,
 
   "python.analysis.diagnosticMode": "openFilesOnly",
   "python.linting.enabled": true,
