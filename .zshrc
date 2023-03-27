@@ -78,17 +78,11 @@ else
 	export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$reset_color%}$ '
 fi
 
-# __conda_setup="$('/home/simon/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/simon/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/simon/anaconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/simon/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
+# pyenv config
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Load syntax highlighting; should be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

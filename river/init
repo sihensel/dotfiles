@@ -8,8 +8,7 @@ riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DI
 # Programs
 riverctl map normal $mod Return  spawn kitty
 riverctl map normal $mod B       spawn librewolf
-riverctl map normal $mod+Shift B spawn firefox
-riverctl map normal $mod+Shift N spawn "google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
+riverctl map normal $mod+Shift B spawn "google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
 riverctl map normal $mod E       spawn pcmanfm
 riverctl map normal $mod S       spawn "slack --enable-features=WebRTCPipeWireCapturer"
 riverctl map normal $mod D       spawn "discord --ignore-gpu-blocklist --enable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --ozone-platform=wayland "

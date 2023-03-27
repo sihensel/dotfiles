@@ -82,7 +82,7 @@ call plug#end()
 
 " General
 syntax on
-autocmd! bufreadpost *.pp set syntax=off    " disable syntax for puppet files
+autocmd! bufreadpost *.pp set syntax=ruby    " puppet files are ruby code
 filetype plugin indent on
 set encoding=utf-8
 set history=500
