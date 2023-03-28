@@ -42,7 +42,7 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.<br>
-This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh#44) for river.
+This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh#L44) for river.
 
 ### Install Script
 
@@ -85,9 +85,10 @@ It is intended to use with the [tridactyl](https://github.com/tridactyl/tridacty
 When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
 
 Go to `about:config`:
-1. set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
-2. set `browser.compactmode.show` to `true`
-3. also set `extensions.pocket.enabled` to `false` while we're at it
+1. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
+2. Set `browser.compactmode.show` to `true`
+3. Also set `extensions.pocket.enabled` to `false` while we're at it
+4. For my setup: `browser.tabs.loadBookmarksInBackground` to `true`
 
 Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.<br>
 Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).<br>

@@ -1,3 +1,4 @@
+/* --- COLORS ------------------------------------------- */
 /* change these variables to get different colors */
 #tabbrowser-tabs {
     --tab-active-color: #458588;
@@ -6,13 +7,14 @@
     --tab-fallback-color-inactive: #32302f;
 }
 
-/* change to control tabbar height */
-#titlebar { --tab-min-height: 20px !important; }
+/* Change background color to avoid the flashbags */
+#browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels,
+browser[type=content-primary],browser[type=content] > html {
+    background: #282828 !important
+}
 
 /* --- DEBLOAT NAVBAR ----------------------------------- */
 
-#back-button,
-#forward-button,
 #reload-button,
 #stop-button,
 #home-button,
@@ -28,7 +30,7 @@
 #nav-bar,
 #navigator-toolbox {
     border-width: 0 !important;
-    --toolbar-field-focus-border-color: #504945;
+    --toolbar-field-focus-border-color: #d65d0e;
 }
 
 /* --- STYLE URLBAR ------------------------------------- */
@@ -49,16 +51,6 @@
     min-height: var(--tab-min-height) !important;
     border-color: var(--lwt-toolbar-field-border-color, hsla(240,5%,5%,.25)) !important;
     --autocomplete-popup-highlight-background: transparent !important;
-}
-
-#urlbar-background {
-    border-width: 0 !important;
-    border-radius: 0 !important;
-}
-
-#urlbar-input-container {
-    border-width: 0 !important;
-    margin-left: 1em !important;
 }
 
 #urlbar-input {
@@ -89,7 +81,6 @@
 #pageActionButton,
 #pocket-button,
 #urlbar-zoom-button,
-#star-button,
 #urlbar-go-button
 {
     display: none;
@@ -104,6 +95,7 @@
 /* --- STYLE TAB TOOLBAR -------------------------------- */
 
 #titlebar {
+    --tab-min-height: 25px !important;
     --proton-tab-block-margin: 0px !important;
     --tab-block-margin: 0 !important;
 }
@@ -134,7 +126,7 @@ tab {
 }
 
 /* safari style tab width */
-.tabbrowser-tab[fadein] { max-width: 100vw !important; border: none }
+/* .tabbrowser-tab[fadein] { max-width: 100vw !important; border: none } */
 
 /* Hide close button on tabs */
 #tabbrowser-tabs .tabbrowser-tab .tab-close-button { display: none !important; }
@@ -170,9 +162,6 @@ tab {
 
 /*AGENT_SHEET*/
 #main-window #navigator-toolbox #TabsToolbar:not(:-moz-lwtheme) { background: var(--tab-active-color) !important; }
-
-/* hide window controls */
-.titlebar-buttonbox-container { display: none; }
 
 /* remove titlebar spacers */
 .titlebar-spacer { display: none !important; }
