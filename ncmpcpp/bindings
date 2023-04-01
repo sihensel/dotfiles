@@ -22,8 +22,11 @@ def_key "h"
 def_key "d"
     delete_playlist_items
 
-def_key "U"
+def_key "u"
     jump_to_parent_directory
+
+def_key "U"
+    update_database
 
 def_key "ctrl-u"
     page_up
