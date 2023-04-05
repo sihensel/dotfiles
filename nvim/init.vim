@@ -94,6 +94,9 @@ set colorcolumn=79
 set shell=/bin/zsh
 set shellcmdflag=-c
 
+" always yank to system clipboard as well (:h provider-clipboard)
+set clipboard+=unnamedplus
+
 " only enable mouse movement in normal mode
 set mouse=n
 " disable cursor move on mouse click
