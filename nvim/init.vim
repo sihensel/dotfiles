@@ -346,33 +346,35 @@ EOF
 nmap <C-n> :NvimTreeToggle<CR>
 lua << EOF
 -- {{{ nvim-tree.lua
+
+local function on_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'o', api.tree.change_root_to_node, opts('CD'))
+  vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical Split'))
+  vim.keymap.set('n', 'i', api.node.open.horizontal, opts('Open: Horizontal Split'))
+  vim.keymap.set('n', '<', api.node.navigate.sibling.prev, opts('Previous Sibling'))
+  vim.keymap.set('n', '>', api.node.navigate.sibling.next, opts('Next Sibling'))
+  vim.keymap.set('n', '<Tab>', api.node.open.preview, opts('Open Preview'))
+  vim.keymap.set('n', 'K', api.node.navigate.sibling.first, opts('First Sibling'))
+  vim.keymap.set('n', 'J', api.node.navigate.sibling.last, opts('Last Sibling'))
+  vim.keymap.set('n', '<C-h>', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
+  vim.keymap.set('n', 'R', api.tree.reload, opts('Refresh'))
+  vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
+  vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
+  vim.keymap.set('n', 'r', api.fs.rename, opts('Rename'))
+end
+
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
+    on_attach = on_attach,
     git = {
         ignore = false,
-    },
-    view = {
-        mappings = {
-            custom_only = true,
-            list = {
-                -- custom keybinds for nvim-tree
-                { key = "<CR>",  cb = tree_cb("edit") },
-                { key = "o",     cb = tree_cb("cd") },
-                { key = "s",     cb = tree_cb("vsplit") },
-                { key = "i",     cb = tree_cb("split") },
-                { key = "<",     cb = tree_cb("prev_sibling") },
-                { key = ">",     cb = tree_cb("next_sibling") },
-                { key = "<Tab>", cb = tree_cb("preview") },
-                { key = "K",     cb = tree_cb("first_sibling") },
-                { key = "J",     cb = tree_cb("last_sibling") },
-                { key = "<C-i>", cb = tree_cb("toggle_ignored") },
-                { key = "<C-h>", cb = tree_cb("toggle_dotfiles") },
-                { key = "R",     cb = tree_cb("refresh") },
-                { key = "a",     cb = tree_cb("create") },
-                { key = "d",     cb = tree_cb("remove") },
-                { key = "r",     cb = tree_cb("rename") },
-            },
-        },
     },
     renderer = {
         group_empty = true,
