@@ -1,17 +1,15 @@
-# Alacritty config
-# https://github.com/sihensel/dotfiles
-
 env:
-  TERM: alacritty
+  TERM: xterm-256color
 
 window:
   padding:
-    x: 6
-    y: 6
+    x: 8
+    y: 8
+  decoration: none
   class:
     instance: Alacritty
     general: Alacritty
-  opacity: 0.87
+  opacity: 0.92
 
 scrolling:
   history: 10000
@@ -27,10 +25,9 @@ font:
   italic:
     family: Roboto Mono Nerd Font
     style: Italic
-  size: 12
-  use_thin_strokes: false
+  size: 13
 
-# Color scheme from https://github.com/alacritty/alacritty/wiki/Color-schemes
+# Color scheme from https://github.com/alacritty/alacritty-theme
 schemes:
   gruvbox: &gruvbox
     primary:
@@ -67,6 +64,7 @@ selection:
 
 cursor:
   style: Underline
+  blinking: off
   unfocused_hollow: false
 
 live_config_reload: true
@@ -83,3 +81,4 @@ key_bindings:
 
 debug:
   log_level: Warn
+  persistent_logging: false

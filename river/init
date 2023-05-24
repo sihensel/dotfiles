@@ -6,7 +6,7 @@ mod="Mod4"
 riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
 
 # Programs
-riverctl map normal $mod Return  spawn kitty
+riverctl map normal $mod Return  spawn alacritty
 riverctl map normal $mod B       spawn librewolf
 riverctl map normal $mod+Shift B spawn "google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
 riverctl map normal $mod E       spawn pcmanfm

@@ -8,7 +8,7 @@ configuration {
     font: "Roboto Mono Nerd Font 12";
     location: 0;
     show-icons: false;
-    terminal: "kitty";
+    terminal: "alacritty";
     disable-history: false;
     sort: false;
     case-sensitive: false;

@@ -1,7 +1,7 @@
 export LANG="en_US.UTF-8"
 export EDITOR="nvim"
 export VIISUAL="nvim"
-export TERMINAL="kitty"
+export TERMINAL="alacritty"
 export BROWSER="librewolf"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark

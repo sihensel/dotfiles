@@ -14,7 +14,7 @@ Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako kitty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs ttf-roboto-mono-nerd
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako alacritty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs ttf-roboto-mono-nerd
 ```
 
 Other Packages I use:
@@ -27,9 +27,9 @@ AUR Packages
 river rofi-lbonn-wayland wdisplays librewolf-bin ctpv-git
 ```
 
-The configs for `awesome`, `picom`, and `alacritty` are outdated, if you want to use them, make sure to install these packages as well.
+The configs for `awesome`, `picom`, and `kitty` are outdated, if you want to use them, make sure to install these packages as well.
 ```
-awesome alacritty rofi slock flameshot picom-git (AUR)
+awesome kitty rofi slock flameshot picom-git (AUR)
 ```
 
 
