@@ -9,8 +9,8 @@ configuration {
     location: 0;
     show-icons: false;
     terminal: "alacritty";
-    disable-history: false;
-    sort: false;
+    disable-history: true;
+    sort: true;
     case-sensitive: false;
     cycle: true;
     sidebar-mode: true;
