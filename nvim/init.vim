@@ -26,14 +26,6 @@
 " CTRL-R (insert)       show :Registers
 " CTRL-K / CTRL-J       move cursor up / down in registers windos
 " DEL / BACKSPACE       delete highlighted entry from registers
-
-" VimTex
-" <leader>ll            start/stop compiling document
-" <leader>lk            stop compiling document
-" <leader>lc            clear auxiliary compiler files
-" <leader>lv            forward search in compiled document (pdf)
-" <leader>le            toggle quickfix window
-" <leader>lt            show table of contents for latex document
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Load Plugins using vim-plug
@@ -59,7 +51,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 
 " Latex
-Plug 'lervag/vimtex'
 Plug 'anufrievroman/vim-angry-reviewer'
 
 " Telescope fzf
@@ -252,9 +243,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-" VimTex settings
-let g:vimtex_view_method = 'zathura'
 
 " blamer.nvim settings
 nnoremap <C-b> :BlamerToggle<CR>
