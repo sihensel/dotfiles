@@ -26,6 +26,7 @@ font:
     family: Roboto Mono Nerd Font
     style: Italic
   size: 13
+  AppleFontSmoothing: 0
 
 # Color scheme from https://github.com/alacritty/alacritty-theme
 schemes:
