@@ -88,7 +88,9 @@ Go to `about:config`:
 1. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
 2. Set `browser.compactmode.show` to `true`
 3. Also set `extensions.pocket.enabled` to `false` while we're at it
-4. For my setup: `browser.tabs.loadBookmarksInBackground` to `true`
+4. For my setup:
+    1. `browser.tabs.loadBookmarksInBackground` to `true`
+    2. `browser.bookmarks.openInTabClosesMenu` to `true`
 
 Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.<br>
 Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).<br>

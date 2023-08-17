@@ -358,7 +358,6 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'r', api.fs.rename, opts('Rename'))
 end
 
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup {
     on_attach = on_attach,
     git = {

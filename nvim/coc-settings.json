@@ -1,4 +1,6 @@
 {
+  "inlayHint.enable": false,
+
   "sumneko-lua.prompt": false,
   "sumneko-lua.checkUpdate": false,
   "Lua.hint.enable": false,
