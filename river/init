@@ -77,7 +77,7 @@ riverctl map normal $mod+Control space toggle-float
 # Toggle fullscreen
 riverctl map normal $mod F toggle-fullscreen
 
-# Mod+Shift+Alt+{H,J,K,L} to change layout orientation
+# Mod+Shift+Control+{H,J,K,L} to change layout orientation
 riverctl map normal $mod+Shift+Control K send-layout-cmd rivertile "main-location top"
 riverctl map normal $mod+Shift+Control L send-layout-cmd rivertile "main-location right"
 riverctl map normal $mod+Shift+Control J send-layout-cmd rivertile "main-location bottom"

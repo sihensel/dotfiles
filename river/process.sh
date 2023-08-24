@@ -42,3 +42,8 @@ systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 killall swaybg
 swaybg -i ~/wallpapers/wall.jpg
+
+pkill -f swayidle
+swayidle -w \
+	timeout 300 'swaylock -f -i ~/wallpapers/wall.jpg' \
+	before-sleep 'swaylock -f -i ~/wallpapers/wall.jpg' &
