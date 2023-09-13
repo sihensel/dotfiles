@@ -363,6 +363,9 @@ require'nvim-tree'.setup {
     git = {
         ignore = false,
     },
+    view = {
+        width = 40
+    },
     renderer = {
         group_empty = true,
         special_files = { 'README.md', 'LICENSE' },
