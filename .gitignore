@@ -1,6 +1,3 @@
-# ignore nvim plugin files
-plugged/
-
 # MPD
 database
 pid

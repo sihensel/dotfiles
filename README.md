@@ -59,17 +59,13 @@ You might want to ignore that, this is just for my personal setup.
 
 ## Configure Neovim Plugins
 
-The keybinds are listed in [init.vim](nvim/init.vim).<br>
-Install [vim-plug](https://github.com/junegunn/vim-plug#neovim) and run `:PlugInstall` to install all plugins. `nodejs` and `npm` are required for `coc`. Langauge server packs can be installed with e.g.:
+The keybinds are listed in [init.lua](nvim/init.lua).<br>
+Plugins are managed via [Lazy.nvim](https://github.com/folke/lazy.nvim). The Plugin manager installs itself and all plugins automatically.<br>
+LSP clients are also installed automatically via [Mason](https://github.com/williamboman/mason.nvim).
 
-```sh
-CocInstall coc-pyright coc-sumneko-lua coc-json coc-clangd coc-cmake
+The following packages are exteneral dependencies, install them with your package manager:
 ```
-Check [the docs](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions) and the [install guide](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim) for more info.
-
-Install the following packages with your package manager:
-```
-fd ripgrep fzf jq
+fd ripgrep fzf jq tree-sitter tree-sitter-cli
 ```
 
 Also install the Python provider for Neovim.
