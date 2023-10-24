@@ -2,17 +2,6 @@
 -- PLUGINS AND CONFIGS
 -------------------------------------------------------------------------------
 
--- Aliases
-local get_mapper = function(mode, noremap)
-    return function(lhs, rhs, opts)
-        opts = opts or {}
-        opts.noremap = noremap
-        vim.keymap.set(mode, lhs, rhs, opts)
-    end
-end
-local nnoremap = get_mapper("n", true)
-
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -48,9 +37,11 @@ return require("lazy").setup({
         -- Colorscheme
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
+        build = ":TSUpdate",
         config = function()
             require'nvim-treesitter.configs'.setup {
                 ensure_installed = {
+                    "comment",
                     "c",
                     "lua",
                     "python",
@@ -62,17 +53,18 @@ return require("lazy").setup({
                     "bibtex",
                     "latex",
                     "diff",
-                    -- "ssh_config",
                 },
                 sync_install = false,
-                auto_install = false,
+                auto_install = true,
 
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false,
-                    disable = {"gitcommit", "diff", "markdown"}
+                    disable = {"gitcommit", "diff", "markdown"},
                 }
             }
+            -- Disable the color flash for errortext
+            vim.api.nvim_set_hl(0, "@error", { link = "Identifier" })
         end
     },
     {
@@ -221,9 +213,9 @@ return require("lazy").setup({
         },
         config = function()
             local builtin = require('telescope.builtin')
-            nnoremap('<leader>ff', builtin.find_files, {})
-            nnoremap('<leader>fg', builtin.live_grep, {})
-            nnoremap('<leader>ft', builtin.help_tags, {})
+            vim.keymap.set('n', '<leader>ff', function() builtin.find_files() end)
+            vim.keymap.set('n', '<leader>fg', function() builtin.live_grep() end)
+            vim.keymap.set('n', '<leader>ft', function() builtin.help_tags() end)
 
             local previewers = require("telescope.previewers")
             local Job = require("plenary.job")
@@ -376,6 +368,9 @@ return require("lazy").setup({
             })
         end
     },
+    -- }}} Functional
+
+    -- {{{ Git
     {
         "NeogitOrg/neogit",
         cmd = "Neogit",
@@ -398,7 +393,22 @@ return require("lazy").setup({
             })
         end,
     },
-    -- }}} Functional
+    {
+        "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
+        config = function()
+            require('gitsigns').setup {
+                attach_to_untracked = false,
+                on_attach = function(bufnr)
+                    local gs = package.loaded.gitsigns
+                    local opts = { buffer = bufnr }
+                    vim.keymap.set("n", "<C-d>",     gs.toggle_deleted,            opts)
+                    vim.keymap.set("n", "<leader>b", gs.toggle_current_line_blame, opts)
+                end
+            }
+        end
+    },
+    -- }}} Git
 
     -- {{{ Misc
     {
@@ -451,36 +461,36 @@ return require("lazy").setup({
                 },
                 handlers = {
                     require("lsp-zero").default_setup,
-                },
+                }
             })
 
             -- Adjust diagnostic text in signcolumn
             vim.fn.sign_define("DiagnosticSignError", {
                 texthl = "DiagnosticSignError",
-                text = "",
-                numhl = "DiagnosticSignError"
+                text   = "",
+                numhl  = "DiagnosticSignError"
             })
             vim.fn.sign_define("DiagnosticSignWarn", {
                 texthl = "DiagnosticSignWarn",
-                text = "",
-                numhl = "DiagnosticSignWarn"
+                text   = "",
+                numhl  = "DiagnosticSignWarn"
             })
             vim.fn.sign_define("DiagnosticSignHint", {
                 texthl = "DiagnosticSignHint",
-                text = "",
-                numhl = "DiagnosticSignHint"
+                text   = "",
+                numhl  = "DiagnosticSignHint"
             })
             vim.fn.sign_define("DiagnosticSignInfo", {
                 texthl = "DiagnosticSignInfo",
-                text = "󰙎",
-                numhl = "DiagnosticSignInfo"
+                text   = "󰙎",
+                numhl  = "DiagnosticSignInfo"
             })
 
             -- Adjust diagnostics
             vim.diagnostic.config({
-                underline = true,
-                virtual_text = false,
-                signs = true,
+                underline        = true,
+                virtual_text     = false,
+                signs            = true,
                 update_in_insert = false,
             })
 
@@ -491,32 +501,59 @@ return require("lazy").setup({
 
             -- Autocompletion
             cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body)
+                    end,
+                },
                 sources = {
-                    { name = "buffer"},
+                    { name = "nvim_lsp" },
+                    { name = "buffer" },
+                },
+                confirm_opts = {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = false,
+                },
+                experimental = {
+                    ghost_text = true,
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ["<CR>"] = cmp.mapping.confirm(),
-                    ["<Tab>"] = cmp_action.luasnip_supertab(),
+                    ["<CR>"]    = cmp.mapping.confirm(),
+                    ["<Tab>"]   = cmp_action.luasnip_supertab(),
                     ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-                }),
+                })
             })
 
             -- LSP keybinds
-            require("lsp-zero").on_attach(function(client, bufnr)
+            local on_attach = function(client, bufnr)
                 local opts = { buffer = bufnr }
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "K",         vim.lsp.buf.hover,         opts)
+                vim.keymap.set("n", "gd",        vim.lsp.buf.definition,    opts)
+                vim.keymap.set("n", "gD",        vim.lsp.buf.declaration,   opts)
+                vim.keymap.set("n", "gR",        vim.lsp.buf.rename,        opts)
                 vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, opts)
-            end)
+            end
 
-            -- Config each LSP server
-            require("lspconfig").bashls.setup {}
-            require("lspconfig").clangd.setup {}
+            local capabilities = require("cmp_nvim_lsp").default_capabilities(
+                vim.lsp.protocol.make_client_capabilities()
+            )
+
+            -- Config for each LSP server
+            local lspconfig = require("lspconfig")
+
+            lspconfig.bashls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
+            lspconfig.clangd.setup {
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
 
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
-            require'lspconfig'.lua_ls.setup {
+            lspconfig.lua_ls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
                 on_init = function(client)
                     local path = client.workspace_folders[1].name
                     if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
@@ -542,8 +579,14 @@ return require("lazy").setup({
                     return true
                 end
             }
-            require("lspconfig").pyright.setup {}
-            require("lspconfig").texlab.setup {}
+            lspconfig.pyright.setup {
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
+            lspconfig.texlab.setup {
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
         end
     }
     -- }}} LSP config
