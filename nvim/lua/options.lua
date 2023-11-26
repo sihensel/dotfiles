@@ -26,7 +26,11 @@ opt.shellcmdflag = '-c'
 -- Filetype
 opt.filetype = 'on'
 cmd 'autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
-cmd 'autocmd! bufreadpost *.pp set syntax=ruby'     -- treat puppet files as ruby code
+-- treat puppet files as ruby code
+cmd 'autocmd! bufreadpost *.pp set syntax=ruby'
+-- enable syntax highlighting for terraform files
+cmd 'autocmd! BufRead,BufNewFile *.tf setfiletype terraform'
+cmd 'autocmd! BufRead,BufNewFile *.tfvars setfiletype terraform'
 
 -- Always yank to system clipboard as well (see :h provider-clipboard)
 opt.clipboard:append('unnamedplus')
