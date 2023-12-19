@@ -32,6 +32,9 @@ cmd 'autocmd! bufreadpost *.pp set syntax=ruby'
 cmd 'autocmd! BufRead,BufNewFile *.tf setfiletype terraform'
 cmd 'autocmd! BufRead,BufNewFile *.tfvars setfiletype terraform'
 
+-- capture the output of an external command in a new window with :R
+cmd 'command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>'
+
 -- Always yank to system clipboard as well (see :h provider-clipboard)
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')

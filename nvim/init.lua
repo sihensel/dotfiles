@@ -27,7 +27,8 @@
 -- Misc -----------------------------------------------------------------------
 -- <leader>r                run current file with Jaq
 -- CTRL-b                   show Neogit
--- CTRL-T                   toggle a terminal
+-- CTRL-d                   show git diff
+-- CTRL-t                   toggle a terminal
 -- gcc/gc{<Movement>}       toggle comment
 -------------------------------------------------------------------------------
 
