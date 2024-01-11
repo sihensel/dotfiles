@@ -40,7 +40,7 @@ opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
 
 -- Only enable mouse movement in normal mode
-opt.mouse = 'n'
+opt.mouse = ''
 
 -- Display whitespaces and other invisible chars (use ':set list' to enable)
 opt.listchars = 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
