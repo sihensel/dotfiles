@@ -14,12 +14,12 @@ Install with `pacman -S --needed <PACKAGE>`.
 
 Packages used for these dotfiles (in no particular order):
 ```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako alacritty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs ttf-roboto-mono-nerd swayidle
+wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako alacritty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs ttf-roboto-mono-nerd swayidle go
 ```
 
 Other Packages I use:
 ```
-ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie
+ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie moreutils
 ```
 
 AUR Packages
