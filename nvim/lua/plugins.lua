@@ -375,7 +375,7 @@ return require("lazy").setup({
         "NeogitOrg/neogit",
         cmd = "Neogit",
         keys = {
-            { "<C-b>", "<cmd>Neogit<CR>", desc = "Launch Neogit split" },
+            { "<leader>b", "<cmd>Neogit<CR>", desc = "Launch Neogit split" },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -403,7 +403,7 @@ return require("lazy").setup({
                     local gs = package.loaded.gitsigns
                     local opts = { buffer = bufnr }
                     vim.keymap.set("n", "<C-d>",     gs.toggle_deleted,            opts)
-                    vim.keymap.set("n", "<leader>b", gs.toggle_current_line_blame, opts)
+                    vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=false} end, opts)
                 end
             }
         end
@@ -455,6 +455,7 @@ return require("lazy").setup({
                     -- :help lspconfig-all
                     "bashls",
                     "clangd",
+                    "gopls",
                     "lua_ls",
                     "pyright",
                     "texlab",
@@ -546,6 +547,10 @@ return require("lazy").setup({
                 capabilities = capabilities
             }
             lspconfig.clangd.setup {
+                on_attach = on_attach,
+                capabilities = capabilities
+            }
+            lspconfig.gopls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities
             }
