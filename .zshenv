@@ -1,6 +1,7 @@
 export LANG="en_US.UTF-8"
-export EDITOR="nvim"
 export VIISUAL="nvim"
+export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="librewolf"
 export READER="zathura"
