@@ -515,9 +515,6 @@ return require("lazy").setup({
                     behavior = cmp.ConfirmBehavior.Replace,
                     select = false,
                 },
-                experimental = {
-                    ghost_text = true,
-                },
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"]    = cmp.mapping.confirm(),
                     ["<Tab>"]   = cmp_action.luasnip_supertab(),
