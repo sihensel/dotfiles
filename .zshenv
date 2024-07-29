@@ -6,7 +6,7 @@ export TERMINAL="alacritty"
 export BROWSER="librewolf"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
-export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(go env GOPATH)/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(go env GOPATH)/bin:$HOME/Android/Sdk/emulator:$PATH"
 
 # Manpage colors
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
@@ -34,6 +34,9 @@ export GPG_TTY=$(tty)
 # check river(1) and xkeyboard-config(7)
 export XKB_DEFAULT_LAYOUT=us(altgr-intl)
 export XKB_DEFAULT_OPTIONS=caps:none
+
+export TBB_ROOT_DIR=/usr/include/tbb
+export ACE_ROOT=/usr/include/ace
 
 # autostart River
 if [[ -z $WAYLAND_DISPLAY && $(tty) = "/dev/tty1" ]]; then
