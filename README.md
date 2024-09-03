@@ -19,7 +19,7 @@ wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura
 
 Other Packages I use:
 ```
-ack grep alsa-utils biber texlive-most perl-clone flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie moreutils
+ack grep alsa-utils biber texlive-most perl-clone libxcrypt-compat flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie moreutils
 ```
 
 AUR Packages

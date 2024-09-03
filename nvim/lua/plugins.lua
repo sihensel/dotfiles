@@ -267,7 +267,10 @@ return require("lazy").setup({
                         "--column",
                         "--smart-case",
                         "--trim",
-                        "--hidden"
+                        "--hidden",
+                        -- ignore everything in the .git directory
+                        "-g",
+                        "!.git/"
                     }
                 },
                 pickers = {
