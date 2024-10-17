@@ -1,1 +1,2 @@
 color cursor default default standout
+set wrap-lines = yes
