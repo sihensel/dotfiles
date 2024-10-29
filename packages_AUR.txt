@@ -1,0 +1,13 @@
+aic94xx-firmware
+downgrade
+git-review
+google-chrome
+jmtpfs
+lf-bin
+librewolf-bin
+pyenv-virtualenv
+slack-desktop
+upd72020x-fw
+wd719x-firmware
+wdisplays
+zotero-bin

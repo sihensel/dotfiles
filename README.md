@@ -2,34 +2,24 @@
 
 This repository contains my personal Linux dotfiles.<br>
 They are often (speak: all the time) a work in progress and may or may not work for you.<br>
-I recently switched from X11 to Wayland using the [River](https://github.com/riverwm/river) compositor.
 
 ![screenshot.png](screenshot.png)
 
 
 ## Dependencies
 
-Some of these are not hard dependencies and can be changed in the config files. This is more of a list for me.<br>
-Install with `pacman -S --needed <PACKAGE>`.
+The list of used packages can be found in `packages.txt` and `packages_AUR.txt`.<br>
+To install them, use:
 
-Packages used for these dotfiles (in no particular order):
-```
-wayland polkit waybar zsh zsh-syntax-highlighting network-manager-applet zathura zathura-pdf-poppler wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr swaybg pipewire wireplumber pipewire-alsa pipewire-jack helvum mpd mpc ncmpcpp grim swaylock mako alacritty brightnessctl reflector exa bat duf neovim capitaine-cursors neofetch pcmanfm-gtk3 sxiv xdg-user-dirs ttf-roboto-mono-nerd swayidle go
-```
-
-Other Packages I use:
-```
-ack grep alsa-utils biber texlive-most perl-clone libxcrypt-compat flake8 nmap ntfs-3g openbsd-netcat powertop ruby-rouge tig tree traceroute ufw zip unzip wget wireshark-cli networkmanager-openvpn mesa gvfs sed udisks2 dosfstools ntfs-3g dnsutils net-tools asciidoctor gzip htop openssh sshpass rsync tlp udiskie moreutils
-```
-
-AUR Packages
-```
-river rofi-lbonn-wayland wdisplays librewolf-bin ctpv-git
+```sh
+pacman -S --needed - < packages.txt
+yay -S --needed - < packages_AUR.txt
 ```
 
 The configs for `awesome`, `picom`, and `kitty` are outdated, if you want to use them, make sure to install these packages as well.
 ```
-awesome kitty rofi slock flameshot picom-git (AUR)
+pacman -S awesome kitty rofi slock flameshot
+yay -S picom-git
 ```
 
 
