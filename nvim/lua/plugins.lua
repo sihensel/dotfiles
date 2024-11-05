@@ -305,15 +305,6 @@ return require("lazy").setup({
 
     -- {{{ Functional
     {
-        "numToStr/Comment.nvim",
-        event = "VeryLazy",
-        config = function()
-            require('Comment').setup {
-                ignore = "^$"   -- Ignore empty lines
-            }
-        end
-    },
-    {
         "akinsho/toggleterm.nvim",
         cmd = "ToggleTerm",
         keys = {
@@ -380,28 +371,6 @@ return require("lazy").setup({
     -- }}} Functional
 
     -- {{{ Git
-    {
-        "NeogitOrg/neogit",
-        cmd = "Neogit",
-        keys = {
-            { "<leader>b", "<cmd>Neogit<CR>", desc = "Launch Neogit split" },
-        },
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        },
-        config = function()
-            -- Override the default highlight groups
-            vim.api.nvim_set_hl(0, 'NeogitDiffAdd',             { bg = 0, fg="#b8bb26" })
-            vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight',    { bg = 0, fg="#b8bb26" })
-            vim.api.nvim_set_hl(0, 'NeogitDiffDelete',          { bg = 0, fg="#fb4934" })
-            vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { bg = 0, fg="#fb4934" })
-
-            require("neogit").setup({
-                kind = "split",
-            })
-        end,
-    },
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
