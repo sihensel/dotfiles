@@ -1,9 +1,5 @@
 # Shell aliases for ZSH
 
-# confirm before overwriting something
-alias cp='cp -i'
-alias mv='mv -i'
-
 # Git
 alias gs='git status'
 alias ga='git add'
@@ -38,3 +34,4 @@ alias chrome='google-chrome-stable --enable-features=UseOzonePlatform --ozone-pl
 alias docker='sudo docker'
 alias dockerstop='sudo docker stop $(docker ps -aq)'
 alias dockerrm='sudo docker rm $(docker ps -aq)'
+alias docker-compose='sudo docker-compose'
