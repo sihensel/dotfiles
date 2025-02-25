@@ -431,6 +431,7 @@ return require("lazy").setup({
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     -- :help lspconfig-all
+                    "ansiblels",
                     "bashls",
                     "clangd",
                     "gopls",
@@ -517,6 +518,11 @@ return require("lazy").setup({
             -- Config for each LSP server
             local lspconfig = require("lspconfig")
 
+            lspconfig.ansiblels.setup{
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "yaml", "ansible.yaml" }
+            }
             lspconfig.bashls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities
