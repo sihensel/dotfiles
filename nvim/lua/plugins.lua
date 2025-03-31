@@ -91,11 +91,12 @@ return require("lazy").setup({
         config = function()
             require'lualine'.setup {
                 options = {
+                    icons_enabled = true,
                     theme = 'gruvbox',
                 },
                 sections = {
                     lualine_a = {'mode'},
-                    lualine_b = {'branch', 'diff', 'g:coc_status'},
+                    lualine_b = {'branch', 'diff', 'lsp_status'},
                     lualine_c = {'filename'},
                     lualine_x = {'encoding', 'fileformat', 'filetype'},
                     lualine_y = {'progress'},
@@ -444,34 +445,19 @@ return require("lazy").setup({
                 }
             })
 
-            -- Adjust diagnostic text in signcolumn
-            vim.fn.sign_define("DiagnosticSignError", {
-                texthl = "DiagnosticSignError",
-                text   = "",
-                numhl  = "DiagnosticSignError"
-            })
-            vim.fn.sign_define("DiagnosticSignWarn", {
-                texthl = "DiagnosticSignWarn",
-                text   = "",
-                numhl  = "DiagnosticSignWarn"
-            })
-            vim.fn.sign_define("DiagnosticSignHint", {
-                texthl = "DiagnosticSignHint",
-                text   = "",
-                numhl  = "DiagnosticSignHint"
-            })
-            vim.fn.sign_define("DiagnosticSignInfo", {
-                texthl = "DiagnosticSignInfo",
-                text   = "󰙎",
-                numhl  = "DiagnosticSignInfo"
-            })
-
             -- Adjust diagnostics
             vim.diagnostic.config({
                 underline        = true,
                 virtual_text     = false,
-                signs            = true,
                 update_in_insert = false,
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = '',
+                        [vim.diagnostic.severity.WARN] = '',
+                        [vim.diagnostic.severity.HINT] = '',
+                        [vim.diagnostic.severity.INFO] = '󰙎',
+                },
+              },
             })
 
             vim.cmd("filetype detect")
@@ -557,7 +543,7 @@ return require("lazy").setup({
                             }
                         })
 
-                        client.notify(
+                        client:notify(
                             "workspace/didChangeConfiguration",
                             {settings = client.config.settings}
                         )
