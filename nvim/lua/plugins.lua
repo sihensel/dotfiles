@@ -269,6 +269,7 @@ return require("lazy").setup({
                         "--smart-case",
                         "--trim",
                         "--hidden",
+                        "--sort=path",
                         -- ignore everything in the .git directory
                         "-g",
                         "!.git/",
@@ -381,7 +382,7 @@ return require("lazy").setup({
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
                     local opts = { buffer = bufnr }
-                    vim.keymap.set("n", "<C-d>",     gs.toggle_deleted,            opts)
+                    vim.keymap.set("n", "<C-d>", gs.toggle_deleted,                        opts)
                     vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=false} end, opts)
                 end
             }
