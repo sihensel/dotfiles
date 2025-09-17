@@ -90,9 +90,9 @@ The custom folder icon for the bookmarks toolbar is from [icons8.com](https://ic
 
 ## Slack Theme
 
-Gruvbox Slack theme. Paste into `Preferences` > `Themes`.
+Gruvbox Slack theme. Paste into `Preferences` > `Appearance`.
 ```
-#282828,#3c3836,#D65D0E,#1D2021,#504945,#FBF1C7,#83C07C,#fb4934,#282828,#FBF1C7
+#282828,#D65D0E,#83C07C,#FB4934
 ```
 
 
