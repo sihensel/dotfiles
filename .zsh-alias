@@ -23,15 +23,9 @@ alias ufw='sudo ufw'
 alias ack='ack -i'
 alias diff='diff -y --color'
 alias ncm='ncmpcpp'
-alias df='duf'
 
 alias updatepac='sudo reflector --country France --country Germany --latest 10 --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 alias updatepip="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
 
 # use Google Chrome on Wayland, see the README for required flags
 alias chrome='google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland'
-
-alias docker='sudo docker'
-alias dockerstop='sudo docker stop $(docker ps -aq)'
-alias dockerrm='sudo docker rm $(docker ps -aq)'
-alias docker-compose='sudo docker-compose'

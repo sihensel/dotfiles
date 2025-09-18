@@ -180,6 +180,8 @@ else
     export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}$ '
 fi
 
+# enable kubectl auto completion
+source <(kubectl completion zsh)
 
 # Load syntax highlighting; should be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
