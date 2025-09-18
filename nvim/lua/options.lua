@@ -10,6 +10,7 @@ local opt = vim.opt
 
 -- General settings
 g.mapleader      = "\\"
+g.maplocalleader = "\\"
 opt.syntax       = 'on'
 opt.encoding     = 'utf-8'
 opt.history      = 500
@@ -104,3 +105,20 @@ opt.splitright = true
 g.loaded_ruby_provider = false
 g.loaded_node_provider = false
 g.loaded_perl_provider = false
+
+-- Adjust LSP diagnostics
+vim.diagnostic.config({
+    underline        = false,
+    update_in_insert = false,
+    virtual_text     = false,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN]  = '',
+            [vim.diagnostic.severity.HINT]  = '',
+            [vim.diagnostic.severity.INFO]  = '󰙎',
+        },
+    },
+})
+
+vim.g._ts_force_sync_parsing = true
