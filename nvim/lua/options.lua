@@ -40,6 +40,9 @@ cmd 'command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhid
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
 
+-- enable termguicolors
+opt.termguicolors = true
+
 -- Only enable mouse movement in normal mode
 opt.mouse = ''
 
@@ -108,7 +111,7 @@ g.loaded_perl_provider = false
 
 -- Adjust LSP diagnostics
 vim.diagnostic.config({
-    underline        = false,
+    underline        = true,
     update_in_insert = false,
     virtual_text     = false,
     signs = {
@@ -120,5 +123,3 @@ vim.diagnostic.config({
         },
     },
 })
-
-vim.g._ts_force_sync_parsing = true

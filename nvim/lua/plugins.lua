@@ -37,7 +37,6 @@ local plugin_spec = {
         },
         config = function()
             vim.cmd([[colorscheme gruvbox]])
-            vim.opt.termguicolors = true
             vim.api.nvim_set_hl(0, 'Normal',     { ctermbg = 0, ctermfg=0 })
             vim.api.nvim_set_hl(0, 'Cursorline', { ctermbg = 0, ctermfg = 0, bold = true })
         end
@@ -71,11 +70,13 @@ local plugin_spec = {
         }
     },
     {
-        "norcalli/nvim-colorizer.lua",
-        event = "VeryLazy",
-        config = function()
-            require('colorizer').setup()
-        end
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+        opts = {
+            user_default_options = {
+                names = false,
+            },
+        },
     },
     -- }}} Colors
 
@@ -181,15 +182,6 @@ local plugin_spec = {
             })
         end
     },
-    {
-		"nvim-treesitter/nvim-treesitter-context",
-		event = "BufRead",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			event = "BufRead",
-		},
-		opts = {},
-	},
     -- }}} UI
 
     -- {{{ Telescope
@@ -267,45 +259,96 @@ local plugin_spec = {
     -- }}} Telescope
 
     -- {{{ Functional
+    -- {
+    --     "akinsho/toggleterm.nvim",
+    --     version = "*",
+    --     cmd = "ToggleTerm",
+    --     keys = {
+    --         { "<C-t>", "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
+    --     },
+    --     opts = {
+    --         size              = 14,
+    --         open_mapping      = [[<c-t>]],
+    --         direction         = 'horizontal',
+    --     },
+    -- },
     {
-        "akinsho/toggleterm.nvim",
-        cmd = "ToggleTerm",
+        'CRAG666/betterTerm.nvim',
         keys = {
-            { "<C-t>", "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
+            {
+                mode = { 'n', 't' },
+                '<C-t>',
+                function()
+                    require('betterTerm').open()
+                end,
+                desc = 'Toggle Terminal',
+            },
         },
         opts = {
-            size              = 18,
-            open_mapping      = [[<c-t>]],
-            direction         = 'horizontal',
+            position = 'bot',
+            size = 14,
+            show_tabs = false,
+            new_tab_mapping = 'C-;',
         },
     },
+    -- {
+    --     "is0n/jaq-nvim",
+    --     cmd = "Jaq",
+    --     keys = {
+    --         { "<leader>r", "<cmd>Jaq<CR>", desc = "Run file with Jaq" },
+    --     },
+    --     opts = {
+    --         cmds = {
+    --             -- Vim commands
+    --             internal = {
+    --                 lua = "luafile %",
+    --                 vim = "source %",
+    --             },
+    --             -- Shell commands
+    --             external = {
+    --                 python = "python3 %",
+    --                 c      = "gcc % -o $fileBase && ./$fileBase",
+    --                 sh     = "sh %",
+    --                 lua    = "lua %",
+    --                 tex    = "make",
+    --             }
+    --         },
+    --         behavior = {
+    --             default     = "bang",
+    --             startinsert = false,
+    --             autosave    = false,
+    --             wincmd      = false,
+    --         },
+    --     },
+    -- },
     {
-        "is0n/jaq-nvim",
-        cmd = "Jaq",
+        "CRAG666/code_runner.nvim",
+        config = true,
         keys = {
-            { "<leader>r", "<cmd>Jaq<CR>", desc = "Run file with Jaq" },
+            {
+                mode = { 'n', 't' },
+                '<leader>r',
+                function()
+                    require('code_runner').run_code()
+                end,
+                desc = 'Run Code',
+            },
+            {
+                mode = { 'n', 't' },
+                '<leader>q',
+                function()
+                    require("code_runner").run_close()
+                end,
+                desc = 'Run Code',
+            },
         },
         opts = {
-            cmds = {
-                -- Vim commands
-                internal = {
-                    lua = "luafile %",
-                    vim = "source %",
+            mode = 'term',
+            focus = false,
+            filetype = {
+                tex = {
+                    "make short",
                 },
-                -- Shell commands
-                external = {
-                    python = "python3 %",
-                    c      = "gcc % -o $fileBase && ./$fileBase",
-                    sh     = "sh %",
-                    lua    = "lua %",
-                    tex    = "make",
-                }
-            },
-            behavior = {
-                default     = "bang",
-                startinsert = false,
-                autosave    = false,
-                wincmd      = false,
             },
         },
     },
@@ -335,6 +378,18 @@ local plugin_spec = {
     {
         "kevinhwang91/nvim-bqf",
         event = "VeryLazy"
+    },
+    {
+        "yorickpeterse/nvim-pqf",
+        event = "VeryLazy",
+        opts = {
+            signs = {
+                error = { text = '' },
+                warning = { text = '' },
+                info = { text = '󰙎' },
+                hint = { text = '' },
+            },
+        },
     },
     {
         "anufrievroman/vim-angry-reviewer",
@@ -372,6 +427,7 @@ local plugin_spec = {
     },
     {
         -- Autocomplete
+        -- alternative: https://github.com/ms-jpq/coq_nvim
         'saghen/blink.cmp',
         dependencies = { 'rafamadriz/friendly-snippets' },
         version = '1.*',
