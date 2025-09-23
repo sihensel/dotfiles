@@ -1,2 +1,3 @@
-color cursor default default standout
+color cursor default default reverse
 set wrap-lines = yes
+set git-colors = no
