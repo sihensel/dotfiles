@@ -31,14 +31,19 @@ local plugin_spec = {
         "ellisonleao/gruvbox.nvim",
         lazy = false,
         priority = 1000,
-        opts = {
-            contrast = "soft",
-            transparent_mode = true
-        },
         config = function()
+            require("gruvbox").setup({
+                italic = {
+                    strings = false,
+                },
+                contrast = "soft",
+                transparent_mode = true,
+                overrides = {
+                    CursorLine = { bg = "", bold = true },
+                    -- SignColumn = { bg = "#3c3836" },
+                },
+            })
             vim.cmd([[colorscheme gruvbox]])
-            vim.api.nvim_set_hl(0, 'Normal',     { ctermbg = 0, ctermfg=0 })
-            vim.api.nvim_set_hl(0, 'Cursorline', { ctermbg = 0, ctermfg = 0, bold = true })
         end
     },
     {

@@ -40,8 +40,9 @@ cmd 'command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhid
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
 
--- enable termguicolors
+-- set colors
 opt.termguicolors = true
+opt.background = "dark"
 
 -- Only enable mouse movement in normal mode
 opt.mouse = ''
@@ -61,7 +62,7 @@ opt.scrolloff   = 6
 
 -- Line numbers and wrapping
 opt.number         = true
-opt.relativenumber = true
+-- opt.relativenumber = true
 opt.wrap           = true
 opt.linebreak      = true
 
