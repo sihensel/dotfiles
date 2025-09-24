@@ -64,28 +64,26 @@ pip install neovim
 ```
 
 
-## Firefox userChrome.css
-
-This theme is heavily based on [Dook97's](https://github.com/Dook97/firefox-qutebrowser-userchrome) config with a few additions.
-It is intended to use with the [tridactyl](https://github.com/tridactyl/tridactyl) extension (Install the `firefox-tridactyl` package for Arch, and restart Firefox _twice_).<br>
-When using Librewolf (or any other Firefox fork I guess), install the `tridactyl` extension from their Github repo.
+## Firefox setup
 
 Go to `about:config`:
-1. Set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`
-2. Set `browser.compactmode.show` to `true`
-3. Also set `extensions.pocket.enabled` to `false` while we're at it
-4. For my setup:
-    1. `browser.tabs.loadBookmarksInBackground` to `true`
-    2. `browser.bookmarks.openInTabClosesMenu` to `false`
-    3. `browser.translations.automaticallyPopup` to `false`
-    4. `browser.translations.enable` to `false`
-    5. `browser.translations.panelShown` to `false`
+- `extensions.pocket.enabled` to `false`
+- `browser.tabs.loadBookmarksInBackground` to `true`
+- `browser.bookmarks.openInTabClosesMenu` to `false`
+- `browser.tabs.loadBookmarksInTabs` to `true`
+- `browser.translations.automaticallyPopup` to `false`
+- `browser.translations.enable` to `false`
+- `media.videocontrols.picture-in-picture.video-toggle.enabled` to `false`
+- `browser.tabs.hoverPreview.enabled` to `false`
+- `browser.tabs.hoverPreview.showThumbnails` to `false`
+- `middlemouse.paste` to `false`
+- `browser.quitShortcut.disabled` to `false`
 
-Go to the `Customize Toolbar` menu (under `More Tools`) and set `density` to `compact`.<br>
-Enable a dark theme in the settings, I use [this Gruvbox theme](https://addons.mozilla.org/en-US/firefox/addon/gruvbox-dark-theme/).<br>
-Copy the `chrome` directory to the root directory of your Firefox profile. Check `about:profiles` for the path to your profile.
+Add the following line to the `My Filters` tab in uBlock Origin to disable the "Sign in with ..." popup.
 
-The custom folder icon for the bookmarks toolbar is from [icons8.com](https://icons8.com/icon/12160/folder).
+```
+accounts.google.com/gsi/*
+```
 
 
 ## Slack Theme
@@ -104,11 +102,3 @@ Make sure to install the `pacman-contrib` package, then copy the file to `/etc/p
 sudo mkdir /etc/pacman.d/hooks
 sudo cp clear_cache.hook /etc/pacman.d/hooks
 ```
-
-
-## Enable screen sharing for Chrome and Slack
-
-For Chrome, visit `chrome://flags/#enable-webrtc-pipewire-capturer` and `chrome://flags/#ozone-platform-hint`.<br>
-Start Chrome with `google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland`.
-
-Start Slack with: `slack --enable-features=WebRTCPipeWireCapturer`.

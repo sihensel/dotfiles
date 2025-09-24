@@ -43,9 +43,6 @@ do
     ln -sf "$dot_dir"/"$i" "$i"
 done
 
-# Librewolf userChrome
-cp -r $dot_dir/chrome ~/.librewolf/*.default-release
-
 # ~/.config
 if [ ! -d ~/.config ]
 then
