@@ -16,12 +16,6 @@ pacman -S --needed - < packages.txt
 yay -S --needed - < packages_AUR.txt
 ```
 
-The configs for `awesome`, `picom`, and `kitty` are outdated, if you want to use them, make sure to install these packages as well.
-```
-pacman -S awesome kitty rofi slock flameshot
-yay -S picom-git
-```
-
 
 ## Installation
 
@@ -32,7 +26,7 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.<br>
-This can be configured in [theme.lua](awesome/themes/groovebox/theme.lua#L42) for awesome or [process.sh](river/process.sh#L44) for river.
+This can be configured in [process.sh](river/process.sh#L44) for river.
 
 ### Install Script
 

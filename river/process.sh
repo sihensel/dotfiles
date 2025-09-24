@@ -9,7 +9,7 @@ nm-applet --indicator &
 
 [ ! -s ~/.config/mpd/pid ] && mpd
 
-brightnessctl set 40%
+brightnessctl set 30%
 
 # River will send the process group of the init executable SIGTERM on exit
 riverctl default-layout rivertile &

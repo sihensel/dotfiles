@@ -63,8 +63,6 @@ browser_sort_format = {%a - }{%t}|{%f} {%l}
 song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 
 ##### various settings #####
-#execute_on_song_change = notify-send -t 5000 -i ~/.config/awesome/lain/icons/music.png "Now Playing" "$(mpc --format '%file%' current | awk -F '/' '{print$2}')"
-execute_on_song_change = notify-send -i ~/.config/awesome/lain/icons/music.png "Now Playing" "$(mpc --format '%title% - %artist%' current)"
 playlist_show_remaining_time = yes
 playlist_separate_albums = yes
 
