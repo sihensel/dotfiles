@@ -116,7 +116,6 @@ local plugin_spec = {
                         nowait = true
                     }
                 end
-
                 vim.keymap.set('n', '<CR>',  api.node.open.edit,              opts('Open'))
                 vim.keymap.set('n', 'o',     api.tree.change_root_to_node,    opts('CD'))
                 vim.keymap.set('n', 's',     api.node.open.vertical,          opts('Open: Vertical Split'))
@@ -132,7 +131,6 @@ local plugin_spec = {
                 vim.keymap.set('n', 'd',     api.fs.remove,                   opts('Delete'))
                 vim.keymap.set('n', 'r',     api.fs.rename,                   opts('Rename'))
             end
-
             require'nvim-tree'.setup {
                 on_attach = on_attach,
                 git = {
@@ -205,6 +203,7 @@ local plugin_spec = {
             { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Telescope find files" },
             { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope live greap" },
             { "<leader>fr", "<cmd>Telescope registers<CR>", desc = "Telescope show registers" },
+            { "<leader>fs", "<cmd>Telescope spell_suggest<CR>", desc = "Telescope show spelling suggestions" },
         },
         config = function()
             local actions = require('telescope.actions')
@@ -377,10 +376,6 @@ local plugin_spec = {
 
     -- {{{ Misc
     {
-        "danilamihailov/beacon.nvim",
-        event = "VeryLazy"
-    },
-    {
         "kevinhwang91/nvim-bqf",
         event = "VeryLazy"
     },
@@ -413,7 +408,7 @@ local plugin_spec = {
                 "mason-org/mason.nvim",
                 opts = {
                     PATH = "append",
-                }
+                },
             },
             "neovim/nvim-lspconfig",
         },
@@ -421,21 +416,19 @@ local plugin_spec = {
             ensure_installed = {
                 -- :help lspconfig-all
                 "ansiblels",
+                "basedpyright",
                 "bashls",
                 "clangd",
                 "gopls",
                 "lua_ls",
-                "pyright",
                 "texlab",
             },
         },
     },
     {
-        -- Autocomplete
-        -- alternative: https://github.com/ms-jpq/coq_nvim
         'saghen/blink.cmp',
-        dependencies = { 'rafamadriz/friendly-snippets' },
-        version = '1.*',
+        version = '*',
+        lazy = false,
         opts = {
             keymap = {
                 preset = 'default',
@@ -444,22 +437,22 @@ local plugin_spec = {
                 ['<Enter>'] = { 'accept', 'fallback' },
             },
             completion = {
-                trigger = {
-                    show_on_backspace = true,
-                },
                 menu = {
                     max_height = 20,
+                    winhighlight = 'Normal:None,FloatBorder:None,CursorLine:BlinkCmpMenuSelection,Search:None',
                 },
                 documentation = {
                     auto_show = true,
                 },
                 list = {
                     selection = {
-                        preselect = false,
                         auto_insert = true,
                     },
                 },
             },
+            sources = {
+                default = { 'lsp', 'path', 'buffer' },
+            }
         },
     },
     -- }}} LSP config

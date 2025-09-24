@@ -11,15 +11,13 @@ local opt = vim.opt
 -- General settings
 g.mapleader      = "\\"
 g.maplocalleader = "\\"
-opt.syntax       = 'on'
+opt.syntax       = 'off'
 opt.encoding     = 'utf-8'
 opt.history      = 500
 opt.compatible   = false
 opt.title        = true
-opt.ruler        = true
 opt.cursorline   = true
 opt.colorcolumn  = '79'
-opt.updatetime   = 500
 opt.signcolumn   = 'yes'
 opt.shell        = '/bin/zsh'
 opt.shellcmdflag = '-c'
@@ -27,22 +25,15 @@ opt.shellcmdflag = '-c'
 -- Filetype
 opt.filetype = 'on'
 cmd 'autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
--- treat puppet files as ruby code
-cmd 'autocmd! bufreadpost *.pp set syntax=ruby'
--- enable syntax highlighting for terraform files
-cmd 'autocmd! BufRead,BufNewFile *.tf setfiletype terraform'
-cmd 'autocmd! BufRead,BufNewFile *.tfvars setfiletype terraform'
-
--- capture the output of an external command in a new window with :R
-cmd 'command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>'
 
 -- Always yank to system clipboard as well (see :h provider-clipboard)
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
 
--- set colors
+-- Colors
 opt.termguicolors = true
-opt.background = "dark"
+opt.background = 'dark'
+opt.winborder = 'rounded'
 
 -- Only enable mouse movement in normal mode
 opt.mouse = ''

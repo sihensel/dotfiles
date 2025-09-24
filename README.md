@@ -55,7 +55,7 @@ LSP clients are also installed automatically via [Mason](https://github.com/will
 
 The following packages are exteneral dependencies, install them with your package manager:
 ```
-fd ripgrep fzf jq tree-sitter tree-sitter-cli
+fd ripgrep fzf tree-sitter tree-sitter-cli
 ```
 
 Also install the Python provider for Neovim.
