@@ -1,3 +1,4 @@
 color cursor default default reverse
 set wrap-lines = yes
 set git-colors = no
+set ignore-case = yes
