@@ -17,9 +17,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
--- Enable ansible language server for all yaml files
+-- Specific settings for ansiblels
 vim.lsp.config.ansiblels = {
-    filetypes = {"yaml"}
+    filetypes = { "yaml", "yaml.ansible" },
+    settings = {
+        ansible = {
+            validation = {
+                enabled = true,
+                lint = {
+                    enabled = false,
+                },
+            },
+        },
+    },
 }
 
 
