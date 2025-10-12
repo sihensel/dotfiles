@@ -16,6 +16,8 @@ pacman -S --needed - < packages.txt
 yay -S --needed - < packages_AUR.txt
 ```
 
+To generate the list of packages, run `pacman -Qqen` to get the list main repo packages and `pacman -Qqem` for AUR packages.
+
 
 ## Installation
 
@@ -62,6 +64,7 @@ pip install neovim
 
 Go to `about:config`:
 - `extensions.pocket.enabled` to `false`
+- `browser.compactmode.show` to `true`
 - `browser.tabs.loadBookmarksInBackground` to `true`
 - `browser.bookmarks.openInTabClosesMenu` to `false`
 - `browser.tabs.loadBookmarksInTabs` to `true`
@@ -72,6 +75,7 @@ Go to `about:config`:
 - `browser.tabs.hoverPreview.showThumbnails` to `false`
 - `middlemouse.paste` to `false`
 - `browser.quitShortcut.disabled` to `false`
+- `browser.urlbar.trimURLs` to `false`
 
 Add the following line to the `My Filters` tab in uBlock Origin to disable the "Sign in with ..." popup.
 
