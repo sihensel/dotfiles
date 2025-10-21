@@ -16,5 +16,12 @@ set guioptions ""
 # Padding
 set statusbar-h-padding 0
 set statusbar-v-padding 0
-set page-padding 5
+set page-v-padding 5
+set page-h-padding 5
 map i recolor
+
+# always copy to system clipboard, simply use CTRL+v
+set selection-clipboard clipboard
+
+# disable saving of bookmarks and input history
+set database null
