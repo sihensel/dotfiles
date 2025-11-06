@@ -31,12 +31,10 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 export GPG_TTY=$(tty)
 
+# Keyboard layout and disable caps lock
 # check river(1) and xkeyboard-config(7)
 export XKB_DEFAULT_LAYOUT=us(altgr-intl)
 export XKB_DEFAULT_OPTIONS=caps:none
-
-export TBB_ROOT_DIR=/usr/include/tbb
-export ACE_ROOT=/usr/include/ace
 
 # autostart River
 if [[ -z $WAYLAND_DISPLAY && $(tty) = "/dev/tty1" ]]; then
