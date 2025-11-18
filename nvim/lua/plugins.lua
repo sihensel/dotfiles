@@ -191,7 +191,11 @@ local plugin_spec = {
             require("ibl").setup({
                 indent = {
                     char = "┃"
-                }
+                },
+                scope = {
+                    show_start = false,
+                    show_end = false
+                },
             })
         end
     },
@@ -273,19 +277,6 @@ local plugin_spec = {
     -- }}} Telescope
 
     -- {{{ Functional
-    -- {
-    --     "akinsho/toggleterm.nvim",
-    --     version = "*",
-    --     cmd = "ToggleTerm",
-    --     keys = {
-    --         { "<C-t>", "<cmd>ToggleTerm<CR>", desc = "Toggle Terminal" },
-    --     },
-    --     opts = {
-    --         size              = 14,
-    --         open_mapping      = [[<c-t>]],
-    --         direction         = 'horizontal',
-    --     },
-    -- },
     {
         'CRAG666/betterTerm.nvim',
         keys = {
@@ -305,36 +296,6 @@ local plugin_spec = {
             new_tab_mapping = 'C-;',
         },
     },
-    -- {
-    --     "is0n/jaq-nvim",
-    --     cmd = "Jaq",
-    --     keys = {
-    --         { "<leader>r", "<cmd>Jaq<CR>", desc = "Run file with Jaq" },
-    --     },
-    --     opts = {
-    --         cmds = {
-    --             -- Vim commands
-    --             internal = {
-    --                 lua = "luafile %",
-    --                 vim = "source %",
-    --             },
-    --             -- Shell commands
-    --             external = {
-    --                 python = "python3 %",
-    --                 c      = "gcc % -o $fileBase && ./$fileBase",
-    --                 sh     = "sh %",
-    --                 lua    = "lua %",
-    --                 tex    = "make",
-    --             }
-    --         },
-    --         behavior = {
-    --             default     = "bang",
-    --             startinsert = false,
-    --             autosave    = false,
-    --             wincmd      = false,
-    --         },
-    --     },
-    -- },
     {
         "CRAG666/code_runner.nvim",
         config = true,

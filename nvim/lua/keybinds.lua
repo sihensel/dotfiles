@@ -59,13 +59,5 @@ inoremap('.', '.<c-g>u')
 inoremap('!', '!<c-g>u')
 inoremap('?', '?<c-g>u')
 
--- Moving text
-nnoremap('<leader>j', ':m .+1<CR>==')
-nnoremap('<leader>k', ':m .-2<CR>==')
-vnoremap('J',         ":m '>+1<CR>gv=gv")
-vnoremap('K',         ":m '<-2<CR>gv=gv")
-inoremap('<C-j>',     '<esc>:m .+1<CR>==')
-inoremap('<C-k>',     '<esc>:m .-2<CR>==')
-
 -- Search for the current line
 nnoremap('<leader>/', '0y$/\\V<c-r>"<cr>')

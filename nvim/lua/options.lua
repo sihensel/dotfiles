@@ -53,7 +53,6 @@ opt.scrolloff   = 6
 
 -- Line numbers and wrapping
 opt.number         = true
--- opt.relativenumber = true
 opt.wrap           = true
 opt.linebreak      = true
 
