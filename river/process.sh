@@ -7,6 +7,9 @@ waybar &
 killall nm-applet
 nm-applet --indicator &
 
+killall udiskie
+udiskie &
+
 [ ! -s ~/.config/mpd/pid ] && mpd
 
 brightnessctl set 30%
