@@ -88,8 +88,12 @@ local plugin_spec = {
         "catgoose/nvim-colorizer.lua",
         event = "BufReadPre",
         opts = {
-            user_default_options = {
-                names = false,
+            options = {
+                parsers = {
+                    names = {
+                        enable = false,
+                    },
+                },
             },
         },
     },
