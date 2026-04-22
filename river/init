@@ -12,7 +12,7 @@ riverctl map normal $mod E       spawn pcmanfm
 riverctl map normal $mod S       spawn slack
 
 # Open rofi
-riverctl map normal $mod space spawn "rofi -show run"
+riverctl map normal $mod space spawn "rofi -show ssh"
 
 # Lock screen
 riverctl map normal $mod F12 spawn "swaylock -i ~/wallpapers/wall.jpg"
