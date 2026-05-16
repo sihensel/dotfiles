@@ -219,7 +219,7 @@ local plugin_spec = {
         },
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Telescope find files" },
-            { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope live greap" },
+            { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope live grep" },
             { "<leader>fr", "<cmd>Telescope registers<CR>", desc = "Telescope show registers" },
             { "<leader>fs", "<cmd>Telescope spell_suggest<CR>", desc = "Telescope show spelling suggestions" },
         },

@@ -26,6 +26,9 @@ opt.shellcmdflag = '-c'
 opt.filetype = 'on'
 cmd 'autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
 
+-- Treat all Latex files as the 'tex' filetype, instead of 'plaintex'
+g.tex_flavor = 'latex'
+
 -- Always yank to system clipboard as well (see :h provider-clipboard)
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
