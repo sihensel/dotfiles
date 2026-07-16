@@ -7,12 +7,12 @@ riverctl spawn "dbus-update-activation-environment SEATD_SOCK DISPLAY WAYLAND_DI
 
 # Programs
 riverctl map normal $mod Return  spawn alacritty
-riverctl map normal $mod B       spawn firefox
+riverctl map normal $mod B       spawn google-chrome-stable
 riverctl map normal $mod E       spawn pcmanfm
 riverctl map normal $mod S       spawn slack
 
 # Open rofi
-riverctl map normal $mod space spawn "rofi -show ssh"
+riverctl map normal $mod space spawn "rofi -show run"
 
 # Lock screen
 riverctl map normal $mod F12 spawn "swaylock -i ~/wallpapers/wall.jpg"
@@ -110,6 +110,7 @@ do
 done
 
 # Set background and border color
+riverctl border-width 3
 riverctl border-color-focused 0xfe8019
 riverctl border-color-unfocused 0x1d2021
 
@@ -119,4 +120,57 @@ riverctl set-repeat 100 300
 riverctl focus-follows-cursor normal
 riverctl xcursor-theme capitaine-cursors
 
-bash $HOME/.config/river/process.sh
+# Touchpad settings
+for pad in $(riverctl list-inputs | grep -i touchpad)
+do
+  riverctl input $pad events enabled
+  riverctl input $pad tap enabled
+  riverctl input $pad natural-scroll disabled
+  # riverctl input $pad accel-profile adaptive
+  # riverctl input $pad pointer-accel 0.4
+  riverctl input $pad disable-while-typing enabled
+  riverctl input $pad scroll-method two-finger
+  riverctl input $pad tap-button-map left-right-middle
+done
+
+# Mouse settings
+for mouse in $(riverctl list-inputs | grep -i mouse)
+do
+  riverctl input $mouse events enabled
+  # riverctl input $mouse accel-profile flat
+  # riverctl input $mouse pointer-accel 0.4
+  riverctl input $mouse natural-scroll disabled
+done
+
+# River will send the process group of the init executable SIGTERM on exit
+riverctl default-layout rivertile &
+exec rivertile -main-ratio 0.5 -view-padding 5 -outer-padding 4 &
+
+brightnessctl set 30%
+
+# Enable way-displays layouts
+way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1 &
+
+# enable screen sharing
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+# start various services
+[ ! -s ~/.config/mpd/pid ] && mpd
+
+killall mako
+mako &
+
+killall waybar
+waybar &
+
+killall nm-applet
+nm-applet --indicator &
+
+killall udiskie
+udiskie &
+
+killall swaybg
+swaybg -i ~/wallpapers/wall.jpg
+
+killall swayidle
+swayidle -w &
