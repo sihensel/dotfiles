@@ -1,8 +1,11 @@
 aic94xx-firmware
 downgrade
 git-review
+google-chrome
+librespeed-cli-bin
+netbird
 pyenv-virtualenv
 slack-desktop
+way-displays
 wd719x-firmware
-wdisplays
 yay

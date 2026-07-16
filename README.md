@@ -28,7 +28,7 @@ git clone https://github.com/sihensel/dotfiles.git
 ```
 
 There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.<br>
-This can be configured in [process.sh](river/process.sh#L44) for river.
+This can be configured in [river/init](river/init).
 
 ### Install Script
 
