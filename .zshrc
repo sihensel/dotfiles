@@ -16,7 +16,7 @@ setopt hist_ignore_all_dups
 
 # configure completion
 # https://thevaluable.dev/zsh-completion-guide-examples/
-zstyle :compinstall filename '/home/simon/.zshrc'
+zstyle :compinstall filename '${HOME}/.zshrc'
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
 
@@ -160,7 +160,7 @@ function parse_os_cloud() {
 if [[ $HOST == "arch-T14" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
+    eval "$(pyenv init - zsh)"
     eval "$(pyenv virtualenv-init -)"
 fi
 

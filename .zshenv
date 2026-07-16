@@ -3,7 +3,7 @@ export VIISUAL="nvim"
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export TERMINAL="alacritty"
-export BROWSER="librewolf"
+export BROWSER="google-chrome-stable"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
 export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(go env GOPATH)/bin:$PATH"
@@ -36,7 +36,3 @@ export GPG_TTY=$(tty)
 export XKB_DEFAULT_LAYOUT=us(altgr-intl)
 export XKB_DEFAULT_OPTIONS=caps:none
 
-# autostart River
-if [[ -z $WAYLAND_DISPLAY && $(tty) = "/dev/tty1" ]]; then
-    exec dbus-run-session river > /dev/null 2>&1
-fi

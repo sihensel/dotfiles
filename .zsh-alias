@@ -7,8 +7,8 @@ alias gc='git commit'
 alias gd='git diff'
 
 # more aliases
-alias ll='exa -lhg --color=automatic --group-directories-first --icons --no-filesize'
-alias la='exa -lhag --color=automatic --group-directories-first --icons --no-filesize'
+alias ll='exa -lhg --color=auto --group-directories-first --icons=auto'
+alias la='exa -lhag --color=auto --group-directories-first --icons=auto'
 alias free='free -m'
 alias grep='grep --color=auto'
 alias ..='cd ..'
