@@ -112,7 +112,7 @@
     },
 
     "custom/pipewire": {
-        "exec": "~/.config/river/get_volume.py 2> /dev/null",
+        "exec": "~/.config/waybar/get_volume.py 2> /dev/null",
         "return-type": "json",
         "interval": 1,
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
