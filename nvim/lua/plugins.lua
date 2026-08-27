@@ -402,7 +402,7 @@ local plugin_spec = {
     },
     {
         'saghen/blink.cmp',
-        version = '*',
+        version = '1.*',
         lazy = false,
         opts = {
             keymap = {
@@ -424,6 +424,12 @@ local plugin_spec = {
                         auto_insert = true,
                     },
                 },
+                trigger = {
+                    show_on_backspace = false,
+                    show_on_backspace_in_keyword = false,
+                    show_on_backspace_after_accept = false,
+                    show_on_backspace_after_insert_enter = false,
+                }
             },
             sources = {
                 default = { 'lsp', 'path', 'buffer' },
