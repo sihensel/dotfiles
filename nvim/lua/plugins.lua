@@ -250,7 +250,7 @@ local plugin_spec = {
                         "!.git/",
                         -- ignore snmp config files
                         "-g",
-                        "!*snmp*",
+                        "!**/config-generator/mibs/**",
                         -- ignore grafana dashboards
                         "-g",
                         "!*dashboards*"
