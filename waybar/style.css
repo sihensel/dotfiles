@@ -16,7 +16,6 @@
 @define-color aqua_dark   #689d6a;
 @define-color orange      #fe8019;
 @define-color orange_dark #d65d0e;
-@define-color arch        #1793d1;
 
 * {
     border: none;
@@ -56,7 +55,7 @@ window#waybar.hidden {
 }
 
 window > box {
-    margin: 8px;
+    margin: 6px;
     padding: 6px 0 6px 0;
     background-color: @bg;
     border-radius: 7px;
@@ -74,6 +73,7 @@ window > box {
 
 #tags button.occupied {
     color: @blue_dark;
+    border-bottom: 2px solid @blue_dark;
 }
 
 #tags button.urgent {
@@ -85,7 +85,7 @@ window > box {
     border-bottom: 2px solid @orange;
 }
 
-#mode, #clock, #disk, #memory, #temperature, #cpu, #temperature, #backlight, #network, #battery, #custom-weather, #mpd, #custom-pipewire, #custom-pacman {
+#mode, #clock, #disk, #memory, #cpu, #backlight, #network, #battery, #mpd, #wireplumber, #custom-pacman, #tray {
     padding-left: 6px;
     padding-right: 6px;
     border-radius: 4px;
@@ -104,19 +104,11 @@ window > box {
     color: @yellow;
 }
 
-#custom-weather {
-    color: @green_dark;
-}
-
 #network.upload {
     color: @red;
 }
 
-#temperature {
-    color: @blue;
-}
-
-#custom-pipewire {
+#wireplumber {
     color: @blue_dark;
 }
 
@@ -145,7 +137,7 @@ window > box {
 }
 
 #cpu {
-    color: @aqua_dark;
+    color: @blue;
 }
 
 #clock {
