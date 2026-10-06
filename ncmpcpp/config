@@ -110,7 +110,7 @@ jump_to_now_playing_song_at_start = yes
 ask_before_clearing_playlists = yes
 clock_display_seconds = no
 display_volume_level = yes
-display_bitrate = yes
+display_bitrate = no
 display_remaining_time = yes
 
 regular_expressions = basic

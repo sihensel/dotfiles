@@ -1,5 +1,16 @@
-def_key "+"
-    show_clock
+# Default bindings:
+# r         toggle queue repeat
+# -         decrease volume
+# p         toggle play/pause
+# f         scroll song forwards
+# b         scroll song backwards
+# s         stop
+# space     add selected song to playlist (also works for folders)
+# enter     add selected song to playlist and play it
+# c         clear current playlist
+# /         search
+# 6         open the metadata editor
+# q         quit
 
 def_key "="
     volume_up
@@ -32,11 +43,6 @@ def_key "ctrl-u"
     page_up
 def_key "ctrl-d"
     page_down
-
-def_key "h"
-    previous_column
-def_key "l"
-    next_column
 
 def_key "."
     show_lyrics
