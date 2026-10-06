@@ -166,6 +166,9 @@ waybar &
 killall nm-applet
 nm-applet --indicator &
 
+killall blueman-applet
+blueman-applet &
+
 killall udiskie
 udiskie &
 
