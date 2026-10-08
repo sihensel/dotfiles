@@ -40,7 +40,7 @@ You might want to ignore that, this is just for my personal setup.
 ./install.sh -p /path/to/dotfiles/
 ```
 
-*Note*: I use the `xdg-user-dirs` package to get rid of most of the standard XDG directories. See the [user-dirs.dirs](./user-dirs.dirs) file for details.
+**Note**: I use the `xdg-user-dirs` package to get rid of most of the standard XDG directories. See the [user-dirs.dirs](./user-dirs.dirs) file for details.
 
 
 ## Configure Neovim Plugins
@@ -51,13 +51,22 @@ LSP clients are also installed automatically via [Mason](https://github.com/will
 
 The following packages are exteneral dependencies, install them with your package manager:
 ```
-fd ripgrep fzf tree-sitter tree-sitter-cli
+fd ripgrep fzf tree-sitter tree-sitter-cli python-pynvim
 ```
 
-Also install the Python provider for Neovim.
+
+## Bluetooth
+
+Install the following packages.
+The blueman applet gets started by river.
 ```
-pip install neovim
+pacman -S --needed bluez bluez-libs bluez-utils blueman
 ```
+
+To autostart the bluetooth daemon while keeping bluetooth powered off:
+- Enable the systemd service with `systemctl enable --now bluetooth.service`
+- Edit `/etc/bluetooth/main.conf` and set `AutoEnable=false` in the `[Policy]` section.
+- Restart the daemon with `systemdctl restart bluetooth.service`
 
 
 ## Firefox setup
@@ -92,7 +101,20 @@ Gruvbox Slack theme. Paste into `Preferences` > `Appearance`.
 ```
 
 
-## Pacman Hook
+## Pacman
+
+### Config
+
+Enable the following options and also enable the `extra` and `multilib` repos.
+```
+Color
+CheckSpace
+VerbosePkgLists
+ParallelDownloads = 5
+DownloadUser = alpm
+```
+
+### Pacman Hook
 
 Make sure to install the `pacman-contrib` package, then copy the file to `/etc/pacman.d/hooks`.
 
