@@ -175,7 +175,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # disable prompt colors for the root user
 if [[ $EUID = 0 ]]; then
-    export PROMPT='[%n@%M %2~]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}# '
+    export PROMPT='{$fg[red]%}[%n@%M %2~]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}# '
 else
     export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}$ '
 fi
