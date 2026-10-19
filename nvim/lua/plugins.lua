@@ -17,22 +17,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
--- Specific settings for ansiblels
-vim.lsp.config.ansiblels = {
-    filetypes = { "yaml", "yaml.ansible" },
-    settings = {
-        ansible = {
-            validation = {
-                enabled = true,
-                lint = {
-                    enabled = false,
-                },
-            },
-        },
-    },
-}
-
-
 -- Define plugins
 local plugin_spec = {
 
@@ -57,32 +41,51 @@ local plugin_spec = {
         end
     },
     {
-        -- also see https://github.com/Corn207/ts-query-loader.nvim
-        'MeanderingProgrammer/treesitter-modules.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', branch = "main" },
-        opts = {
-            ensure_installed = {
-                "comment",
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
+        lazy = false,
+        build = ':TSUpdate',
+        config = function()
+            -- from https://github.com/MeanderingProgrammer/treesitter-modules.nvim
+            require('nvim-treesitter').install({
+                "bash",
+                "bibtex",
                 "c",
+                "comment",
+                "css",
+                "diff",
+                "go",
+                "html",
+                "json",
+                "latex",
                 "lua",
+                "markdown",
+                "markdown_inline",
                 "python",
                 "yaml",
-                "json",
-                "bash",
-                "css",
-                "html",
-                "bibtex",
-                "latex",
-                "diff",
-            },
-            sync_install = false,
-            auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-                disable = {"gitcommit", "diff"},
-            }
-        }
+            })
+            vim.api.nvim_create_autocmd('FileType', {
+                group = vim.api.nvim_create_augroup('treesitter.setup', {}),
+                callback = function(args)
+                    local buf = args.buf
+                    local filetype = args.match
+
+                    -- you need some mechanism to avoid running on buffers that do not
+                    -- correspond to a language (like oil.nvim buffers), this implementation
+                    -- checks if a parser exists for the current language
+                    local language = vim.treesitter.language.get_lang(filetype) or filetype
+                    if not vim.treesitter.language.add(language) then
+                        return
+                    end
+
+                    -- enable highlighting
+                    vim.treesitter.start(buf, language)
+
+                    -- enable indenting
+                    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
     },
     {
         "catgoose/nvim-colorizer.lua",
@@ -331,6 +334,21 @@ local plugin_spec = {
             },
         },
     },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        opts = {
+            enabled = false,
+            latex = {
+                enabled = false
+            },
+            completions = {
+                lsp = {
+                    enabled = true
+                }
+            },
+        },
+    },
     -- }}} Functional
 
     -- {{{ Git
@@ -390,13 +408,10 @@ local plugin_spec = {
         opts = {
             ensure_installed = {
                 -- :help lspconfig-all
-                "ansiblels",
                 "basedpyright",
-                "bashls",
                 "clangd",
                 "gopls",
                 "lua_ls",
-                "texlab",
             },
         },
     },
@@ -421,6 +436,7 @@ local plugin_spec = {
                 },
                 list = {
                     selection = {
+                        preselect = true,
                         auto_insert = true,
                     },
                 },
@@ -431,9 +447,26 @@ local plugin_spec = {
                     show_on_backspace_after_insert_enter = false,
                 }
             },
+            fuzzy = {
+                sorts = {
+                    'exact',
+                    'score',
+                    'sort_text',
+                },
+            },
             sources = {
                 default = { 'lsp', 'path', 'buffer' },
-            }
+            },
+            cmdline = {
+                completion = {
+                    list = {
+                        selection = {
+                            preselect = false,
+                            auto_insert = true,
+                        },
+                    },
+                },
+            },
         },
     },
     -- }}} LSP config
