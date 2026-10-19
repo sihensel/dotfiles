@@ -1,5 +1,5 @@
 export LANG="en_US.UTF-8"
-export VIISUAL="nvim"
+export VISUAL="nvim"
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export TERMINAL="alacritty"
