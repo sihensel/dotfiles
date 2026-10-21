@@ -59,7 +59,7 @@ fd ripgrep fzf tree-sitter tree-sitter-cli python-pynvim go unzip
 
 Install the following packages.
 The blueman applet gets started by river.
-```
+```sh
 pacman -S --needed bluez bluez-libs bluez-utils blueman
 ```
 
@@ -71,25 +71,39 @@ To autostart the bluetooth daemon while keeping bluetooth powered off:
 
 ## Firefox setup
 
-Go to `about:config`:
-- `extensions.pocket.enabled` to `false`
-- `browser.compactmode.show` to `true`
-- `browser.tabs.loadBookmarksInBackground` to `true`
-- `browser.bookmarks.openInTabClosesMenu` to `false`
-- `browser.tabs.loadBookmarksInTabs` to `true`
-- `browser.translations.automaticallyPopup` to `false`
-- `browser.translations.enable` to `false`
-- `media.videocontrols.picture-in-picture.video-toggle.enabled` to `false`
-- `browser.tabs.hoverPreview.enabled` to `false`
-- `browser.tabs.hoverPreview.showThumbnails` to `false`
-- `middlemouse.paste` to `false`
-- `browser.quitShortcut.disabled` to `false`
-- `browser.urlbar.trimURLs` to `false`
+Go to `about:config` and change the following settings.
 
-Add the following line to the `My Filters` tab in uBlock Origin to disable the "Sign in with ..." popup.
+| Setting | Value |
+| --- | --- |
+| `browser.compactmode.show` | `true` |
+| `browser.tabs.loadBookmarksInBackground` | `true` |
+| `browser.bookmarks.openInTabClosesMenu` | `false` |
+| `browser.tabs.loadBookmarksInTabs` | `true` |
+| `browser.translations.automaticallyPopup` | `false` |
+| `browser.translations.enable` | `false` |
+| `media.videocontrols.picture-in-picture.video-toggle.enabled` | `false` |
+| `browser.tabs.hoverPreview.enabled` | `false` |
+| `browser.tabs.hoverPreview.showThumbnails` | `false` |
+| `middlemouse.paste` | `false` |
+| `browser.quitShortcut.disabled` | `false` |
+| `browser.urlbar.trimURLs` | `false` |
+| `general.autoScroll` | `true` |
+
+Add the following line to the `My Filters` tab in uBlock Origin to disable the `Sign in with Google` popup.
 
 ```
 accounts.google.com/gsi/*
+```
+
+## Enable Mono Audio for Pipewire
+
+```sh
+wpctl settings --save node.features.audio.mono true
+```
+
+The setting is saved in `~/.local/state/wireplumber`. Verify it worked with:
+```sh
+wpctl settings node.features.audio.mono
 ```
 
 
