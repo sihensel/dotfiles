@@ -26,10 +26,6 @@ setopt always_to_end
 setopt list_packed
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Edit line in nvim with ctrl-e (requires 'export VISUAL=nvim' in .zshenv)
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
 
 #------------------------------------------------------------------------------
 # INPUT MODE AND CURSOR
@@ -142,13 +138,7 @@ bindkey -M viins '^R' fzf-history-widget
 # CUSTOM FUNCTIONS
 #------------------------------------------------------------------------------
 
-# show current git branch in git repos
-# https://gist.github.com/reinvanoyen/05bcfe95ca9cb5041a4eafd29309ff29
-function parse_git_branch() {
-    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/(\1)/p'
-}
-
-# show current openstack clouds.yaml entry
+# show current OS_CLOUD environment variable in prompt
 function parse_os_cloud() {
     printenv | grep -e 'OS_CLOUD' 2> /dev/null | sed -e 's/.*=\(.*\)/(\1)/'
 }
@@ -168,13 +158,17 @@ fi
 
 autoload -U colors && colors
 setopt prompt_subst
-export PATH="$PATH:$HOME/.rvm/bin"
 
-# disable prompt colors for the root user
+# load the SVC module, which supports git
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%b '   # show the git branch
+
+# red prompt for the root user (copy to /root/.zshrc)
 if [[ $EUID = 0 ]]; then
-    export PROMPT='{$fg[red]%}[%n@%M %2~]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}# '
+    export PROMPT='%F{red}ROOT %2~%f # '
 else
-    export PROMPT='%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%2~%{$fg[red]%}]%{$fg[cyan]%}$(parse_git_branch)%{$fg[red]%}$(parse_os_cloud)%{$reset_color%}$ '
+    export PROMPT='%F{magenta}%2~%f %F{cyan}${vcs_info_msg_0_}%f%F{red}$(parse_os_cloud)%f$ '
 fi
 
 # enable kubectl auto completion
@@ -184,7 +178,7 @@ source <(kubectl completion zsh)
 source ~/.zsh-alias
 
 # load work setup, if available
-if [ -f ~/.zsh-work ]; then
+if [ -s ~/.zsh-work ]; then
     source ~/.zsh-work
 fi
 

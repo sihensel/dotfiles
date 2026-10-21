@@ -1,3 +1,9 @@
+# PATH, make sure all entires are unique
+typeset -U path PATH
+path=(~/.local/bin $path)
+path=($(go env GOPATH)/bin $path)
+export PATH
+
 export LANG="en_US.UTF-8"
 export VISUAL="nvim"
 export EDITOR="nvim"
@@ -6,7 +12,6 @@ export TERMINAL="alacritty"
 export BROWSER="google-chrome-stable"
 export READER="zathura"
 export GTK_THEME=Adwaita:dark
-export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$(go env GOPATH)/bin:$PATH"
 
 # Manpage colors
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
@@ -21,8 +26,8 @@ export LESS="-RF"
 export BAT_THEME="gruvbox-dark"
 
 # Wayland
-export XDG_CURRENT_DESKTOP=river
-export XDG_SESSION_DESKTOP=river
+export XDG_CURRENT_DESKTOP=wl-roots
+export XDG_SESSION_DESKTOP=wl-roots
 export XDG_SESSION_TYPE=wayland
 
 export SDL_VIDEODRIVER=wayland
