@@ -1,0 +1,405 @@
+[audio]
+enable_notification_sounds = false
+enable_power_sounds = false
+enable_screenshot_sounds = false
+enable_sounds = false
+enable_volume_sounds = false
+
+[bar.default]
+background_opacity = 0.0
+capsule = true
+capsule_fill = "on_primary"
+capsule_padding = 7.0
+capsule_radius = 6
+capsule_thickness = 0.9499999824911356
+center = [ "clock" ]
+contact_shadow = true
+end = [ "tray", "group:g1", "volume", "battery", "bluetooth", "network" ]
+font_scale = 1.0999999828636646
+margin_edge = 12
+margin_ends = 30
+margin_opposite_edge = 0
+padding = 6
+radius = 8
+scale = 1.2000000104308128
+shadow = false
+start = [ "workspaces" ]
+thickness = 35
+widget_spacing = 10
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    border = "#D3869B"
+    border_width = 1.0
+    enabled = true
+    fill = "on_primary"
+    id = "g1"
+    members = [ "custom_button_2", "media" ]
+    opacity = 1.0
+    padding = 7.0
+    radius = 6.0
+
+[calendar]
+
+[control_center]
+show_session_button = false
+sidebar = "full"
+sidebar_section = "full"
+
+    [control_center.calendar]
+    show_events_card = false
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "mic_mute"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "session"
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[hot_corners]
+enabled = true
+
+[idle]
+behavior_order = [ "lock", "screen-off" ]
+pre_action_fade_seconds = 0
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 300.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 600.0
+
+[location]
+address = ""
+
+[lockscreen]
+transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1219.0
+    cy = 1189.0
+    output = "DP-2"
+    placement_height = 1371.0
+    placement_width = 2438.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 764.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = false
+        show_login_button = true
+        show_media = true
+        show_password_reveal = false
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
+
+[nightlight]
+temperature_day = 6200
+
+[notification]
+background_opacity = 0.99999997764825821
+border_color = "tertiary"
+border_width = 1.5
+follow_focused_output = true
+offset_y = 20
+
+[osd]
+background_opacity = 0.99999997764825821
+border_color = "tertiary"
+border_width = 1.5
+follow_focused_output = true
+
+[plugins]
+enabled = []
+
+[shell]
+app_icon_colorize = false
+avatar_path = "/home/simon/wallpapers/GANOO.png"
+clipboard_enabled = false
+font_family = "Noto Sans"
+offline_mode = true
+panel_anchor_bar = "default"
+show_close_buttons = false
+show_location = false
+
+    [shell.animation]
+    speed = 1.2000000178813934
+
+    [shell.launcher]
+    categories = false
+    category_icons_only = true
+    compact = true
+    default_view = "all"
+    fetch_exchange_rates = false
+    layout = "simple"
+    search_position = "top"
+    show_session_button = false
+    show_settings_button = false
+    track_usage = false
+
+    [shell.panel]
+    control_center_placement = "floating"
+    floating_offset = 10
+    open_near_click_control_center = true
+    session_placement = "floating"
+    session_position = "center"
+
+    [shell.screenshot]
+    copy_to_clipboard = false
+    directory = "/home/simon"
+
+    [shell.session]
+    grid = true
+    grid_columns = 2
+    show_shortcuts = false
+
+        [[shell.session.actions]]
+        action = "lock"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "1"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "logout"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "2"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "lock_and_suspend"
+        countdown_seconds = 0.0
+        enabled = false
+        shortcut = "3"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "reboot"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "4"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "shutdown"
+        countdown_seconds = 0.0
+        enabled = true
+        shortcut = "5"
+        variant = "destructive"
+
+    [shell.shadow]
+    direction = "down_right"
+
+[system.monitor]
+cpu_poll_seconds = 5
+disk_poll_seconds = 60
+memory_poll_seconds = 5
+network_poll_seconds = 5
+
+[theme]
+builtin = "Gruvbox"
+community_palette = "GitHub Dark"
+mode = "dark"
+source = "builtin"
+wallpaper_scheme = "soft"
+
+[wallpaper]
+directory = "/home/simon/wallpapers"
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+
+    [wallpaper.last]
+    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+
+    [wallpaper.monitors.DP-2]
+    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+
+    [[wallpaper.favorite]]
+    path = "/home/simon/wallpapers/Pfoun/3fdc41d23b6bebeb2a063f43ad1bd57e.jpg"
+
+[weather]
+enabled = false
+refresh_minutes = 60
+
+[widget.audio_visualizer]
+color_1 = "tertiary"
+color_2 = "tertiary"
+show_when_idle = true
+
+[widget.battery]
+capsule_border = "secondary"
+color = "secondary"
+
+[widget.bluetooth]
+capsule_border = "tertiary"
+color = "tertiary"
+show_label = true
+
+[widget.brightness]
+color = "secondary"
+
+[widget.clock]
+capsule_border = "#FE8019"
+color = "#FE8019"
+format = "{:%a %H:%M}"
+
+    [widget.clock.actions]
+    left = "panel-toggle control-center"
+
+[widget.custom_button_2]
+color = "#D3869B"
+glyph = "music"
+icon_color = "#D3869B"
+type = "custom_button"
+
+    [widget.custom_button_2.actions]
+    left = "panel-open control-center media"
+
+[widget.media]
+capsule_border = "#D3869B"
+color = "#D3869B"
+hide_album_art = true
+icon_color = "#D3869B"
+
+[widget.network]
+capsule_border = "primary"
+color = "primary"
+show_vpn_label = true
+vpn_status = "both"
+
+[widget.nightlight.actions]
+left = "nightlight-force-toggle"
+
+[widget.session]
+color = "error"
+
+[widget.sysmon]
+stat = "ram_pct"
+
+[widget.tray]
+capsule_border = "hover"
+
+[widget.volume]
+capsule_border = "#8EC07C"
+color = "#8EC07C"
+icon_color = "#8EC07C"
+
+[widget.workspaces]
+active_pill_size = 1.2000000000000002
+capsule_border = "secondary"
+capsule_padding = 10
+capsule_radius = 5
+empty_color = "on_surface_variant"
+focused_color = "secondary"
+inactive_pill_size = 1.2000000000000002
+occupied_color = "tertiary"
+show_labels = false
