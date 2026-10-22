@@ -2,15 +2,10 @@ aic94xx-firmware
 downgrade
 git-review
 google-chrome
-lib32-giflib
-lib32-libxslt
-lib32-mpg123
-lib32-sdl12-compat
-lib32-v4l-utils
 librespeed-cli-bin
 netbird
+paru
+paru-debug
 pyenv-virtualenv
 slack-desktop
-way-displays
 wd719x-firmware
-yay

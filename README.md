@@ -16,7 +16,7 @@ pacman -S --needed - < packages.txt
 yay -S --needed - < packages_AUR.txt
 ```
 
-To generate the list of packages, run `pacman -Qqen` to get the list main repo packages and `pacman -Qqem` for AUR packages.
+To generate the list of packages, run `pacman -Qqn` to get the list main repo packages and `pacman -Qqm` for AUR packages.
 
 
 ## Installation
