@@ -1,3 +1,0 @@
-timeout 300 'swaylock -f -i ~/wallpapers/wall.jpg'
-timeout 600 'wlopm --off eDP-1' resume 'wlopm --on eDP-1'
-before-sleep 'swaylock -f -i ~/wallpapers/wall.jpg'
