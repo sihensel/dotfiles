@@ -7,35 +7,33 @@ enable_volume_sounds = false
 
 [bar.default]
 capsule_radius = 5
-center = [ "clock", "notifications" ]
-end = [ "media", "volume", "tray", "network", "bluetooth", "brightness", "battery", "sysmon", "session" ]
+center = [ "clock", "tray" ]
+contact_shadow = true
+end = [ "network", "bluetooth", "media", "volume", "battery", "session" ]
 font_scale = 1.0999999828636646
 margin_edge = 15
-margin_ends = 30
+margin_ends = 25
 margin_opposite_edge = 5
 padding = 20
 scale = 1.1000000089406967
 shadow = false
-start = [ "launcher", "workspaces" ]
-thickness = 40
+start = [ "workspaces" ]
+thickness = 35
 widget_spacing = 15
 
 [calendar]
 
-[control_center.calendar]
-show_events_card = false
+[control_center]
+show_session_button = false
 
-[[control_center.shortcuts]]
-type = "wifi"
+    [control_center.calendar]
+    show_events_card = false
 
-[[control_center.shortcuts]]
-type = "bluetooth"
+    [[control_center.shortcuts]]
+    type = "caffeine"
 
-[[control_center.shortcuts]]
-type = "caffeine"
-
-[[control_center.shortcuts]]
-type = "notification"
+    [[control_center.shortcuts]]
+    type = "notification"
 
 [desktop_widgets]
 schema_version = 2
@@ -48,18 +46,21 @@ widget_order = []
 
     [desktop_widgets.widget]
 
+[hot_corners]
+enabled = true
+
 [idle]
 behavior_order = [ "lock", "screen-off" ]
 pre_action_fade_seconds = 0
 
     [idle.behavior.lock]
     action = "lock"
-    enabled = false
+    enabled = true
     timeout = 300.0
 
     [idle.behavior.screen-off]
     action = "screen_off"
-    enabled = false
+    enabled = true
     timeout = 600.0
 
 [location]
@@ -69,8 +70,9 @@ address = "Bietigheim, Germany"
 transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
 
 [lockscreen_widgets]
+enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
+widget_order = [ "lockscreen-login-box@eDP-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -133,6 +135,34 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2" ]
         show_unlock_hint = true
         show_weather = true
 
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 768.0
+    cy = 745.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
 [notification]
 background_opacity = 0.99999997764825821
 border_color = "tertiary"
@@ -147,10 +177,10 @@ border_width = 1.5
 follow_focused_output = true
 
 [plugins]
-enabled = [ "noctalia/timer", "andrewdems/vpn-manager" ]
+enabled = [ "noctalia/timer" ]
 
 [shell]
-avatar_path = "/home/simon/Valpepers/GANOO.png"
+avatar_path = "/home/simon/wallpapers/GANOO.png"
 clipboard_enabled = false
 font_family = "Noto Sans"
 panel_anchor_bar = "default"
@@ -222,19 +252,19 @@ network_poll_seconds = 5
 
 [theme]
 builtin = "Gruvbox"
-community_palette = "Gruber Darker"
+community_palette = "Gruvbox Material Medium"
 mode = "dark"
 wallpaper_scheme = "m3-content"
 
 [wallpaper]
-directory = "/home/simon/Valpepers"
+directory = "/home/simon/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/simon/Valpepers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/wallpapers/Games/__warcraft_and_2_more_drawn_by_cutesexyrobutts__1220238414b6a4bf426a924ce712dc6b.png"
 
     [wallpaper.last]
-    path = "/home/simon/Valpepers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/wallpapers/Games/__warcraft_and_2_more_drawn_by_cutesexyrobutts__1220238414b6a4bf426a924ce712dc6b.png"
 
     [wallpaper.monitors.DP-2]
     path = "/home/simon/Valpepers/Games/skyrim-tundra.jpg"
@@ -242,24 +272,55 @@ transition_on_startup = true
     [wallpaper.monitors.HDMI-A-1]
     path = "/home/simon/Valpepers/Games/skyrim-tundra.jpg"
 
+    [wallpaper.monitors.eDP-1]
+    path = "/home/simon/wallpapers/Games/__warcraft_and_2_more_drawn_by_cutesexyrobutts__1220238414b6a4bf426a924ce712dc6b.png"
+
 [weather]
 refresh_minutes = 60
 
 [widget.audio_visualizer]
 show_when_idle = true
 
+[widget.battery]
+color = "secondary"
+
+[widget.bluetooth]
+color = "tertiary"
+show_label = true
+
+[widget.brightness]
+color = "secondary"
+
 [widget.clock]
+color = "secondary"
 format = "{:%a %H:%M}"
 
     [widget.clock.actions]
     left = "panel-toggle control-center"
 
+[widget.media]
+hide_album_art = true
+
+[widget.network]
+color = "primary"
+show_vpn_label = true
+vpn_status = "both"
+
+[widget.session]
+color = "error"
+
 [widget.sysmon]
 stat = "ram_pct"
 
+[widget.volume]
+color = "tertiary"
+icon_color = "tertiary"
+
 [widget.workspaces]
+active_pill_size = 1.75
 capsule_padding = 10
 capsule_radius = "auto"
 empty_color = "shadow"
 focused_color = "secondary"
+inactive_pill_size = 1.75
 occupied_color = "tertiary"
