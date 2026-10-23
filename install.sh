@@ -54,7 +54,7 @@ fi
 
 cd ~/.config || exit 1
 
-for i in alacritty imv lf mango mpd ncmpcpp noctalia nvim rofi xdg-desktop-portal zathura mimeapps.list user-dirs.dirs
+for i in alacritty fontconfig imv lf mango mpd ncmpcpp noctalia nvim rofi xdg-desktop-portal zathura mimeapps.list user-dirs.dirs
 do
     if [ -d "$i" ] || [ -f "$i" ]; then
         rm -rf "$i"
