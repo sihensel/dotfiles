@@ -55,55 +55,13 @@ fd ripgrep fzf tree-sitter tree-sitter-cli python-pynvim go unzip
 ```
 
 
-## Bluetooth
+## Librewolf
 
-Install the following packages.
-The blueman applet gets started by river.
-```sh
-pacman -S --needed bluez bluez-libs bluez-utils blueman
-```
-
-To autostart the bluetooth daemon while keeping bluetooth powered off:
-- Enable the systemd service with `systemctl enable --now bluetooth.service`
-- Edit `/etc/bluetooth/main.conf` and set `AutoEnable=false` in the `[Policy]` section.
-- Restart the daemon with `systemdctl restart bluetooth.service`
-
-
-## Firefox setup
-
-Go to `about:config` and change the following settings.
-
-| Setting | Value |
-| --- | --- |
-| `browser.compactmode.show` | `true` |
-| `browser.tabs.loadBookmarksInBackground` | `true` |
-| `browser.bookmarks.openInTabClosesMenu` | `false` |
-| `browser.tabs.loadBookmarksInTabs` | `true` |
-| `browser.translations.automaticallyPopup` | `false` |
-| `browser.translations.enable` | `false` |
-| `media.videocontrols.picture-in-picture.video-toggle.enabled` | `false` |
-| `browser.tabs.hoverPreview.enabled` | `false` |
-| `browser.tabs.hoverPreview.showThumbnails` | `false` |
-| `middlemouse.paste` | `false` |
-| `browser.quitShortcut.disabled` | `false` |
-| `browser.urlbar.trimURLs` | `false` |
-| `general.autoScroll` | `true` |
+Place the `user.js` file in `~/.config/librewolf/librewolf/*.default-release/` and restart the browser (`install.sh` takes care of that).
 
 Add the following line to the `My Filters` tab in uBlock Origin to disable the `Sign in with Google` popup.
-
 ```
 accounts.google.com/gsi/*
-```
-
-## Enable Mono Audio for Pipewire
-
-```sh
-wpctl settings --save node.features.audio.mono true
-```
-
-The setting is saved in `~/.local/state/wireplumber`. Verify it worked with:
-```sh
-wpctl settings node.features.audio.mono
 ```
 
 

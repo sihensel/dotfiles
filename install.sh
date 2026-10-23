@@ -2,7 +2,6 @@
 
 # creates symbolic links for my dotfiles so all files can stay in the dotfiles folder
 # WARNING: this script will overwrite existing files
-# this script should be POSIX compliant (checked with https://www.shellcheck.net/)
 
 dot_dir=~/dotfiles   # FULL path to the repo
 
@@ -42,6 +41,10 @@ do
     fi
     ln -sf "$dot_dir"/"$i" "$i"
 done
+
+# create symlink for the user.js file
+ln -sf "$dot_dir"/librewolf/user.js ~/.config/librewolf/librewolf/*.default-release
+
 
 # ~/.config
 if [ ! -d ~/.config ]
