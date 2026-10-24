@@ -1,7 +1,7 @@
 # Welcome ~/
 
-This repository contains my personal Linux dotfiles.<br>
-They are often (speak: all the time) a work in progress and may or may not work for you.<br>
+This repository contains my personal Linux dotfiles. \
+They are often (speak: all the time) a work in progress and may or may not work for you.
 
 ![screenshot.png](screenshot.png)
 
@@ -16,38 +16,32 @@ pacman -S --needed - < packages.txt
 yay -S --needed - < packages_AUR.txt
 ```
 
-To generate the list of packages, run `pacman -Qqen` to get the list main repo packages and `pacman -Qqem` for AUR packages.
+To generate the list of packages, run `pacman -Qqn` to get the list main repo packages and `pacman -Qqm` for AUR packages.
 
 
 ## Installation
-
-Clone the repo into your home directory.
-
-```sh
-git clone https://github.com/sihensel/dotfiles.git
-```
-
-There is no wallpaper included, the window manager looks for `~/wallpapers/wall.jpg`.<br>
-This can be configured in [river/init](river/init).
-
-### Install Script
 
 The script `install.sh` places symlinks to the local repo, so all files can stay in one place.<br>
 You might want to ignore that, this is just for my personal setup.
 
 ```sh
 ./install.sh   # or
-./install.sh -p /path/to/dotfiles/
+./install.sh -p /absolute/path/to/dotfiles/
 ```
 
-**Note**: I use the `xdg-user-dirs` package to get rid of most of the standard XDG directories. See the [user-dirs.dirs](./user-dirs.dirs) file for details.
+There is no wallpaper included, you can set one via Noctalia.
+
+> [!NOTE]
+> The `xdg-user-dirs` package is used to get rid of most of the standard XDG directories.
+> See the [user-dirs.dirs](./user-dirs.dirs) file for details.
 
 
 ## Configure Neovim Plugins
 
-The keybinds are listed in [init.lua](nvim/init.lua).<br>
-Plugins are managed via [Lazy.nvim](https://github.com/folke/lazy.nvim). The Plugin manager installs itself and all plugins automatically.<br>
-LSP clients are also installed automatically via [Mason](https://github.com/williamboman/mason.nvim).
+The keybinds are listed in [init.lua](nvim/init.lua).
+Plugins are managed via [Lazy.nvim](https://github.com/folke/lazy.nvim).
+The Plugin manager installs itself and all plugins automatically.
+LSP clients are installed automatically via [Mason](https://github.com/williamboman/mason.nvim).
 
 The following packages are exteneral dependencies, install them with your package manager:
 ```
@@ -57,7 +51,7 @@ fd ripgrep fzf tree-sitter tree-sitter-cli python-pynvim go unzip
 
 ## Librewolf
 
-Place the `user.js` file in `~/.config/librewolf/librewolf/*.default-release/` and restart the browser (`install.sh` takes care of that).
+Place the `user.js` file in `~/.config/librewolf/librewolf/*.default-release/` (`install.sh` takes care of that), and restart the browser.
 
 Add the following line to the `My Filters` tab in uBlock Origin to disable the `Sign in with Google` popup.
 ```
