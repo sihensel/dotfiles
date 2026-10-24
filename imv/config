@@ -2,7 +2,6 @@
 fullscreen = false
 overlay = true
 overlay_font = Monospace:12
-overlay_text = $filename
 
 [binds]
 d = overlay
