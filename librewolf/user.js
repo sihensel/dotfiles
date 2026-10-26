@@ -23,6 +23,7 @@ user_pref("generate.autoScroll", true);
 user_pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
 user_pref("middlemouse.paste", false);
 user_pref("widget.non-native-theme.scrollbar.size", 18);
+// user_pref("layout.css.devPixelsPerPx", 1.1)      // UI scaling
 
 // turn off the AI nonsense
 user_pref("browser.ml.enable", false);
