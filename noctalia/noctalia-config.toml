@@ -202,6 +202,7 @@ border_color = "tertiary"
 border_width = 1.5
 follow_focused_output = true
 offset_y = 20
+position = "top_center"
 
 [osd]
 background_opacity = 0.99999997764825821
@@ -403,3 +404,4 @@ focused_color = "secondary"
 inactive_pill_size = 1.2000000000000002
 occupied_color = "tertiary"
 show_labels = false
+show_tooltip = false
