@@ -1,3 +1,5 @@
+[general]
+live_config_reload = true
 
 [colors.bright]
 black = "#928374"
@@ -87,5 +89,11 @@ instance = "Alacritty"
 x = 8
 y = 8
 
-[general]
-live_config_reload = true
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+post_processing = true
+persist = false
+mouse.enabled = true
+mouse.mods = "Shift"
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`\\\\]+"
