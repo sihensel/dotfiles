@@ -61,3 +61,13 @@ inoremap('?', '?<c-g>u')
 
 -- Search for the current line
 nnoremap('<leader>/', '0y$/\\V<c-r>"<cr>')
+
+-- Open current file in browser
+vim.keymap.set("n", "<leader>b", function()
+    local current_file = vim.fn.expand("%:p")
+    if current_file == "" then
+        vim.notify("No file open in current buffer", vim.log.levels.WARN)
+        return
+    end
+    vim.fn.jobstart({ "librewolf", current_file }, { detach = true })
+end)
