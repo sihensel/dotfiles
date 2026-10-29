@@ -98,6 +98,9 @@ opt.path = '.,**'
 opt.splitbelow = true
 opt.splitright = true
 
+-- Disable folds
+opt.foldenable = false
+
 -- Disable some warnings for :checkhealth
 g.loaded_ruby_provider = false
 g.loaded_node_provider = false
