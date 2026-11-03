@@ -64,6 +64,11 @@ action = "Copy"
 key = "C"
 mods = "Control|Shift"
 
+[[keyboard.bindings]]
+action = "None"
+key = "B"
+mods = "Control|Shift"
+
 [mouse]
 hide_when_typing = true
 
