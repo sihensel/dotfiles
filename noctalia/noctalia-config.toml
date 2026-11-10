@@ -215,7 +215,7 @@ enabled = []
 
 [shell]
 app_icon_colorize = false
-avatar_path = "/home/simon/wallpapers/GANOO.png"
+avatar_path = "/home/simon/HDD/wallpapers/GANOO.png"
 clipboard_enabled = false
 font_family = "Noto Sans"
 offline_mode = true
@@ -306,26 +306,23 @@ source = "builtin"
 wallpaper_scheme = "soft"
 
 [wallpaper]
-directory = "/home/simon/wallpapers"
+directory = "/home/simon/HDD/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
 
     [wallpaper.last]
-    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/simon/wallpapers/Games/skyrim-tundra.jpg"
-
-    [[wallpaper.favorite]]
-    path = "/home/simon/wallpapers/Pfoun/3fdc41d23b6bebeb2a063f43ad1bd57e.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
 
 [weather]
 enabled = false
