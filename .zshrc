@@ -33,6 +33,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # vi mode
 bindkey -v
+# allow backspace to delete any character in insert mode
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
 export KEYTIMEOUT=1
 
 # Change cursor shape for different vi modes
