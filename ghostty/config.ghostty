@@ -31,3 +31,10 @@ confirm-close-surface = false
 app-notifications = config-reload
 
 class = ghostty
+
+window-inherit-working-directory = false
+tab-inherit-working-directory = false
+split-inherit-working-directory = false
+
+# term = xterm-256color
+adjust-cursor-thickness = 1
