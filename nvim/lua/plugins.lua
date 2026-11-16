@@ -30,11 +30,15 @@ local plugin_spec = {
                 italic = {
                     strings = false,
                 },
-                contrast = "soft",
+                contrast = "hard",
                 transparent_mode = true,
                 overrides = {
-                    CursorLine = { bg = "", bold = true },
-                    -- SignColumn = { bg = "#3c3836" },
+                    CursorLine               = { bg = "", bold = true },
+                    DiagnosticUnderlineError = { underdotted = true, sp = "#fb4934" },
+                    DiagnosticUnderlineWarn  = { underdotted = true, sp = "#fabd2f" },
+                    DiagnosticUnderlineInfo  = { underdotted = true, sp = "#83a598" },
+                    DiagnosticUnderlineHint  = { underdotted = true, sp = "#83c07c" },
+                    DiagnosticUnderlineOk    = { underdotted = true, sp = "#b8bb26" },
                 },
             })
             vim.cmd([[colorscheme gruvbox]])
@@ -307,7 +311,7 @@ local plugin_spec = {
         },
         opts = {
             position = 'bot',
-            size = 14,
+            size = 20,
             show_tabs = false,
             new_tab_mapping = 'C-;',
         },
@@ -379,10 +383,16 @@ local plugin_spec = {
     -- {{{ Misc
     {
         "kevinhwang91/nvim-bqf",
-        event = "VeryLazy"
+        event = "VeryLazy",
+        opts = {
+            preview = {
+                winblend = 0,
+                wrap = false,
+            },
+        },
     },
     {
-        "yorickpeterse/nvim-pqf",
+        "https://codeberg.org/yorickpeterse/nvim-pqf",
         event = "VeryLazy",
         opts = {
             signs = {
@@ -392,13 +402,6 @@ local plugin_spec = {
                 hint = { text = '' },
             },
         },
-    },
-    {
-        "anufrievroman/vim-angry-reviewer",
-        cmd = "AngryReviewer",
-        init = function()
-            vim.g.AngryReviewerEnglish = 'american'
-        end
     },
     -- }}} Misc
 
