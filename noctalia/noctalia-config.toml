@@ -65,20 +65,6 @@ sidebar_section = "full"
     [[control_center.shortcuts]]
     type = "session"
 
-[desktop_widgets]
-schema_version = 2
-widget_order = []
-
-    [desktop_widgets.grid]
-    cell_size = 16
-    major_interval = 4
-    visible = true
-
-    [desktop_widgets.widget]
-
-[hot_corners]
-enabled = true
-
 [idle]
 behavior_order = [ "lock", "screen-off" ]
 pre_action_fade_seconds = 0
@@ -92,9 +78,6 @@ pre_action_fade_seconds = 0
     action = "screen_off"
     enabled = true
     timeout = 600.0
-
-[location]
-address = ""
 
 [lockscreen]
 transition = [ "disc", "fade", "honeycomb", "stripes", "wipe", "zoom" ]
@@ -127,7 +110,7 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
-        layout = "regular"
+        layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
@@ -135,7 +118,6 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
-        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
     box_height = 196.0
@@ -155,7 +137,7 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         center_password_text = false
         input_opacity = 1.0
         input_radius = 6.0
-        layout = "regular"
+        layout = "compact"
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
@@ -163,7 +145,6 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
-        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 70.0
@@ -191,7 +172,6 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@DP-2", "
         show_password_reveal = false
         show_session_buttons = true
         show_unlock_hint = false
-        show_weather = true
 
 [nightlight]
 temperature_day = 6200
@@ -214,7 +194,6 @@ follow_focused_output = true
 enabled = []
 
 [shell]
-app_icon_colorize = false
 avatar_path = "/home/simon/HDD/wallpapers/GANOO.png"
 clipboard_enabled = false
 font_family = "Noto Sans"
@@ -310,19 +289,19 @@ directory = "/home/simon/HDD/wallpapers"
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/Elder Scrolls/skyrim-tundra.jpg"
 
     [wallpaper.last]
-    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/Elder Scrolls/skyrim-tundra.jpg"
 
     [wallpaper.monitors.DP-2]
-    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/Elder Scrolls/skyrim-tundra.jpg"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/Elder Scrolls/skyrim-tundra.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/simon/HDD/wallpapers/Games/skyrim-tundra.jpg"
+    path = "/home/simon/HDD/wallpapers/Games/Elder Scrolls/skyrim-tundra.jpg"
 
 [weather]
 enabled = false
@@ -367,6 +346,7 @@ capsule_border = "#D3869B"
 color = "#D3869B"
 hide_album_art = true
 icon_color = "#D3869B"
+max_length = 200
 
 [widget.network]
 capsule_border = "primary"
@@ -376,12 +356,6 @@ vpn_status = "both"
 
 [widget.nightlight.actions]
 left = "nightlight-force-toggle"
-
-[widget.session]
-color = "error"
-
-[widget.sysmon]
-stat = "ram_pct"
 
 [widget.tray]
 capsule_border = "hover"
