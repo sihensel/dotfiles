@@ -1,6 +1,6 @@
 [Added Associations]
-image/jpeg=imv.desktop;imv-dir.desktop;
-image/png=imv.desktop;
+image/jpeg=imv-dir.desktop;
+image/png=imv-dir.desktop;
 application/pdf=librewolf.desktop;
 -scheme-handler/http=librewolf.desktop;
 x-scheme-handler/https=librewolf.desktop;
@@ -17,7 +17,7 @@ application/json=nvim.desktop;
 
 [Default Applications]
 image/jpeg=imv-dir.desktop
-image/png=imv.desktop
+image/png=imv-dir.desktop
 application/pdf=librewolf.desktop
 x-scheme-handler/webcal=librewolf.desktop
 x-scheme-handler/mailto=librewolf.desktop
