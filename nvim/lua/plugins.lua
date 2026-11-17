@@ -2,7 +2,7 @@
 -- PLUGINS AND CONFIGS
 -------------------------------------------------------------------------------
 
--- Bootstrap lazy.nvim
+-- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
     vim.fn.system({
@@ -17,10 +17,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
--- Define plugins
+-- define plugins
 local plugin_spec = {
 
-    -- {{{ Colors
+    -- {{{ colors
     {
         "ellisonleao/gruvbox.nvim",
         lazy = false,
@@ -33,12 +33,13 @@ local plugin_spec = {
                 contrast = "hard",
                 transparent_mode = true,
                 overrides = {
-                    CursorLine               = { bg = "", bold = true },
+                    CursorLine = { bg = "#282828" },
+                    CursorLineNr = { bold = true },
                     DiagnosticUnderlineError = { underdotted = true, sp = "#fb4934" },
-                    DiagnosticUnderlineWarn  = { underdotted = true, sp = "#fabd2f" },
-                    DiagnosticUnderlineInfo  = { underdotted = true, sp = "#83a598" },
-                    DiagnosticUnderlineHint  = { underdotted = true, sp = "#83c07c" },
-                    DiagnosticUnderlineOk    = { underdotted = true, sp = "#b8bb26" },
+                    DiagnosticUnderlineWarn = { underdotted = true, sp = "#fabd2f" },
+                    DiagnosticUnderlineInfo = { underdotted = true, sp = "#83a598" },
+                    DiagnosticUnderlineHint = { underdotted = true, sp = "#83c07c" },
+                    DiagnosticUnderlineOk = { underdotted = true, sp = "#b8bb26" },
                 },
             })
             vim.cmd([[colorscheme gruvbox]])
@@ -113,7 +114,7 @@ local plugin_spec = {
             },
         },
     },
-    -- }}} Colors
+    -- }}} colors
 
     -- {{{ UI
     {
@@ -134,73 +135,52 @@ local plugin_spec = {
             { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
         },
         config = function()
-            local function on_attach(bufnr)
-                local api = require('nvim-tree.api')
+            local function nvim_tree_on_attach(bufnr)
+                local api = require "nvim-tree.api"
 
                 local function opts(desc)
                     return {
-                        desc = 'nvim-tree: ' .. desc,
+                        desc = "nvim-tree: " .. desc,
                         buffer = bufnr,
                         noremap = true,
                         silent = true,
                         nowait = true
                     }
                 end
-                vim.keymap.set('n', '<CR>',  api.node.open.edit,              opts('Open'))
-                vim.keymap.set('n', 'o',     api.tree.change_root_to_node,    opts('CD'))
-                vim.keymap.set('n', 's',     api.node.open.vertical,          opts('Open: Vertical Split'))
-                vim.keymap.set('n', 'i',     api.node.open.horizontal,        opts('Open: Horizontal Split'))
-                vim.keymap.set('n', '<',     api.node.navigate.sibling.prev,  opts('Previous Sibling'))
-                vim.keymap.set('n', '>',     api.node.navigate.sibling.next,  opts('Next Sibling'))
-                vim.keymap.set('n', '<Tab>', api.node.open.preview,           opts('Open Preview'))
-                vim.keymap.set('n', 'K',     api.node.navigate.sibling.first, opts('First Sibling'))
-                vim.keymap.set('n', 'J',     api.node.navigate.sibling.last,  opts('Last Sibling'))
-                vim.keymap.set('n', '<C-h>', api.tree.toggle_hidden_filter,   opts('Toggle Dotfiles'))
-                vim.keymap.set('n', 'R',     api.tree.reload,                 opts('Refresh'))
-                vim.keymap.set('n', 'a',     api.fs.create,                   opts('Create'))
-                vim.keymap.set('n', 'd',     api.fs.remove,                   opts('Delete'))
-                vim.keymap.set('n', 'r',     api.fs.rename,                   opts('Rename'))
+
+                -- default mappings
+                api.map.on_attach.default(bufnr)
+
+                -- custom mappings
+                vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+                vim.keymap.set('n', 'o', api.tree.change_root_to_node, opts('CD'))
+                vim.keymap.set('n', 's', api.node.open.horizontal, opts('Open: Horizontal Split'))
+                vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+                vim.keymap.set('n', '<C-h>', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
+                vim.keymap.set('n', '<C-r>', api.tree.reload, opts('Refresh'))
+                vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
+                vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
+                vim.keymap.set('n', 'r', api.fs.rename, opts('Rename'))
             end
             require'nvim-tree'.setup {
-                on_attach = on_attach,
+                on_attach = nvim_tree_on_attach,
                 git = {
                     ignore = false,
                 },
                 view = {
-                    width = 40
+                    width = 45,
                 },
                 renderer = {
                     group_empty = true,
-                    special_files = { 'README.md', 'LICENSE' },
+                    special_files = {
+                        'README.md',
+                        'Makefile',
+                        'Dockerfile'
+                    },
                     indent_markers = {
                         enable = true
                     },
-                    icons = {
-                        webdev_colors = true,
-                        glyphs = {
-                            symlink = '',
-                            git = {
-                                unstaged  = "",
-                                staged    = "✓",
-                                unmerged  = "",
-                                renamed   = " ",
-                                untracked = "",
-                                deleted   = "",
-                                ignored   = "◌"
-                            },
-                            folder = {
-                                arrow_open   = "",
-                                arrow_closed = "",
-                                default      = "",
-                                open         = "",
-                                empty        = "",
-                                empty_open   = "",
-                                symlink      = "",
-                                symlink_open = "",
-                            }
-                        }
-                    }
-                }
+                },
             }
         end
     },
@@ -221,7 +201,7 @@ local plugin_spec = {
     },
     -- }}} UI
 
-    -- {{{ Telescope
+    -- {{{ telescope
     {
         "nvim-telescope/telescope.nvim",
         version = false,
@@ -230,7 +210,7 @@ local plugin_spec = {
             "nvim-lua/plenary.nvim",
             {
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make"
+				build = "make",
 			}
         },
         keys = {
@@ -246,8 +226,8 @@ local plugin_spec = {
                     color_devicons = true,
                     mappings = {
                         n = {
-                            ["<leader>s"] = actions.file_vsplit,
-                            ["<leader>i"] = actions.file_split,
+                            ["<leader>s"] = actions.file_split,
+                            ["<leader>v"] = actions.file_vsplit,
                         },
                     },
                     vimgrep_arguments = {
@@ -269,7 +249,7 @@ local plugin_spec = {
                         "!**/config-generator/mibs/**",
                         -- ignore grafana dashboards
                         "-g",
-                        "!*dashboards*"
+                        "!*dashboards*",
                     }
                 },
                 pickers = {
@@ -279,24 +259,24 @@ local plugin_spec = {
                             "--type", "f",
                             "--exclude",
                             "*.git",
-                            "--strip-cwd-prefix"
+                            "--strip-cwd-prefix",
                         },
-                        hidden = true
+                        hidden = true,
                     }
                 },
                 extensions = {
                     fzy_native = {
                         override_generic_sorter = false,
                         override_file_sorter = true,
-                    }
-                }
+                    },
+                },
             }
             require('telescope').load_extension('fzf')
         end
     },
-    -- }}} Telescope
+    -- }}} telescope
 
-    -- {{{ Functional
+    -- {{{ functional
     {
         'CRAG666/betterTerm.nvim',
         keys = {
@@ -304,16 +284,21 @@ local plugin_spec = {
                 mode = { 'n', 't' },
                 '<C-t>',
                 function()
-                    require('betterTerm').open()
+                    require('betterTerm').toggle_termwindow()
                 end,
                 desc = 'Toggle Terminal',
             },
         },
         opts = {
-            position = 'bot',
-            size = 20,
+            display = 'float',
+            float_config = {
+                width = 0.8,
+                height = 0.8,
+                border = 'rounded',
+            },
             show_tabs = false,
-            new_tab_mapping = 'C-;',
+            new_tab_mapping = 'C-;',    -- effectively disables the keybind
+            index_base = 1,
         },
     },
     {
@@ -334,12 +319,16 @@ local plugin_spec = {
                 function()
                     require("code_runner").run_close()
                 end,
-                desc = 'Run Code',
+                desc = 'Close Code Runner Window',
             },
         },
         opts = {
             mode = 'term',
             focus = false,
+            startinsert = false,
+            term = {
+                size = 20,
+            },
             filetype = {
                 tex = {
                     "make short",
@@ -355,6 +344,9 @@ local plugin_spec = {
             latex = {
                 enabled = false
             },
+            html = {
+                enabled = false
+            },
             completions = {
                 lsp = {
                     enabled = true
@@ -362,9 +354,9 @@ local plugin_spec = {
             },
         },
     },
-    -- }}} Functional
+    -- }}} functional
 
-    -- {{{ Git
+    -- {{{ git
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
@@ -373,14 +365,14 @@ local plugin_spec = {
             on_attach = function(buffer)
                 local gs = package.loaded.gitsigns
                 local opts = { buffer = buffer }
-                vim.keymap.set("n", "<C-d>", gs.toggle_deleted,                        opts)
-                vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=false} end, opts)
+                vim.keymap.set("n", "<C-d>", gs.toggle_deleted, opts)
+                vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=true} end, opts)
             end
         },
     },
-    -- }}} Git
+    -- }}} git
 
-    -- {{{ Misc
+    -- {{{ misc
     {
         "kevinhwang91/nvim-bqf",
         event = "VeryLazy",
@@ -403,7 +395,7 @@ local plugin_spec = {
             },
         },
     },
-    -- }}} Misc
+    -- }}} misc
 
     -- {{{ LSP config
     {
@@ -484,7 +476,7 @@ local plugin_spec = {
     -- }}} LSP config
 }
 
--- Load Plugins
+-- load plugins
 return require("lazy").setup({
     spec = plugin_spec,
 })

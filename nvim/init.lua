@@ -7,30 +7,26 @@
 
 -- Nvim-Tree ------------------------------------------------------------------
 -- CTRL-n                   toggle nvim-tree
--- i                        open file in split
--- s                        open file in vsplit
+-- s                        open file in split
+-- v                        open file in vsplit
 -- o                        cd into directory
 
 -- Telescope ------------------------------------------------------------------
 -- <leader>ff               search for file
 -- <leader>fg               search for code (live grep)
 -- <leader>ft               search for tags
--- <leader>i                open in split
--- <leader>s                open in vsplit
-
--- Registers ------------------------------------------------------------------
--- " (normal or visual)     show :Registers
--- CTRL-R (insert)          show :Registers
--- CTRL-K / CTRL-J          move cursor up / down in registers windos
--- DEL / BACKSPACE          delete highlighted entry from registers
+-- <leader>fs               open spell recommendations
+-- <leader>s                open selected entry in split
+-- <leader>v                open selected entry in vsplit
 
 -- Misc -----------------------------------------------------------------------
--- <leader>r                run current file with Jaq
--- <leader>-b               show Neogit
--- CTRL-d                   show git diff
+-- <leader>r                run current file with code_runner.nvim
+-- <leader>q                close code runner window
+-- CTRL-d                   show deleted lines
 -- CTRL-b                   show git blame in a pop-up window
 -- CTRL-t                   toggle a terminal
 -- gcc/gc{<Movement>}       toggle comment
+-- <leader>b                open current file in browser (librewolf)
 -------------------------------------------------------------------------------
 
 require("options")

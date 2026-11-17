@@ -2,121 +2,140 @@
 -- VIM OPTIONS
 -------------------------------------------------------------------------------
 
--- Aliases
+-- aliases
 local cmd = vim.cmd
 local g = vim.g
 local opt = vim.opt
 
 
--- General settings
-g.mapleader      = "\\"
+-- general settings
+g.mapleader = "\\"
 g.maplocalleader = "\\"
-opt.syntax       = 'off'
-opt.encoding     = 'utf-8'
-opt.history      = 500
-opt.compatible   = false
-opt.title        = true
-opt.cursorline   = true
-opt.colorcolumn  = '79'
-opt.signcolumn   = 'yes'
-opt.shell        = '/bin/zsh'
+opt.syntax = 'off'
+opt.encoding = 'utf-8'
+opt.history = 500
+opt.compatible = false
+opt.title = true
+opt.colorcolumn = '79'
+opt.signcolumn = 'yes'
+opt.shell = '/bin/zsh'
 opt.shellcmdflag = '-c'
 
--- Filetype
+-- filetype
 opt.filetype = 'on'
 cmd 'autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o'
 
--- Treat all Latex files as the 'tex' filetype, instead of 'plaintex'
+-- treat all Latex files as the 'tex' filetype, instead of 'plaintex'
 g.tex_flavor = 'latex'
 
--- Always yank to system clipboard as well (see :h provider-clipboard)
+-- always yank to system clipboard as well (see :h provider-clipboard)
 opt.clipboard:append('unnamedplus')
 opt.shortmess:append('c')
 
--- Colors
+-- colors
 opt.termguicolors = true
 opt.background = 'dark'
 opt.winborder = 'rounded'
 
--- Only enable mouse movement in normal mode
+-- only enable mouse movement in normal mode
 opt.mouse = ''
 
--- Display whitespaces and other invisible chars (use ':set list' to enable)
+-- cursorline
+opt.cursorline = true
+opt.cursorlineopt = 'screenline,number'
+-- show cursorline in normal mode
+local cursorline_group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged" }, {
+    group = cursorline_group,
+    callback = function()
+        if vim.api.nvim_get_mode().mode == "n" then
+            vim.opt_local.cursorlineopt = { "screenline", "number" }
+        end
+    end,
+})
+-- only show cursorline on the number row in insert and visual mode
+vim.api.nvim_create_autocmd({ "InsertEnter", "ModeChanged" }, {
+    group = cursorline_group,
+    callback = function()
+        if vim.api.nvim_get_mode().mode:match("^[ivV\22]") then
+            vim.opt_local.cursorlineopt = { "number" }
+        end
+    end,
+})
+
+-- display whitespaces and other invisible chars (use ':set list' to enable)
 opt.listchars = 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
-opt.list      = false
+opt.list = false
+-- hide end-of-buffer characters
+opt.fillchars = {eob = " "}
 
--- Adjust tab behavior and indentation
-opt.tabstop     = 4
+-- adjust tab behavior and indentation
+opt.tabstop = 4
 opt.softtabstop = 4
-opt.shiftwidth  = 4
-opt.expandtab   = true
-opt.smarttab    = true
+opt.shiftwidth = 4
+opt.expandtab = true
+opt.smarttab = true
 opt.smartindent = true
-opt.scrolloff   = 6
+opt.scrolloff = 6
 
--- Line numbers and wrapping
-opt.number         = true
-opt.wrap           = true
-opt.linebreak      = true
+-- line numbers and wrapping
+opt.number = true
+opt.wrap = true
+opt.linebreak = true
 
--- Disable annoying alerts
+-- disable annoying alerts
 opt.errorbells = false
 opt.visualbell = false
 
--- Disable backups and swap files
-opt.swapfile    = false
-opt.wb          = false
-opt.backup      = false
+-- disable backups and swap files
+opt.swapfile = false
+opt.wb = false
+opt.backup = false
 opt.writebackup = false
 
--- Adjust search
-opt.hlsearch   = false
-opt.incsearch  = true
+-- adjust search
+opt.hlsearch = false
+opt.incsearch = true
 opt.ignorecase = true
-opt.smartcase  = true
+opt.smartcase = true
 
--- Show matching brackets
+-- show matching brackets
 opt.showmatch = true
 
--- Let backspace behave like it should
+-- let backspace behave like it should
 opt.backspace = 'indent,eol,start'
 
-opt.laststatus  = 2
-opt.hidden      = true
-opt.showmode    = false
-opt.timeoutlen  = 1000
+opt.laststatus = 2
+opt.hidden = true
+opt.showmode = false
+opt.timeoutlen = 1000
 opt.ttimeoutlen = 10
 
--- Autocomplete for find
+-- autocomplete for find
 opt.wildmenu = true
 opt.wildmode = 'longest:full,full'
 
--- Set the path to the current dir
+-- set the path to the current dir
 opt.path = '.,**'
 
--- Change split behavior
+-- change split behavior
 opt.splitbelow = true
 opt.splitright = true
 
--- Disable folds
+-- disable folds
 opt.foldenable = false
 
--- Disable some warnings for :checkhealth
-g.loaded_ruby_provider = false
-g.loaded_node_provider = false
-g.loaded_perl_provider = false
-
--- Adjust LSP diagnostics
+-- adjust LSP diagnostics
 vim.diagnostic.config({
-    underline        = true,
+    underline = true,
     update_in_insert = false,
-    virtual_text     = false,
+    virtual_text = false,
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN]  = '',
-            [vim.diagnostic.severity.HINT]  = '',
-            [vim.diagnostic.severity.INFO]  = '󰙎',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '',
+            [vim.diagnostic.severity.INFO] = '󰙎',
         },
     },
 })
