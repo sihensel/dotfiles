@@ -4,13 +4,16 @@ path=(~/.local/bin $path)
 path=($(go env GOPATH)/bin $path)
 export PATH
 
+export TERM="xterm-256color"
 export LANG="en_US.UTF-8"
+export LC_TIME="de_DE.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="librewolf"
-export READER="zathura"
+export READER="$BROWSER"
 
 # Manpage colors
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
