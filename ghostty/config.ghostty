@@ -27,7 +27,7 @@ mouse-hide-while-typing = true
 middle-click-action = ignore
 right-click-action = ignore
 
-app-notifications = config-reload
+app-notifications = no-clipboard-copy,config-reload
 confirm-close-surface = false
 resize-overlay = never
 
