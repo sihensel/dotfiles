@@ -11,7 +11,7 @@ export LC_MESSAGES="en_US.UTF-8"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="ghostty"
 export BROWSER="librewolf"
 export READER="$BROWSER"
 
