@@ -4,7 +4,7 @@ configuration {
     modi: "drun,ssh";
     font: "Roboto Mono Nerd Font 11";
     show-icons: true;
-    terminal: "alacritty";
+    terminal: "ghostty";
     drun-display-format: "{name}";
     location: 0;
     disable-history: true;
