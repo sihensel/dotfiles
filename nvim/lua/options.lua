@@ -1,7 +1,3 @@
--------------------------------------------------------------------------------
--- VIM OPTIONS
--------------------------------------------------------------------------------
-
 -- aliases
 local cmd = vim.cmd
 local g = vim.g
@@ -16,7 +12,6 @@ opt.encoding = 'utf-8'
 opt.history = 500
 opt.compatible = false
 opt.title = true
-opt.colorcolumn = '79'
 opt.signcolumn = 'yes'
 opt.shell = '/bin/zsh'
 opt.shellcmdflag = '-c'
@@ -43,25 +38,6 @@ opt.mouse = ''
 -- cursorline
 opt.cursorline = true
 opt.cursorlineopt = 'screenline,number'
--- show cursorline in normal mode
-local cursorline_group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
-vim.api.nvim_create_autocmd({ "InsertLeave", "ModeChanged" }, {
-    group = cursorline_group,
-    callback = function()
-        if vim.api.nvim_get_mode().mode == "n" then
-            vim.opt_local.cursorlineopt = { "screenline", "number" }
-        end
-    end,
-})
--- only show cursorline on the number row in insert and visual mode
-vim.api.nvim_create_autocmd({ "InsertEnter", "ModeChanged" }, {
-    group = cursorline_group,
-    callback = function()
-        if vim.api.nvim_get_mode().mode:match("^[ivV\22]") then
-            vim.opt_local.cursorlineopt = { "number" }
-        end
-    end,
-})
 
 -- display whitespaces and other invisible chars (use ':set list' to enable)
 opt.listchars = 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣'
@@ -94,7 +70,7 @@ opt.backup = false
 opt.writebackup = false
 
 -- adjust search
-opt.hlsearch = false
+opt.hlsearch = true
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
@@ -105,7 +81,7 @@ opt.showmatch = true
 -- let backspace behave like it should
 opt.backspace = 'indent,eol,start'
 
-opt.laststatus = 2
+opt.laststatus = 3
 opt.hidden = true
 opt.showmode = false
 opt.timeoutlen = 1000

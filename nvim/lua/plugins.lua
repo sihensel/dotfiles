@@ -1,7 +1,3 @@
--------------------------------------------------------------------------------
--- PLUGINS AND CONFIGS
--------------------------------------------------------------------------------
-
 -- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
@@ -17,10 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
--- define plugins
 local plugin_spec = {
 
-    -- {{{ colors
     {
         "ellisonleao/gruvbox.nvim",
         lazy = false,
@@ -40,11 +34,13 @@ local plugin_spec = {
                     DiagnosticUnderlineInfo = { underdotted = true, sp = "#83a598" },
                     DiagnosticUnderlineHint = { underdotted = true, sp = "#83c07c" },
                     DiagnosticUnderlineOk = { underdotted = true, sp = "#b8bb26" },
+                    WinSeparator = { fg = "#458588" },
                 },
             })
-            vim.cmd([[colorscheme gruvbox]])
+            vim.cmd("colorscheme gruvbox")
         end
     },
+
     {
         'nvim-treesitter/nvim-treesitter',
         branch = 'main',
@@ -83,24 +79,20 @@ local plugin_spec = {
                 callback = function(args)
                     local buf = args.buf
                     local filetype = args.match
-
-                    -- you need some mechanism to avoid running on buffers that do not
-                    -- correspond to a language (like oil.nvim buffers), this implementation
-                    -- checks if a parser exists for the current language
+                    -- avoid running on buffers that do not correspond to a language
                     local language = vim.treesitter.language.get_lang(filetype) or filetype
                     if not vim.treesitter.language.add(language) then
                         return
                     end
-
                     -- enable highlighting
                     vim.treesitter.start(buf, language)
-
                     -- enable indenting
                     vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                 end,
             })
         end,
     },
+
     {
         "catgoose/nvim-colorizer.lua",
         event = "BufReadPre",
@@ -114,30 +106,65 @@ local plugin_spec = {
             },
         },
     },
-    -- }}} colors
 
-    -- {{{ UI
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             theme = 'gruvbox',
-            extensions = {'nvim-tree'},
+            extensions = {
+                'nvim-tree',
+            },
         },
     },
+
+    {
+        'b0o/incline.nvim',
+        event = 'VeryLazy',
+        opts = {
+            window = {
+                zindex = 30,
+                margin = {
+                    -- shift to overlap window borders
+                    vertical = {
+                        top = 0,
+                        bottom = 0,
+                    },
+                    horizontal = {
+                        left = 0,
+                        right = 2,
+                    },
+                },
+            },
+            render = function(props)
+                local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t')
+                if filename == '' then
+                    filename = '[No Name]'
+                end
+                local modified = vim.bo[props.buf].modified
+                return {
+                    ' ',
+                    filename,
+                    modified and ' [+]' or '',
+                    ' ',
+                    guibg = '#458588',
+                    guifg = '#fbf1c7' }
+            end,
+        },
+    },
+
     {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
-            { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+            { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle nvim-tree" },
         },
         config = function()
             local function nvim_tree_on_attach(bufnr)
                 local api = require "nvim-tree.api"
-
                 local function opts(desc)
                     return {
                         desc = "nvim-tree: " .. desc,
@@ -147,10 +174,8 @@ local plugin_spec = {
                         nowait = true
                     }
                 end
-
                 -- default mappings
                 api.map.on_attach.default(bufnr)
-
                 -- custom mappings
                 vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
                 vim.keymap.set('n', 'o', api.tree.change_root_to_node, opts('CD'))
@@ -184,179 +209,47 @@ local plugin_spec = {
             }
         end
     },
+
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",
         config = function()
             require("ibl").setup({
                 indent = {
-                    char = "┃"
+                    char = "┃",
                 },
                 scope = {
                     show_start = false,
-                    show_end = false
+                    show_end = false,
                 },
             })
         end
     },
-    -- }}} UI
 
-    -- {{{ telescope
     {
-        "nvim-telescope/telescope.nvim",
-        version = false,
+        "OXY2DEV/markview.nvim",
         lazy = false,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-			}
-        },
         keys = {
-            { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Telescope find files" },
-            { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Telescope live grep" },
-            { "<leader>fr", "<cmd>Telescope registers<CR>", desc = "Telescope show registers" },
-            { "<leader>fs", "<cmd>Telescope spell_suggest<CR>", desc = "Telescope show spelling suggestions" },
+            { "<leader>m", "<cmd>Markview splitToggle<CR>", desc = "Toggle Markdown split preview" },
         },
-        config = function()
-            local actions = require('telescope.actions')
-            require('telescope').setup {
-                defaults = {
-                    color_devicons = true,
-                    mappings = {
-                        n = {
-                            ["<leader>s"] = actions.file_split,
-                            ["<leader>v"] = actions.file_vsplit,
-                        },
-                    },
-                    vimgrep_arguments = {
-                        "rg",
-                        "--color=never",
-                        "--no-heading",
-                        "--with-filename",
-                        "--line-number",
-                        "--column",
-                        "--smart-case",
-                        "--trim",
-                        "--hidden",
-                        "--sort=path",
-                        -- ignore everything in the .git directory
-                        "-g",
-                        "!.git/",
-                        -- ignore snmp config files
-                        "-g",
-                        "!**/config-generator/mibs/**",
-                        -- ignore grafana dashboards
-                        "-g",
-                        "!*dashboards*",
-                    }
-                },
-                pickers = {
-                    find_files = {
-                        find_command = {
-                            "fd",
-                            "--type", "f",
-                            "--exclude",
-                            "*.git",
-                            "--strip-cwd-prefix",
-                        },
-                        hidden = true,
-                    }
-                },
-                extensions = {
-                    fzy_native = {
-                        override_generic_sorter = false,
-                        override_file_sorter = true,
-                    },
-                },
-            }
-            require('telescope').load_extension('fzf')
-        end
+        opts = {
+            preview = {
+                enable = false,
+                icon_provider = "devicons",
+            },
+        },
     },
-    -- }}} telescope
 
-    -- {{{ functional
     {
-        'CRAG666/betterTerm.nvim',
+        "chrisgrieser/nvim-spider",
         keys = {
-            {
-                mode = { 'n', 't' },
-                '<C-t>',
-                function()
-                    require('betterTerm').toggle_termwindow()
-                end,
-                desc = 'Toggle Terminal',
-            },
-        },
-        opts = {
-            display = 'float',
-            float_config = {
-                width = 0.8,
-                height = 0.8,
-                border = 'rounded',
-            },
-            show_tabs = false,
-            new_tab_mapping = 'C-;',    -- effectively disables the keybind
-            index_base = 1,
+            { "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+            { "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+            { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+            { "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
         },
     },
-    {
-        "CRAG666/code_runner.nvim",
-        config = true,
-        keys = {
-            {
-                mode = { 'n', 't' },
-                '<leader>r',
-                function()
-                    require('code_runner').run_code()
-                end,
-                desc = 'Run Code',
-            },
-            {
-                mode = { 'n', 't' },
-                '<leader>q',
-                function()
-                    require("code_runner").run_close()
-                end,
-                desc = 'Close Code Runner Window',
-            },
-        },
-        opts = {
-            mode = 'term',
-            focus = false,
-            startinsert = false,
-            term = {
-                size = 20,
-            },
-            filetype = {
-                tex = {
-                    "make short",
-                },
-            },
-        },
-    },
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-        opts = {
-            enabled = false,
-            latex = {
-                enabled = false
-            },
-            html = {
-                enabled = false
-            },
-            completions = {
-                lsp = {
-                    enabled = true
-                }
-            },
-        },
-    },
-    -- }}} functional
 
-    -- {{{ git
     {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
@@ -370,43 +263,11 @@ local plugin_spec = {
             end
         },
     },
-    -- }}} git
 
-    -- {{{ misc
-    {
-        "kevinhwang91/nvim-bqf",
-        event = "VeryLazy",
-        opts = {
-            preview = {
-                winblend = 0,
-                wrap = false,
-            },
-        },
-    },
-    {
-        "https://codeberg.org/yorickpeterse/nvim-pqf",
-        event = "VeryLazy",
-        opts = {
-            signs = {
-                error = { text = '' },
-                warning = { text = '' },
-                info = { text = '󰙎' },
-                hint = { text = '' },
-            },
-        },
-    },
-    -- }}} misc
-
-    -- {{{ LSP config
     {
         "mason-org/mason-lspconfig.nvim",
         dependencies = {
-            {
-                "mason-org/mason.nvim",
-                opts = {
-                    PATH = "append",
-                },
-            },
+            { "mason-org/mason.nvim", opts = { PATH = "append" }},
             "neovim/nvim-lspconfig",
         },
         opts = {
@@ -419,6 +280,7 @@ local plugin_spec = {
             },
         },
     },
+
     {
         'saghen/blink.cmp',
         version = '1.*',
@@ -473,7 +335,55 @@ local plugin_spec = {
             },
         },
     },
-    -- }}} LSP config
+
+    {
+        "folke/trouble.nvim",
+        cmd = "Trouble",
+        keys = {
+            { "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Open Diagnostics in Trouble" },
+        },
+        opts = {
+            focus = true,
+            warn_no_results = false,
+        },
+    },
+
+    {
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        lazy = false,
+        keys = {
+            { "<leader>ff", "<cmd>FzfLua files<CR>", desc = "fzf-lua files" },
+            { "<leader>fh", "<cmd>FzfLua history<CR>", desc = "fzf-lua history" },
+            { "<leader>fg", "<cmd>FzfLua live_grep<CR>", desc = "fzf-lua live grep" },
+            { "<leader>fm", "<cmd>FzfLua manpages<CR>", desc = "fzf-lua manpages" },
+            { "<leader>fr", "<cmd>FzfLua registers<CR>", desc = "fzf-lua registers" },
+            { "<leader>fs", "<cmd>FzfLua spellcheck<CR>", desc = "fzf-lua spellcheck" },
+            { "<leader>fu", "<cmd>FzfLua undotree<CR>", desc = "fzf-lua undotree" },
+        },
+        opts = function ()
+            local actions = require("trouble.sources.fzf").actions
+            return {
+                actions = {
+                    files = {
+                        true,   -- inherit defaults
+                        ["ctrl-q"] = actions.open,  -- open all matches in trouble, see trouble's README
+                    },
+                },
+                winopts = {
+                    preview = {
+                        layout = "vertical",
+                        vertical = "up:60%",
+                    },
+                },
+                grep = {
+                    rg_opts = [[ --column --line-number --no-heading --color=always --smart-case --max-columns=4096 --sort=path --trim -g "!.git" -g "!**/config-generator/mibs/**" -g "!*dashboards*" -e ]],
+                    hidden = true,
+                },
+            }
+        end,
+    },
+
 }
 
 -- load plugins

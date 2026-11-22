@@ -8,7 +8,7 @@ They are often (speak: all the time) a work in progress and may or may not work 
 
 ## Dependencies
 
-The list of used packages can be found in `packages.txt` and `packages_AUR.txt`.<br>
+The list of used packages can be found in `packages.txt` and `packages_AUR.txt`. \
 To install them, use:
 
 ```sh
@@ -21,7 +21,7 @@ To generate the list of packages, run `pacman -Qqn` to get the list main repo pa
 
 ## Installation
 
-The script `install.sh` places symlinks to the local repo, so all files can stay in one place.<br>
+The script `install.sh` places symlinks to the local repo, so all files can stay in one place. \
 You might want to ignore that, this is just for my personal setup.
 
 ```sh
@@ -38,14 +38,12 @@ There is no wallpaper included, you can set one via Noctalia.
 
 ## Configure Neovim Plugins
 
-The keybinds are listed in [init.lua](nvim/init.lua).
-Plugins are managed via [Lazy.nvim](https://github.com/folke/lazy.nvim).
-The Plugin manager installs itself and all plugins automatically.
+Plugins are managed via [Lazy.nvim](https://github.com/folke/lazy.nvim), which installs itself and all plugins automatically.
 LSP clients are installed automatically via [Mason](https://github.com/williamboman/mason.nvim).
 
 The following packages are exteneral dependencies, install them with your package manager:
 ```
-fd ripgrep fzf tree-sitter tree-sitter-cli python-pynvim go unzip
+fd ripgrep bat fzf tree-sitter tree-sitter-cli python-pynvim go unzip
 ```
 
 
