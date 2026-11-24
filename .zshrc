@@ -146,6 +146,15 @@ function parse_os_cloud() {
     printenv | grep -e 'OS_CLOUD' 2> /dev/null | sed -e 's/.*=\(.*\)/(\1)/'
 }
 
+# enable yazi to stay in current directory when quitting
+function y() {
+    local tmp cwd; tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+    command rm -f -- "$tmp"
+}
+
 # pyenv config
 if [[ $HOST == "arch-T14" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
