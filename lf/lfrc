@@ -5,31 +5,22 @@ set scrolloff 10
 set icons
 set period 1
 
-# File previews, install ctpv-git (AUR)
-set previewer ctpv
-set cleaner ctpvclear
-&ctpv -s $id
-&ctpvquit $id
-
-# stay in the current directory when quitting with 'x'
-map x quitcd
-cmd quitcd ${{
-    echo "1" > "$LF_TEMPDIR"/cdtolastdir
-    lf -remote "send $id quit"
-}}
-
 # open files
-cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*|application/json) $EDITOR "$fx";;
-        video/*|application/pdf|image/*) xdg-open "$f" & ;;
-        *) for f in "$fx"; do xdg-open "$f"> /dev/null 2> /dev/null & done;;
+cmd open &{{
+    set -f
+    case $(file --mime-type -lb "$f") in
+        text/*) lf -remote "send $id \$$editor \$fx";;
+        *) for f in $fx; do $opener "$f" > /dev/null 2> /dev/null & done;;
     esac
 }}
 
+# move file into trash instead of deleting them
+cmd trash ${{
+    set -f
+    gio trash $fx
+}}
 
 # Keybinds
 map <enter> shell
-map Y $printf "%s" "$fx" | xclip -selection clipboard
 map d # unmap
-map dd delete
+map dd trash
