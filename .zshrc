@@ -5,6 +5,10 @@
 unsetopt beep notify
 [[ $- == *i* ]] && stty stop undef
 
+# disable terminal flow control
+setopt no_flow_control
+stty -ixon 2>/dev/null
+
 # history
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -31,38 +35,32 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # INPUT MODE AND CURSOR
 #------------------------------------------------------------------------------
 
-# vi mode
-bindkey -v
-# allow backspace to delete any character in insert mode
-bindkey "^H" backward-delete-char
-bindkey "^?" backward-delete-char
-export KEYTIMEOUT=1
+# emacs mode
+bindkey -e
 
-# Change cursor shape for different vi modes
-# cursor options:
-# 2 - steady block
-# 4 - steady underline
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[2 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'underline' ]]; then
-    echo -ne '\e[4 q'
-  fi
-}
+# CTRL + W and CTRL + B to jump words forwards/backwards
+bindkey '^W' forward-word
+bindkey '^B' backward-word
+# CTRL + Arrow Keys to jump words forwards/backwards
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[OC' forward-word
+bindkey '^[OD' backward-word
 
-# # Use underline cursor on startup and for each new prompt
-zle -N zle-keymap-select
+# CTRL + Backspace to delete words backwards
+bindkey '^H' backward-kill-word
+# CTRL + Delete to delete words forwards
+bindkey '^[[3;5~' kill-word
+# Delete to delete char under cursor
+bindkey '^[[3~' delete-char
+# Ctrl + S to delete from cursor to end of line
+bindkey '^S' kill-line
+
+# use the default cursor specified by the terminal emulator
 zle-line-init() {
-    zle -K viins    # initiate `vi insert` as keymap
-    echo -ne '\e[4 q'
+    echo -ne '\e[0 q'
 }
 zle -N zle-line-init
-echo -ne '\e[4 q'
-preexec() { echo -ne '\e[4 q' ;}
 
 
 #------------------------------------------------------------------------------
