@@ -18,8 +18,8 @@ vim.keymap.set("n", "*", "*zzzv", { desc = "Jump to next word under cursor and c
 vim.keymap.set("n", "#", "#zzzv", { desc = "Jump to previous word under cursor and center view" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
-vim.keymap.set("i", ",", ",<c-g>u", { desc = "Stop undo at periods" })
-vim.keymap.set("i", ".", ".<c-g>u", { desc = "Stop undo at commas" })
+vim.keymap.set("i", ".", ".<c-g>u", { desc = "Stop undo at periods" })
+vim.keymap.set("i", ",", ",<c-g>u", { desc = "Stop undo at commas" })
 vim.keymap.set("i", "!", "!<c-g>u", { desc = "Stop undo at exclamation marks" })
 vim.keymap.set("i", "?", "?<c-g>u", { desc = "Stop undo at question marks" })
 
@@ -27,14 +27,11 @@ vim.keymap.set("n", "<c-t>", "<cmd>split | term<CR>", { desc = "Open split termi
 vim.keymap.set("t", "<leader>q", [[<C-\><C-n>]], { desc = "Exit terminal to normal mode" })
 vim.keymap.set("t", "<c-t>", "<cmd>q<CR>", { desc = "Close terminal" })
 
-vim.keymap.set({ "n", "i", "v" }, "<LeftMouse>", "<nop>", {desc = "Prevent mouse clicks from moving the cursor"})
-vim.keymap.set({ "n", "i", "v" }, "<2-LeftMouse>", "<nop>", {desc = "Prevent mouse clicks from moving the cursor"})
-
 vim.keymap.set("n", "<leader>b", function()
     local current_file = vim.fn.expand("%:p")
     if current_file == "" then
         vim.notify("No file open in current buffer", vim.log.levels.WARN)
         return
     end
-    vim.fn.jobstart({ "librewolf", current_file }, { detach = true })
+    vim.ui.open(current_file, { cmd = { "librewolf", "--" } })
 end, { desc = "Open current file in browser (Librewolf)" })

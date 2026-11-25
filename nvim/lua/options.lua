@@ -8,13 +8,15 @@ local opt = vim.opt
 g.mapleader = "\\"
 g.maplocalleader = "\\"
 opt.syntax = 'off'
-opt.encoding = 'utf-8'
 opt.history = 500
-opt.compatible = false
 opt.title = true
 opt.signcolumn = 'yes'
 opt.shell = '/bin/zsh'
 opt.shellcmdflag = '-c'
+
+-- disable netrw for nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- filetype
 opt.filetype = 'on'
@@ -32,7 +34,7 @@ opt.termguicolors = true
 opt.background = 'dark'
 opt.winborder = 'rounded'
 
--- only enable mouse movement in normal mode
+-- disable mouse movement entirely
 opt.mouse = ''
 
 -- cursorline
@@ -84,15 +86,14 @@ opt.backspace = 'indent,eol,start'
 opt.laststatus = 3
 opt.hidden = true
 opt.showmode = false
-opt.timeoutlen = 1000
-opt.ttimeoutlen = 10
+opt.timeoutlen = 750
 
 -- autocomplete for find
 opt.wildmenu = true
 opt.wildmode = 'longest:full,full'
 
 -- set the path to the current dir
-opt.path = '.,**'
+opt.path = '.,**3'
 
 -- change split behavior
 opt.splitbelow = true
@@ -106,12 +107,24 @@ vim.diagnostic.config({
     underline = true,
     update_in_insert = false,
     virtual_text = false,
+    virtual_lines = false,
     signs = {
         text = {
-            [vim.diagnostic.severity.ERROR] = '',
-            [vim.diagnostic.severity.WARN] = '',
-            [vim.diagnostic.severity.HINT] = '',
-            [vim.diagnostic.severity.INFO] = '󰙎',
+            -- empty text disables signcolumn symbols
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '',
+            [vim.diagnostic.severity.INFO] = '',
+        },
+        numhl = {
+            -- custom highlight group defined in plugins.lua
+            [vim.diagnostic.severity.ERROR] = 'DiagNumError',
+            [vim.diagnostic.severity.WARN] = 'DiagNumWarn',
+            [vim.diagnostic.severity.INFO] = 'DiagNumInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagNumHint',
         },
     },
 })
+
+-- treat vim as a global to avoid LSP warnings when editing nvim config files
+vim.lsp.config('lua_ls', { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })

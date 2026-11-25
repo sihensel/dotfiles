@@ -29,15 +29,20 @@ local plugin_spec = {
                 overrides = {
                     CursorLine = { bg = "#282828" },
                     CursorLineNr = { bold = true },
-                    DiagnosticUnderlineError = { underdotted = true, sp = "#fb4934" },
-                    DiagnosticUnderlineWarn = { underdotted = true, sp = "#fabd2f" },
-                    DiagnosticUnderlineInfo = { underdotted = true, sp = "#83a598" },
-                    DiagnosticUnderlineHint = { underdotted = true, sp = "#83c07c" },
-                    DiagnosticUnderlineOk = { underdotted = true, sp = "#b8bb26" },
+                    DiagnosticUnderlineError = { underline = true, sp = "#fb4934" },
+                    DiagnosticUnderlineWarn = { underline = true, sp = "#fabd2f" },
+                    DiagnosticUnderlineInfo = { underline = true, sp = "#83a598" },
+                    DiagnosticUnderlineHint = { underline = true, sp = "#83c07c" },
+                    DiagnosticUnderlineOk = { underline = true, sp = "#b8bb26" },
                     WinSeparator = { fg = "#458588" },
                 },
             })
             vim.cmd("colorscheme gruvbox")
+            -- custom highlight groups to show LSP diagnostics in the number column
+            vim.api.nvim_set_hl(0, 'DiagNumError', { fg = '#fb4934', underline = true, sp = '#fb4934' })
+            vim.api.nvim_set_hl(0, 'DiagNumWarn',  { fg = '#fabd2f', underline = true, sp = '#fabd2f' })
+            vim.api.nvim_set_hl(0, 'DiagNumInfo',  { fg = '#83a598', underline = true, sp = '#83a598' })
+            vim.api.nvim_set_hl(0, 'DiagNumHint',  { fg = '#83c07c', underline = true, sp = '#83c07c' })
         end
     },
 
@@ -112,7 +117,9 @@ local plugin_spec = {
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
-            theme = 'gruvbox',
+            options = {
+                theme = 'gruvbox',
+            },
             extensions = {
                 'nvim-tree',
             },
@@ -156,7 +163,6 @@ local plugin_spec = {
 
     {
         "nvim-tree/nvim-tree.lua",
-        version = "*",
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
@@ -181,7 +187,7 @@ local plugin_spec = {
                 vim.keymap.set('n', 'o', api.tree.change_root_to_node, opts('CD'))
                 vim.keymap.set('n', 's', api.node.open.horizontal, opts('Open: Horizontal Split'))
                 vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
-                vim.keymap.set('n', '<C-h>', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
+                vim.keymap.set('n', '<C-h>', api.filter.dotfiles.toggle, opts('Toggle Dotfiles'))
                 vim.keymap.set('n', '<C-r>', api.tree.reload, opts('Refresh'))
                 vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
                 vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
@@ -189,8 +195,8 @@ local plugin_spec = {
             end
             require'nvim-tree'.setup {
                 on_attach = nvim_tree_on_attach,
-                git = {
-                    ignore = false,
+                filters = {
+                    git_ignored = false,
                 },
                 view = {
                     width = 45,
@@ -241,25 +247,15 @@ local plugin_spec = {
     },
 
     {
-        "chrisgrieser/nvim-spider",
-        keys = {
-            { "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
-            { "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
-            { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
-            { "ge", "<cmd>lua require('spider').motion('ge')<CR>", mode = { "n", "o", "x" } },
-        },
-    },
-
-    {
         "lewis6991/gitsigns.nvim",
         event = "VeryLazy",
         opts = {
+            -- LSP diagnostic signs have a priority of 10, so now gitsigns always appears on the left
             attach_to_untracked = false,
             on_attach = function(buffer)
                 local gs = package.loaded.gitsigns
-                local opts = { buffer = buffer }
-                vim.keymap.set("n", "<C-d>", gs.toggle_deleted, opts)
-                vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=true} end, opts)
+                vim.keymap.set("n", "<C-d>", gs.preview_hunk_inline, { buffer = buffer, desc = "Preview inline Git hunk" })
+                vim.keymap.set("n", "<C-b>", function() gs.blame_line{full=true} end, { buffer = buffer, desc = "Toggle Git blame for current line" })
             end
         },
     },
@@ -340,7 +336,8 @@ local plugin_spec = {
         "folke/trouble.nvim",
         cmd = "Trouble",
         keys = {
-            { "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Open Diagnostics in Trouble" },
+            -- { "<leader>d", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Open Diagnostics in Trouble" },
+            { "<leader>d", "<cmd>Trouble diagnostics toggle<cr>", desc = "Open Diagnostics in Trouble" },
         },
         opts = {
             focus = true,
@@ -354,20 +351,20 @@ local plugin_spec = {
         lazy = false,
         keys = {
             { "<leader>ff", "<cmd>FzfLua files<CR>", desc = "fzf-lua files" },
-            { "<leader>fh", "<cmd>FzfLua history<CR>", desc = "fzf-lua history" },
+            { "<leader>fo", "<cmd>FzfLua oldfiles<CR>", desc = "fzf-lua history" },
             { "<leader>fg", "<cmd>FzfLua live_grep<CR>", desc = "fzf-lua live grep" },
             { "<leader>fm", "<cmd>FzfLua manpages<CR>", desc = "fzf-lua manpages" },
-            { "<leader>fr", "<cmd>FzfLua registers<CR>", desc = "fzf-lua registers" },
+            { "<leader>fr", "<cmd>FzfLua lsp_references<CR>", desc = "fzf-lua registers" },
             { "<leader>fs", "<cmd>FzfLua spellcheck<CR>", desc = "fzf-lua spellcheck" },
             { "<leader>fu", "<cmd>FzfLua undotree<CR>", desc = "fzf-lua undotree" },
         },
         opts = function ()
-            local actions = require("trouble.sources.fzf").actions
+            local trouble_actions = require("trouble.sources.fzf").actions
             return {
                 actions = {
                     files = {
                         true,   -- inherit defaults
-                        ["ctrl-q"] = actions.open,  -- open all matches in trouble, see trouble's README
+                        ["ctrl-q"] = trouble_actions.open,  -- open all matches in trouble, see trouble's README
                     },
                 },
                 winopts = {
@@ -380,8 +377,24 @@ local plugin_spec = {
                     rg_opts = [[ --column --line-number --no-heading --color=always --smart-case --max-columns=4096 --sort=path --trim -g "!.git" -g "!**/config-generator/mibs/**" -g "!*dashboards*" -e ]],
                     hidden = true,
                 },
+                oldfiles = {
+                    file_ignore_patterns = { "%.git/" },
+                },
             }
         end,
+    },
+
+    {
+        {
+            "rachartier/tiny-inline-diagnostic.nvim",
+            event = "VeryLazy",
+            priority = 1000,
+            opts = {
+                options = {
+                    show_code = false,
+                },
+            },
+        },
     },
 
 }
